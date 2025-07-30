@@ -39,8 +39,14 @@ export default function LatestCapturesCarousel() {
   return (
     <section className="w-full flex flex-col items-center py-2">
       {/* Gallery container to prevent overlap with heading/line/text */}
-      <div className="relative w-full max-w-4xl mx-auto flex items-center justify-center mt-8" style={{ minHeight: 320 }}>
-        <div className="flex items-center justify-center w-full h-full gap-4" style={{ position: 'relative', zIndex: 2 }}>
+      <div
+        className="relative w-full max-w-4xl mx-auto flex items-center justify-center mt-8"
+        style={{ minHeight: 600, height: 600, maxHeight: 600 }}
+      >
+        <div
+          className="flex items-center justify-center w-full h-full gap-4"
+          style={{ position: 'relative', zIndex: 2, height: '100%', alignItems: 'center', justifyContent: 'center' }}
+        >
           {/* Left Image - previous */}
           <div style={{ width: '220px', height: '320px', zIndex: 1 }}>
             <Image
