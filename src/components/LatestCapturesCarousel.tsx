@@ -25,10 +25,6 @@ export default function LatestCapturesCarousel() {
   const [modalOpen, setModalOpen] = useState(false);
   const length = images.length;
 
-  // Calculate indices for left, center, right images
-  const leftIdx = (current - 1 + length) % length;
-  const centerIdx = current;
-  const rightIdx = (current + 1) % length;
 
   useEffect(() => {
     if (modalOpen || !autoScroll) return;

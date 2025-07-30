@@ -38,7 +38,7 @@ export default function Home() {
             {/* Description Paragraph - Smaller font */}
             <div className="max-w-3xl mx-auto">
               <p className="text-sm md:text-base text-gray-400 leading-relaxed font-light">
-                Ever since I was a child, I've been obsessed with capturing photons from the distant past. Armed with modest gear and my love for 
+                Ever since I was a child, I&apos;ve been obsessed with capturing photons from the distant past. Armed with modest gear and my love for 
                 astronomy and astrophotography, I set out to absorb light particles in all of their raw form and preserve the beauty of distant planets and 
                 deep sky objects forever, adding my interpretation in the painstaking processing of each image.
               </p>
