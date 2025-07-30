@@ -13,8 +13,8 @@ export default function Home() {
         {/* Hero Image - Smaller height so Latest Captures are clearly visible */}
         <div className="h-[75vh] relative overflow-hidden">
           <Image
-            src="/images/hero/M42-20x240sec-2-7-2005-2547x1813.jpg"
-            alt="M42 Orion Nebula - Maple Valley Observatory"
+            src="/images/hero/NGC7000-Pelican-1.jpg"
+            alt="NGC7000 Pelican Nebula - Maple Valley Observatory"
             fill
             className="object-cover"
             priority
