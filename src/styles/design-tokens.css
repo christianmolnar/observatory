@@ -1,0 +1,206 @@
+/* MapleValleyObservatory.com Design Tokens */
+/* Configurable design system with Apple-inspired aesthetics */
+
+:root {
+  /* ===== FONTS ===== */
+  /* Apple San Francisco inspired font stack */
+  --font-primary: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", "Courier New", monospace;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 2rem;     /* 32px */
+  --font-size-4xl: 3rem;     /* 48px */
+  --font-size-5xl: 4rem;     /* 64px */
+
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ===== COLORS ===== */
+  /* Primary Colors - Deep Space Theme */
+  --color-deep-space: #000000;
+  --color-space-black: #0a0a0a;
+  --color-dark-gray: #1a1a1a;
+  --color-nebula-purple: #6366F1;
+  --color-star-white: #FFFFFF;
+  --color-cosmic-gold: #F59E0B;
+
+  /* Secondary Colors */
+  --color-meteor-gray: #404040;
+  --color-galaxy-silver: #9CA3AF;
+  --color-aurora-green: #10B981;
+
+  /* Semantic Colors */
+  --color-background: var(--color-deep-space);
+  --color-surface: var(--color-space-black);
+  --color-surface-elevated: var(--color-dark-gray);
+  --color-text-primary: var(--color-star-white);
+  --color-text-secondary: var(--color-galaxy-silver);
+  --color-text-muted: #6B7280;
+  --color-accent: var(--color-nebula-purple);
+  --color-accent-hover: #4F46E5;
+  --color-cta: var(--color-cosmic-gold);
+  --color-cta-hover: #D97706;
+  --color-success: var(--color-aurora-green);
+  --color-border: #333333;
+  --color-border-light: #404040;
+
+  /* ===== SPACING ===== */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgb(99 102 241 / 0.3);
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+
+  /* ===== Z-INDEX ===== */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* ===== LIGHT THEME OVERRIDES ===== */
+/* (Optional - for future light theme toggle) */
+[data-theme="light"] {
+  --color-background: #FFFFFF;
+  --color-surface: #F9FAFB;
+  --color-surface-elevated: #FFFFFF;
+  --color-text-primary: #111827;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+}
+
+/* ===== BASE STYLES ===== */
+html {
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.font-display {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.025em;
+}
+
+.font-body {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated {
+  background-color: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+  background-color: var(--color-cta);
+  color: var(--color-background);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-cta-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
+}
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+@media (max-width: 768px) {
+  :root {
+    --font-size-3xl: 1.75rem;  /* 28px */
+    --font-size-4xl: 2.5rem;   /* 40px */
+    --font-size-5xl: 3rem;     /* 48px */
+  }
+}
