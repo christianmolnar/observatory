@@ -109,6 +109,22 @@ export const solarSystemConfig = {
   ]
 };
 
+// Celestial Events Categories Configuration
+export const celestialEventsConfig = {
+  title: 'Celestial Events',
+  backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg',
+  description: 'Capture rare and spectacular astronomical events including eclipses, conjunctions, transits, and other celestial phenomena.',
+  categories: [
+    {
+      title: 'Total Eclipse 2017',
+      href: '/astrophotography/solar-system/events/total-eclipse-2017',
+      backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg', // Will be replaced with eclipse image
+      description: 'The Great American Eclipse of August 21, 2017',
+      imageFolder: 'astrophotography/solar-system/events/total-eclipse-2017'
+    }
+  ]
+};
+
 // Terrestrial Categories Configuration
 export const terrestrialConfig = {
   title: 'Terrestrial Photography',
@@ -162,6 +178,9 @@ export const imageFoldersConfig = {
     planets: 'astrophotography/solar-system/planets',
     events: 'astrophotography/solar-system/events'
   },
+  celestialEvents: {
+    totalEclipse2017: 'astrophotography/solar-system/events/total-eclipse-2017'
+  },
   wideField: 'wide-field',
   terrestrial: {
     yellowstone: 'terrestrial/yellowstone',
@@ -202,6 +221,7 @@ export const globalConfig = {
   homepage: homepageConfig,
   deepSky: deepSkyConfig,
   solarSystem: solarSystemConfig,
+  celestialEvents: celestialEventsConfig,
   wideField: wideFieldConfig,
   terrestrial: terrestrialConfig,
   equipment: equipmentConfig,

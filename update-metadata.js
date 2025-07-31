@@ -17,14 +17,15 @@ const SCAN_FOLDERS = [
   'astrophotography/solar-system/lunar',
   'astrophotography/solar-system/planets',
   'astrophotography/solar-system/events',
+  'astrophotography/solar-system/events/total-eclipse-2017',
   'wide-field',
   'terrestrial/yellowstone',
   'terrestrial/grand-tetons',
   'equipment'
 ];
 
-// Supported image extensions
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.avif', '.webp'];
+// Supported image and video extensions
+const MEDIA_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.avif', '.webp', '.mp4', '.mov', '.avi', '.webm'];
 
 function findImages() {
   const allImages = [];
@@ -37,7 +38,7 @@ function findImages() {
       
       files.forEach(file => {
         const ext = path.extname(file).toLowerCase();
-        if (IMAGE_EXTENSIONS.includes(ext)) {
+        if (MEDIA_EXTENSIONS.includes(ext)) {
           allImages.push({
             filename: file,
             folder: folder,
@@ -293,16 +294,16 @@ function generateCleanName(filename) {
   // Replace hyphens, underscores, and dots with spaces
   name = name.replace(/[-_.]/g, ' ');
   
-  // Remove numbers at the end (like IMG_1234, DSC_5678, etc.)
-  name = name.replace(/\s*\d+\s*$/, '');
-  
   // Remove common camera/phone prefixes and suffixes
   name = name.replace(/^(IMG|DSC|DSCN|P|PHOTO|PIC|IMAGE)\s*/i, '');
   name = name.replace(/\s*(JPG|JPEG|PNG|AVIF|WEBP|iOS)$/i, '');
   
   // Remove sequences of numbers in the middle or end
   name = name.replace(/\s+\d{8,}\s*/g, ' '); // Remove 8+ digit sequences (timestamps)
-  name = name.replace(/\s+\d{4,}\s*$/, ''); // Remove 4+ digits at end
+  
+  // Remove numbers at the end (handles both spaced and unspaced numbers)
+  name = name.replace(/\s*\d+\s*$/, ''); // Remove numbers with optional spaces at end
+  name = name.replace(/\d+$/, ''); // Remove numbers directly attached at end (like "Basin10" -> "Basin")
   
   // Clean up extra spaces
   name = name.replace(/\s+/g, ' ').trim();
@@ -360,6 +361,8 @@ function getImageType(folder) {
     return 'terrestrial';
   } else if (folder === 'equipment') {
     return 'equipment';
+  } else if (folder.includes('events')) {
+    return 'celestial-events';
   } else {
     return 'astrophotography';
   }
@@ -379,6 +382,15 @@ function createMetadataEntry(image) {
       return {
         "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
         "equipmentInfo": ""  // e.g., "Smart Telescope by ZWO"
+      };
+      
+    case 'celestial-events':
+      return {
+        "catalogDesignation": "",
+        "objectName": generateCleanName(image.filename), // e.g., "Total Eclipse" instead of "2017 Total Eclipse1"
+        "location": "Maple Valley, WA",
+        "equipment": "",
+        "exposure": ""
       };
       
     default: // astrophotography
@@ -401,9 +413,27 @@ function updateMetadata() {
   
   let newEntries = 0;
   let updatedEntries = 0;
+  let deletedEntries = 0;
   let totalImages = allImages.length;
   
   console.log(`📁 Found ${totalImages} images across all folders`);
+  
+  // First, check for entries that no longer have corresponding files (cleanup)
+  const currentImageFilenames = new Set(allImages.map(img => img.filename));
+  const entriesToDelete = [];
+  
+  Object.keys(existingMetadata).forEach(filename => {
+    if (!currentImageFilenames.has(filename)) {
+      entriesToDelete.push(filename);
+    }
+  });
+  
+  // Remove entries for deleted files
+  entriesToDelete.forEach(filename => {
+    console.log(`🗑️  Removing metadata for deleted file: ${filename}`);
+    delete existingMetadata[filename];
+    deletedEntries++;
+  });
   
   // Add/update entries for all images
   allImages.forEach(image => {
@@ -432,14 +462,21 @@ function updateMetadata() {
         }
       } else if (imageType === 'equipment') {
         const entry = existingMetadata[image.filename];
-        const needsUpdate = !entry.equipmentName || entry.equipmentName === '';
+        // Only update if both equipmentName and equipmentInfo are empty/missing
+        // This preserves any manual edits to equipment descriptions
+        const needsUpdate = (!entry.equipmentName || entry.equipmentName === '') && 
+                           (!entry.equipmentInfo || entry.equipmentInfo === '');
         
         if (needsUpdate) {
           console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
           entry.equipmentName = generateCleanName(image.filename);
+          // Don't overwrite equipmentInfo if it already has content
+          if (!entry.equipmentInfo) {
+            entry.equipmentInfo = '';
+          }
           updatedEntries++;
         } else {
-          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder}) - preserving manual edits`);
         }
       } else {
         console.log(`🔄 Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
@@ -449,7 +486,7 @@ function updateMetadata() {
     }
   });
   
-  if (newEntries > 0 || updatedEntries > 0) {
+  if (newEntries > 0 || updatedEntries > 0 || deletedEntries > 0) {
     // Write updated metadata back to file
     const sortedMetadata = {};
     Object.keys(existingMetadata).sort().forEach(key => {
@@ -459,14 +496,15 @@ function updateMetadata() {
     fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
     console.log(`✅ Updated metadata file`);
   } else {
-    console.log('ℹ️  No images found to process');
+    console.log('ℹ️  No changes needed');
   }
   
   console.log(`\n📊 Summary:`);
-  console.log(`   Total images: ${totalImages}`);
+  console.log(`   Total images found: ${totalImages}`);
   console.log(`   Total metadata entries: ${Object.keys(existingMetadata).length}`);
   console.log(`   New entries added: ${newEntries}`);
   console.log(`   Existing entries updated: ${updatedEntries}`);
+  console.log(`   Obsolete entries removed: ${deletedEntries}`);
 }
 
 // Run the script

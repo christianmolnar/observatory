@@ -16,6 +16,9 @@ interface ImageMetadata {
   exposure?: string;
   // Terrestrial fields
   name?: string;
+  // Equipment fields
+  equipmentName?: string;
+  equipmentInfo?: string;
   // Common fields
   location: string;
 }
@@ -26,12 +29,15 @@ interface GalleryTemplateProps {
   imageFolder: string;
 }
 
-// Dynamically import gallery images
+// Dynamically import gallery images and videos
 function getGalleryImages(imageFolder: string): ImageMetadata[] {
+  const allMedia = [];
+  
   try {
+    // First, get all images using require.context
     // @ts-expect-error - require.context is a webpack-specific function
-    const context = require.context('../../public/images', true, /\.(jpg|jpeg|png|avif|webp)$/);
-    return context.keys()
+    const imageContext = require.context('../../public/images', true, /\.(jpg|jpeg|png|avif|webp)$/);
+    const imageFiles = imageContext.keys()
       .filter((key: string) => key.includes(imageFolder))
       .map((key: string) => {
         const src = key.replace(/^\./, '/images');
@@ -45,6 +51,35 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
         };
         return { src, filename, ...imageMetadata };
       });
+    
+    allMedia.push(...imageFiles);
+    
+    // Then, manually add video files that we know exist based on metadata
+    // and actually belong to this specific folder
+    Object.keys(metadata).forEach(filename => {
+      if (isVideoFile(filename)) {
+        const videoMetadata = metadata[filename as keyof typeof metadata];
+        if (videoMetadata) {
+          // Create a mapping of known video files to their actual folder locations
+          const videoFolderMapping: Record<string, string> = {
+            '2017 Total Eclipse2.mp4': 'astrophotography/solar-system/events/total-eclipse-2017'
+          };
+          
+          // Only add the video if it belongs to the current folder
+          const videoFolder = videoFolderMapping[filename];
+          if (videoFolder && videoFolder === imageFolder) {
+            const expectedPath = `/images/${imageFolder}/${filename}`;
+            allMedia.push({
+              src: expectedPath,
+              filename,
+              ...videoMetadata
+            });
+          }
+        }
+      }
+    });
+    
+    return allMedia;
   } catch {
     // Fallback to featured images if the specific folder doesn't exist
     // @ts-expect-error - require.context is a webpack-specific function
@@ -62,6 +97,13 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
       return { src, filename, ...imageMetadata };
     });
   }
+}
+
+// Helper function to check if file is a video
+function isVideoFile(filename: string): boolean {
+  const videoExtensions = ['.mp4', '.mov', '.avi', '.webm'];
+  const extension = filename.toLowerCase().substring(filename.lastIndexOf('.'));
+  return videoExtensions.includes(extension);
 }
 
 export default function GalleryTemplate({ title, backgroundImage, imageFolder }: GalleryTemplateProps) {
@@ -146,15 +188,32 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               >
                 {/* Glass Card */}
                 <div className="relative bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300">
-                  {/* Image Container */}
+                  {/* Image/Video Container */}
                   <div className="aspect-[3/4] relative">
-                    <Image
-                      src={image.src}
-                      alt={image.objectName || image.name || 'Gallery Image'}
-                      fill
-                      className="object-cover"
-                      quality={90}
-                    />
+                    {isVideoFile(image.src) ? (
+                      <>
+                        <video
+                          src={image.src}
+                          className="object-cover w-full h-full"
+                          preload="metadata"
+                          muted
+                        />
+                        {/* Video Play Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all duration-300">
+                          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                            <div className="w-0 h-0 border-l-[16px] border-l-black border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1"></div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <Image
+                        src={image.src}
+                        alt={image.objectName || image.name || image.equipmentName || 'Gallery Image'}
+                        fill
+                        className="object-cover"
+                        quality={90}
+                      />
+                    )}
                   </div>
                   
                   {/* Bottom Label with Thicker Border - Two Lines */}
@@ -171,6 +230,18 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                           <h4 className="text-white text-sm font-medium tracking-wide text-center">
                             {image.objectName}
                           </h4>
+                        )}
+                      </>
+                    ) : /* For equipment images */
+                    image.equipmentName ? (
+                      <>
+                        <h3 className="text-white text-sm font-medium tracking-wide text-center mb-1">
+                          {image.equipmentName}
+                        </h3>
+                        {image.equipmentInfo && (
+                          <p className="text-white/80 text-xs text-center">
+                            {image.equipmentInfo}
+                          </p>
                         )}
                       </>
                     ) : (
@@ -266,24 +337,42 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
             </button>
           )}
 
-          {/* Image Container */}
+          {/* Media Container */}
           <div className="flex flex-col items-center justify-center w-full h-full p-6">
             <div className="relative max-w-[85vw] max-h-[70vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
-              <Image
-                src={images[currentImage].src}
-                alt={images[currentImage].objectName || images[currentImage].name || 'Gallery Image'}
-                width={1400}
-                height={1000}
-                className="object-contain w-full h-full"
-                priority
-                style={{ 
-                  width: 'auto', 
-                  height: 'auto',
-                  maxWidth: '85vw',
-                  maxHeight: '70vh',
-                  minWidth: '300px'
-                }}
-              />
+              {isVideoFile(images[currentImage].src) ? (
+                <video
+                  src={images[currentImage].src}
+                  controls
+                  className="object-contain w-full h-full"
+                  style={{ 
+                    width: 'auto', 
+                    height: 'auto',
+                    maxWidth: '85vw',
+                    maxHeight: '70vh',
+                    minWidth: '300px'
+                  }}
+                  preload="metadata"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <Image
+                  src={images[currentImage].src}
+                  alt={images[currentImage].objectName || images[currentImage].name || images[currentImage].equipmentName || 'Gallery Image'}
+                  width={1400}
+                  height={1000}
+                  className="object-contain w-full h-full"
+                  priority
+                  style={{ 
+                    width: 'auto', 
+                    height: 'auto',
+                    maxWidth: '85vw',
+                    maxHeight: '70vh',
+                    minWidth: '300px'
+                  }}
+                />
+              )}
             </div>
             
             {/* Metadata Bar */}

@@ -1,12 +1,15 @@
-import GalleryTemplate from '@/components/GalleryTemplate';
-import globalConfig from '@/config/global';
+import CategoryTemplate from '@/components/CategoryTemplate';
+import { globalConfig } from '@/config/global';
 
 export default function CelestialEventsPage() {
+  const { celestialEvents } = globalConfig;
+  
   return (
-    <GalleryTemplate
-      title="Celestial Events"
-      backgroundImage="/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg"
-      imageFolder={globalConfig.imageFolders.solarSystem.events}
+    <CategoryTemplate
+      title={celestialEvents.title}
+      backgroundImage={celestialEvents.backgroundImage}
+      categories={celestialEvents.categories}
+      description={celestialEvents.description}
     />
   );
 }
