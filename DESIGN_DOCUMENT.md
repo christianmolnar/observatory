@@ -35,25 +35,22 @@ A complete redesign of MapleValleyObservatory.com to create a modern, beautiful 
 
 #### Deep Sky Objects (`/astrophotography/deep-sky`)
 - Nebulae (M42 Orion Nebula, Running Man, etc.)
-- Galaxies (M31 Andromeda, M33 Triangulum, etc.)
-- Star clusters (M44 Beehive, M3, etc.)
+- Galaxies
+- Star clusters
 - Each image with metadata: equipment, exposure details, processing notes
-- **Current Status**: ✅ Implemented with automated astronomical object recognition
 
-#### Solar System (`/astrophotography/solar-system`)
+#### Solar System (`/astrophotography/solar`)
 - Sun photography
-- Solar eclipses (2017 Total Eclipse collection)
+- Solar eclipses
 - Solar features and phenomena
-- Moon phases and features (Full Moon, Crescent Moon, etc.)
+- Moon phases and features
 - Planets (Jupiter, Saturn, Mars, etc.)
 - Solar system objects
-- **Current Status**: ✅ Implemented
 
-#### Wide Field (`/wide-field`)
+#### Wide Field (`/astrophotography/wide-field`)
 - Milky Way photography
-- Constellation photography  
+- Constellation photography
 - Star field images
-- **Current Status**: ✅ Implemented as top-level route (not under /astrophotography)
 
 ### 3. Terrestrial Photography (`/terrestrial`)
 **Collection-Based Structure:**
@@ -61,14 +58,8 @@ A complete redesign of MapleValleyObservatory.com to create a modern, beautiful 
 #### Collections Overview (`/terrestrial/collections`)
 - Grid view of all collections with hero images
 - Each collection shows: title, location, date range, image count
-- **Current Status**: ✅ Basic implementation (needs enhancement)
 
-**Current Collections in Metadata:**
-- **Yellowstone National Park** - Mammoth Hot Springs, Midway Basin, Upper Basin, Old Faithful, Yellowstone Canyon, Yellowstone Fauna
-- **Grand Teton National Park** - Grand Tetons collection
-- **Pacific Northwest** - Various locations
-
-**Future Collections Structure:**
+**Initial Collections:**
 - **National Parks Adventures** (`/terrestrial/collections/national-parks`)
 - **Pacific Northwest Landscapes** (`/terrestrial/collections/pacific-northwest`)
 - **Maple Valley Local** (`/terrestrial/collections/maple-valley-local`)
@@ -84,14 +75,10 @@ Each collection page includes:
 ### 4. Equipment (`/equipment`)
 
 #### Smart All-In-One Telescopes (`/equipment/smart-telescopes`)
-**Current Equipment in Metadata:**
-- **William Optics & Meade 8-inch ACF**: Current setup with ZWO ASI 533MC and 676MC cameras, mounted on Meade LXD75, ASIAIR software
-- **Meade LX 65**: Double OTA mount (former equipment)
-
 **SeeStar S30:**
 - Specifications
 - Sample images taken with this equipment
-- Use cases and advantages  
+- Use cases and advantages
 - Setup and operation notes
 
 **SeeStar S50:**
@@ -99,15 +86,14 @@ Each collection page includes:
 - Image gallery showcasing capabilities
 - Comparison with S30
 - User experience and tips
-- **Current Status**: ✅ Mentioned in observatory config but needs dedicated page
 
 #### Observatory (`/equipment/observatory`)
 **Main Observatory Setup:**
-- Telescope mounts (Meade LXD75, former LX 65)
-- Traditional telescopes (William Optics, Meade 8-inch ACF)
-- Camera equipment (ZWO ASI 533MC, 676MC)
+- Telescope mounts
+- Traditional telescopes
+- Camera equipment
 - Accessories and filters
-- Computer equipment (ASIAIR software)
+- Computer equipment
 - Software used for processing
 
 **Equipment Cards Format:**
@@ -228,52 +214,9 @@ Each collection page includes:
 
 ## Technical Architecture
 
-### Current Implementation: Next.js with Enhanced Features
-
-**✅ Implemented Tech Stack:**
-- Next.js 15.4.5 with App Router
-- TypeScript for type safety
-- Tailwind CSS 4.0 for styling
-- Automated metadata generation system
-- Enhanced astronomical object recognition
-- Dynamic gallery loading from file system
-
-**Enhanced Features Beyond Original Design:**
-- **Comprehensive Astronomical Database**: 200+ objects from 8 major catalogs
-  - Messier (M1-M110): Famous deep sky objects
-  - NGC (New General Catalogue): Comprehensive catalog  
-  - IC (Index Catalogue): Supplement to NGC
-  - Caldwell (C1-C109): Best non-Messier objects
-  - Sharpless (Sh2-xxx): Emission nebulae
-  - Barnard (B1-B366): Dark nebulae
-  - Abell (A1-A86): Planetary nebulae
-  - van den Bergh (vdB1-vdB158): Reflection nebulae
-
-- **Smart Filename Parsing**: Handles both catalog designations and common names
-  - Examples: "NGC6888.jpg" → NGC6888 + "Crescent Nebula"
-  - Examples: "Crescent Nebula.jpg" → NGC6888 + "Crescent Nebula"
-  - Supports space-separated formats: "NGC 2264.jpg", "IC 5146.jpg"
-
-- **Automated Metadata Generation**: `update-metadata.js` script
-  - Parses astronomical object names from filenames
-  - Generates catalog designations and proper names
-  - Updates metadata.json automatically
-  - Supports multiple image categories (astrophotography, terrestrial, equipment)
-
-### Current Navigation Structure
-```
-/ (Home)
-├── /astrophotography/deep-sky (Deep Sky Objects)
-├── /astrophotography/solar-system (Solar System)
-├── /wide-field (Wide Field - top level)
-├── /terrestrial (Terrestrial Photography)
-├── /equipment (Equipment/Gear)
-└── /contact (Contact - to be implemented)
-```
-
 ### Recommended Framework Options
 
-#### ✅ Option 1: Next.js (CURRENT - Implemented)
+#### Option 1: Next.js (Recommended)
 **Pros:**
 - Excellent SEO with SSG/SSR
 - Image optimization built-in
@@ -281,12 +224,13 @@ Each collection page includes:
 - Large ecosystem
 - Easy deployment
 
-**Current Tech Stack:**
-- Next.js 15.4.5 with App Router ✅
-- TypeScript for type safety ✅
-- Tailwind CSS for styling ✅
-- Custom metadata generation system ✅
-- File-based image loading ✅
+**Tech Stack:**
+- Next.js 14+ with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Framer Motion for animations
+- MDX for content management
+- Vercel for hosting
 
 #### Option 2: Astro
 **Pros:**
@@ -314,32 +258,12 @@ Each collection page includes:
 
 ### Content Management Strategy
 
-#### ✅ Option A: File-Based (CURRENT - Implemented)
-- ✅ Automated metadata generation via `update-metadata.js`
-- ✅ JSON metadata database at `src/data/metadata.json`
-- ✅ Images loaded dynamically from `public/images/` folders
-- ✅ Git-based workflow for all content
-- ✅ No manual metadata entry required
-- ✅ Automatic astronomical object recognition
-
-**Current Metadata Structure:**
-```json
-{
-  "filename.jpg": {
-    "catalogDesignation": "NGC6888",
-    "objectName": "Crescent Nebula", 
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  }
-}
-```
-
-**Supported Image Categories:**
-- Astrophotography (with astronomical object recognition)
-- Terrestrial (with location-based metadata)
-- Equipment (with equipment-specific metadata)
-- Wide field (specialized astrophotography category)
+#### Option A: File-Based (Recommended for Start)
+- Markdown files for content
+- JSON for image metadata
+- Images loaded dynamically from folders for all galleries
+- Git-based workflow
+- Easy to version control
 
 #### Option B: Headless CMS
 - Strapi, Sanity, or Contentful
@@ -362,53 +286,18 @@ Each collection page includes:
 - **Alt text** for all images
 - **Page speed** optimization
 
-## Development Phases - CURRENT STATUS
+## Development Phases
 
-### ✅ Phase 1: Foundation (COMPLETED)
-- ✅ Set up development environment (Next.js 15.4.5 + TypeScript + Tailwind)
-- ✅ Implement basic layout and navigation
-- ✅ Create homepage design  
-- ✅ Set up image optimization pipeline
+### Phase 1: Foundation (Week 1-2)
+- Set up development environment
+- Implement basic layout and navigation
+- Create homepage design
+- Set up image optimization pipeline
 
-### ✅ Phase 2: Core Features (COMPLETED)
-- ✅ Build astrophotography galleries (deep-sky, solar-system)
-- ✅ Implement wide-field photography section
-- ✅ Create basic terrestrial galleries
-- ✅ Develop equipment showcase foundation
-- ✅ **ENHANCED**: Automated metadata generation system
-- ✅ **ENHANCED**: Comprehensive astronomical object database (200+ objects)
-- ✅ **ENHANCED**: Smart filename parsing for catalog designations
-
-### 🚧 Phase 3: Polish & Content (IN PROGRESS)
-- ✅ Migrate existing content (metadata.json populated)
-- ✅ Enhanced astronomical object recognition system
-- 🔄 Implement lightbox and advanced interactions (basic version exists)
-- ❌ Add Clear Sky Clock integration
-- ✅ Mobile optimization and testing
-- ❌ About page implementation
-- ❌ Contact page implementation
-
-### ❌ Phase 4: Launch Preparation (PENDING)
-- ❌ SEO optimization
-- ❌ Performance testing
-- ❌ Domain setup and deployment
-- ❌ Content review and final additions
-
-## Current Project Status: **Phase 3 (80% Complete)**
-
-**Major Achievements:**
-- Professional-grade astronomical object recognition system
-- Automated metadata generation surpassing original design scope
-- Functional gallery system with real content
-- Modern responsive design implementation
-- Configurable branding system
-
-**Remaining Tasks:**
-- Complete missing pages (About, Contact)
-- Enhanced lightbox functionality
-- Clear Sky Clock integration
-- Performance optimization
-- SEO implementation
+### Phase 2: Core Features (Week 3-4)
+- Build astrophotography galleries
+- Implement terrestrial collections
+- Create equipment showcase pages
 - Add search and filter functionality
 
 ### Phase 3: Polish & Content (Week 5-6)

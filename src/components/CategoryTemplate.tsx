@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import SiteLayout from '@/components/SiteLayout';
 
 interface CategoryItem {
   title: string;
@@ -21,33 +21,32 @@ interface CategoryPageProps {
 
 export default function CategoryTemplate({ title, backgroundImage, categories, description }: CategoryPageProps) {
   return (
-    <div className="min-h-screen bg-black">
-      <Navigation />
-      
-      {/* Background Image */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src={backgroundImage}
-          alt="Background"
-          fill
-          className="object-cover opacity-50"
-          quality={85}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/20" />
-      </div>
+    <SiteLayout>
+      <div className="min-h-screen bg-black">
+        {/* Background Image */}
+        <div className="fixed inset-0 z-0">
+          <Image
+            src={backgroundImage}
+            alt="Background"
+            fill
+            className="object-cover opacity-50"
+            quality={85}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/20" />
+        </div>
 
-      {/* Category Content */}
-      <main className="relative z-10 pt-48 pb-16">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Page Title */}
-          <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-light text-white tracking-[0.2em] mb-8">
-              {title.toUpperCase()}
-            </h1>
-            {description && (
-              <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
-                {description}
-              </p>
+        {/* Category Content */}
+        <main className="relative z-10 pt-16 pb-16">
+          <div className="max-w-6xl mx-auto px-6">
+            {/* Page Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl md:text-4xl font-light text-white tracking-[0.2em] mb-8">
+                {title.toUpperCase()}
+              </h1>
+              {description && (
+                <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
+                  {description}
+                </p>
             )}
           </div>
 
@@ -97,6 +96,7 @@ export default function CategoryTemplate({ title, backgroundImage, categories, d
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </SiteLayout>
   );
 }

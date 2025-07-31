@@ -18,8 +18,26 @@ export const navigationConfig = {
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
-    { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
+  ]
+};
+
+// Sub-Navigation Configuration
+export const subNavigationConfig = {
+  '/astrophotography/deep-sky': [
+    { label: 'Galaxies', href: '/astrophotography/deep-sky/galaxies' },
+    { label: 'Nebulas', href: '/astrophotography/deep-sky/nebulas' },
+    { label: 'Star Clusters', href: '/astrophotography/deep-sky/star-clusters' }
+  ],
+  '/astrophotography/solar-system': [
+    { label: 'Solar', href: '/astrophotography/solar-system/solar' },
+    { label: 'Lunar', href: '/astrophotography/solar-system/lunar' },
+    { label: 'Planets', href: '/astrophotography/solar-system/planets' },
+    { label: 'Celestial Events', href: '/astrophotography/solar-system/events' }
+  ],
+  '/terrestrial': [
+    { label: 'Yellowstone', href: '/terrestrial/yellowstone' },
+    { label: 'Grand Tetons', href: '/terrestrial/grand-tetons' }
   ]
 };
 
@@ -151,9 +169,9 @@ export const terrestrialConfig = {
 
 // Wide Field Astrophotography Configuration
 export const wideFieldConfig = {
-  title: 'WIDE FIELD PHOTOGRAPHY',
+  title: 'WIDE FIELD ASTROPHOTOGRAPHY',
   backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
-  imageFolder: 'wide-field',
+  imageFolder: 'astrophotography/deep-sky/wide-field',
   description: 'Wide-angle captures of the night sky, constellations, and Milky Way panoramas showcasing the grandeur of our cosmic neighborhood.'
 };
 
@@ -219,6 +237,7 @@ export const styleConfig = {
 export const globalConfig = {
   observatory: observatoryConfig,
   navigation: navigationConfig,
+  subNavigation: subNavigationConfig,
   homepage: homepageConfig,
   deepSky: deepSkyConfig,
   solarSystem: solarSystemConfig,

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
-import Navigation from '@/components/Navigation';
+import SiteLayout from '@/components/SiteLayout';
 import metadata from '@/data/metadata.json';
 
 interface ImageMetadata {
@@ -16,9 +16,6 @@ interface ImageMetadata {
   exposure?: string;
   // Terrestrial fields
   name?: string;
-  // Equipment fields
-  equipmentName?: string;
-  equipmentInfo?: string;
   // Common fields
   location: string;
 }
@@ -38,7 +35,11 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
     // @ts-expect-error - require.context is a webpack-specific function
     const imageContext = require.context('../../public/images', true, /\.(jpg|jpeg|png|avif|webp)$/);
     const imageFiles = imageContext.keys()
-      .filter((key: string) => key.includes(imageFolder))
+      .filter((key: string) => {
+        // Make the path matching more precise to avoid cross-contamination
+        const normalizedKey = key.replace(/^\.\//, '');
+        return normalizedKey.startsWith(imageFolder + '/') || normalizedKey === imageFolder;
+      })
       .map((key: string) => {
         const src = key.replace(/^\./, '/images');
         const filename = src.split('/').pop() || '';
@@ -55,20 +56,30 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
     allMedia.push(...imageFiles);
     
     // Then, manually add video files that we know exist based on metadata
-    // and actually belong to this specific folder
+    // Videos are handled differently since they can't be loaded as modules
     Object.keys(metadata).forEach(filename => {
       if (isVideoFile(filename)) {
         const videoMetadata = metadata[filename as keyof typeof metadata];
+        
         if (videoMetadata) {
-          // Create a mapping of known video files to their actual folder locations
-          const videoFolderMapping: Record<string, string> = {
-            '2017 Total Eclipse2.mp4': 'astrophotography/solar-system/events/total-eclipse-2017'
+          // Check if this video belongs to the current folder by checking the metadata location
+          // We'll use a simple path-based check since we can't use require.context for videos
+          const expectedPath = `/images/${imageFolder}/${filename}`;
+          
+          // Only include videos that would logically belong in this folder
+          // This is a safer approach than trying to scan video files as modules
+          const shouldIncludeVideo = () => {
+            // For eclipse videos, only include them in the eclipse-specific folder
+            if (filename.toLowerCase().includes('eclipse')) {
+              return imageFolder.includes('total-eclipse-2017');
+            }
+            
+            // For other videos, you can add similar logic here based on naming conventions
+            // For now, we'll be conservative and only include eclipse videos in their specific folder
+            return false;
           };
           
-          // Only add the video if it belongs to the current folder
-          const videoFolder = videoFolderMapping[filename];
-          if (videoFolder && videoFolder === imageFolder) {
-            const expectedPath = `/images/${imageFolder}/${filename}`;
+          if (shouldIncludeVideo()) {
             allMedia.push({
               src: expectedPath,
               filename,
@@ -79,13 +90,12 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
       }
     });
     
-    // Sort all media alphabetically by filename
-    return allMedia.sort((a, b) => a.filename.localeCompare(b.filename));
+    return allMedia;
   } catch {
     // Fallback to featured images if the specific folder doesn't exist
     // @ts-expect-error - require.context is a webpack-specific function
     const context = require.context('../../public/images/astrophotography/featured', false, /\.(jpg|jpeg|png|avif|webp)$/);
-    const fallbackImages = context.keys().map((key: string) => {
+    return context.keys().map((key: string) => {
       const src = key.replace(/^\./, '/images/astrophotography/featured');
       const filename = src.split('/').pop() || '';
       const imageMetadata = metadata[filename as keyof typeof metadata] || {
@@ -97,7 +107,6 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
       };
       return { src, filename, ...imageMetadata };
     });
-    return fallbackImages.sort((a: ImageMetadata, b: ImageMetadata) => a.filename.localeCompare(b.filename));
   }
 }
 
@@ -153,23 +162,22 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
   }, [modalOpen, nextImage, prevImage]);
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navigation />
-      
-      {/* Background Image */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src={backgroundImage}
-          alt="Background"
-          fill
-          className="object-cover opacity-50"
-          quality={85}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/20" />
-      </div>
+    <SiteLayout>
+      <div className="min-h-screen bg-black">
+        {/* Background Image */}
+        <div className="fixed inset-0 z-0">
+          <Image
+            src={backgroundImage}
+            alt="Background"
+            fill
+            className="object-cover opacity-50"
+            quality={85}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/20" />
+        </div>
 
-      {/* Gallery Content */}
-      <main className="relative z-10 pt-48 pb-16">
+        {/* Gallery Content */}
+      <main className="relative z-10 pt-16 pb-16">
         <div className="max-w-6xl mx-auto px-6">
           {/* Gallery Title */}
           <div className="text-center mb-12">
@@ -210,7 +218,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                     ) : (
                       <Image
                         src={image.src}
-                        alt={image.objectName || image.name || image.equipmentName || 'Gallery Image'}
+                        alt={image.objectName || image.name || 'Gallery Image'}
                         fill
                         className="object-cover"
                         quality={90}
@@ -232,18 +240,6 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                           <h4 className="text-white text-sm font-medium tracking-wide text-center">
                             {image.objectName}
                           </h4>
-                        )}
-                      </>
-                    ) : /* For equipment images */
-                    image.equipmentName ? (
-                      <>
-                        <h3 className="text-white text-sm font-medium tracking-wide text-center mb-1">
-                          {image.equipmentName}
-                        </h3>
-                        {image.equipmentInfo && (
-                          <p className="text-white/80 text-xs text-center">
-                            {image.equipmentInfo}
-                          </p>
                         )}
                       </>
                     ) : (
@@ -361,7 +357,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               ) : (
                 <Image
                   src={images[currentImage].src}
-                  alt={images[currentImage].objectName || images[currentImage].name || images[currentImage].equipmentName || 'Gallery Image'}
+                  alt={images[currentImage].objectName || images[currentImage].name || 'Gallery Image'}
                   width={1400}
                   height={1000}
                   className="object-contain w-full h-full"
@@ -383,9 +379,8 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                 {(() => {
                   const metadataItems = [];
                   
-                  // Check if this is an astrophotography, terrestrial, or equipment image
+                  // Check if this is an astrophotography or terrestrial image
                   const isAstrophotography = images[currentImage].catalogDesignation || images[currentImage].objectName;
-                  const isEquipment = images[currentImage].equipmentName;
                   
                   if (isAstrophotography) {
                     // Astrophotography: Object name (catalog designation + object name or either one)
@@ -402,18 +397,6 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                         </span>
                       );
                     }
-                  } else if (isEquipment) {
-                    // Equipment: Show equipment name and info
-                    metadataItems.push(
-                      <span key="name" className="font-medium tracking-wide">
-                        {images[currentImage].equipmentName}
-                      </span>
-                    );
-                    if (images[currentImage].equipmentInfo) {
-                      metadataItems.push(
-                        <span key="equipmentInfo">{images[currentImage].equipmentInfo}</span>
-                      );
-                    }
                   } else {
                     // Terrestrial: Show name if available
                     if (images[currentImage].name) {
@@ -425,8 +408,8 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                     }
                   }
                   
-                  // Location (only for non-equipment items, since equipment doesn't typically have location in the same way)
-                  if (!isEquipment && images[currentImage].location) {
+                  // Location
+                  if (images[currentImage].location) {
                     metadataItems.push(
                       <span key="location">{images[currentImage].location}</span>
                     );
@@ -469,6 +452,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
         </div>,
         document.body
       )}
-    </div>
+      </div>
+    </SiteLayout>
   );
 }

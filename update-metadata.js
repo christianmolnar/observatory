@@ -62,245 +62,57 @@ function loadExistingMetadata() {
   }
 }
 
-// Comprehensive Astronomical Object Catalog Database
-// Includes major catalogs: Messier, NGC, IC, Caldwell, Sharpless, Barnard, Abell, vdB
+// Astronomical object catalog and name database
 const ASTRONOMICAL_OBJECTS = {
-  // ===== MESSIER CATALOG (M) - Most Popular Objects =====
+  // Messier Catalog
   'M1': { catalog: 'M1', name: 'Crab Nebula', type: 'nebula' },
-  'M2': { catalog: 'M2', name: 'Globular Cluster M2', type: 'star cluster' },
-  'M3': { catalog: 'M3', name: 'Globular Cluster M3', type: 'star cluster' },
-  'M4': { catalog: 'M4', name: 'Globular Cluster M4', type: 'star cluster' },
-  'M5': { catalog: 'M5', name: 'Globular Cluster M5', type: 'star cluster' },
-  'M6': { catalog: 'M6', name: 'Butterfly Cluster', type: 'star cluster' },
-  'M7': { catalog: 'M7', name: 'Ptolemy Cluster', type: 'star cluster' },
-  'M8': { catalog: 'M8', name: 'Lagoon Nebula', type: 'nebula' },
-  'M11': { catalog: 'M11', name: 'Wild Duck Cluster', type: 'star cluster' },
-  'M13': { catalog: 'M13', name: 'Great Globular Cluster in Hercules', type: 'star cluster' },
-  'M15': { catalog: 'M15', name: 'Globular Cluster M15', type: 'star cluster' },
-  'M16': { catalog: 'M16', name: 'Eagle Nebula', type: 'nebula' },
-  'M17': { catalog: 'M17', name: 'Omega Nebula', type: 'nebula' },
-  'M20': { catalog: 'M20', name: 'Trifid Nebula', type: 'nebula' },
-  'M22': { catalog: 'M22', name: 'Sagittarius Cluster', type: 'star cluster' },
-  'M27': { catalog: 'M27', name: 'Dumbbell Nebula', type: 'nebula' },
   'M31': { catalog: 'M31', name: 'Andromeda Galaxy', type: 'galaxy' },
-  'M32': { catalog: 'M32', name: 'Elliptical Galaxy M32', type: 'galaxy' },
   'M33': { catalog: 'M33', name: 'Triangulum Galaxy', type: 'galaxy' },
-  'M35': { catalog: 'M35', name: 'Open Cluster M35', type: 'star cluster' },
-  'M36': { catalog: 'M36', name: 'Pinwheel Cluster', type: 'star cluster' },
-  'M37': { catalog: 'M37', name: 'Open Cluster M37', type: 'star cluster' },
-  'M38': { catalog: 'M38', name: 'Starfish Cluster', type: 'star cluster' },
   'M42': { catalog: 'M42', name: 'Orion Nebula', type: 'nebula' },
-  'M43': { catalog: 'M43', name: 'De Mairan\'s Nebula', type: 'nebula' },
-  'M44': { catalog: 'M44', name: 'Beehive Cluster', type: 'star cluster' },
   'M45': { catalog: 'M45', name: 'Pleiades', type: 'star cluster' },
-  'M46': { catalog: 'M46', name: 'Open Cluster M46', type: 'star cluster' },
-  'M47': { catalog: 'M47', name: 'Open Cluster M47', type: 'star cluster' },
-  'M50': { catalog: 'M50', name: 'Open Cluster M50', type: 'star cluster' },
   'M51': { catalog: 'M51', name: 'Whirlpool Galaxy', type: 'galaxy' },
-  'M52': { catalog: 'M52', name: 'Open Cluster M52', type: 'star cluster' },
   'M57': { catalog: 'M57', name: 'Ring Nebula', type: 'nebula' },
-  'M63': { catalog: 'M63', name: 'Sunflower Galaxy', type: 'galaxy' },
-  'M64': { catalog: 'M64', name: 'Black Eye Galaxy', type: 'galaxy' },
-  'M65': { catalog: 'M65', name: 'Leo Triplet Galaxy', type: 'galaxy' },
-  'M66': { catalog: 'M66', name: 'Leo Triplet Galaxy', type: 'galaxy' },
-  'M67': { catalog: 'M67', name: 'King Cobra Cluster', type: 'star cluster' },
-  'M78': { catalog: 'M78', name: 'Reflection Nebula M78', type: 'nebula' },
   'M81': { catalog: 'M81', name: 'Bode\'s Galaxy', type: 'galaxy' },
   'M82': { catalog: 'M82', name: 'Cigar Galaxy', type: 'galaxy' },
-  'M92': { catalog: 'M92', name: 'Globular Cluster M92', type: 'star cluster' },
-  'M94': { catalog: 'M94', name: 'Cat\'s Eye Galaxy', type: 'galaxy' },
-  'M95': { catalog: 'M95', name: 'Barred Spiral Galaxy M95', type: 'galaxy' },
-  'M96': { catalog: 'M96', name: 'Elliptical Galaxy M96', type: 'galaxy' },
-  'M97': { catalog: 'M97', name: 'Owl Nebula', type: 'nebula' },
   'M101': { catalog: 'M101', name: 'Pinwheel Galaxy', type: 'galaxy' },
-  'M103': { catalog: 'M103', name: 'Open Cluster M103', type: 'star cluster' },
   'M104': { catalog: 'M104', name: 'Sombrero Galaxy', type: 'galaxy' },
-  'M106': { catalog: 'M106', name: 'Spiral Galaxy M106', type: 'galaxy' },
-  'M108': { catalog: 'M108', name: 'Surfboard Galaxy', type: 'galaxy' },
-  'M109': { catalog: 'M109', name: 'Barred Spiral Galaxy M109', type: 'galaxy' },
-  'M110': { catalog: 'M110', name: 'Elliptical Galaxy M110', type: 'galaxy' },
-
-  // ===== NGC CATALOG - Popular Objects =====
-  'NGC224': { catalog: 'NGC224', name: 'Andromeda Galaxy', type: 'galaxy' },
-  'NGC253': { catalog: 'NGC253', name: 'Sculptor Galaxy', type: 'galaxy' },
-  'NGC281': { catalog: 'NGC281', name: 'Pacman Nebula', type: 'nebula' },
-  'NGC598': { catalog: 'NGC598', name: 'Triangulum Galaxy', type: 'galaxy' },
-  'NGC869': { catalog: 'NGC869', name: 'Double Cluster', type: 'star cluster' },
-  'NGC884': { catalog: 'NGC884', name: 'Double Cluster', type: 'star cluster' },
-  'NGC891': { catalog: 'NGC891', name: 'Silver Sliver Galaxy', type: 'galaxy' },
-  'NGC1316': { catalog: 'NGC1316', name: 'Fornax A Galaxy', type: 'galaxy' },
-  'NGC1499': { catalog: 'NGC1499', name: 'California Nebula', type: 'nebula' },
-  'NGC1952': { catalog: 'NGC1952', name: 'Crab Nebula', type: 'nebula' },
-  'NGC1976': { catalog: 'NGC1976', name: 'Orion Nebula', type: 'nebula' },
-  'NGC1977': { catalog: 'NGC1977', name: 'Running Man Nebula', type: 'nebula' },
-  'NGC2024': { catalog: 'NGC2024', name: 'Flame Nebula', type: 'nebula' },
-  'NGC2070': { catalog: 'NGC2070', name: 'Tarantula Nebula', type: 'nebula' },
-  'NGC2175': { catalog: 'NGC2175', name: 'Monkey Head Nebula', type: 'nebula' },
-  'NGC2237': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
-  'NGC2175': { catalog: 'NGC2175', name: 'Monkey Head Nebula', type: 'nebula' },
-  'NGC2237': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
-  'NGC2244': { catalog: 'NGC2244', name: 'Rosette Nebula Open Cluster', type: 'star cluster' },
-  'NGC2264': { catalog: 'NGC2264', name: 'Cone Nebula', type: 'nebula' },
-  'NGC2359': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
-  'NGC3372': { catalog: 'NGC3372', name: 'Carina Nebula', type: 'nebula' },
-  'NGC4565': { catalog: 'NGC4565', name: 'Needle Galaxy', type: 'galaxy' },
-  'NGC5128': { catalog: 'NGC5128', name: 'Centaurus A', type: 'galaxy' },
-  'NGC5194': { catalog: 'NGC5194', name: 'Whirlpool Galaxy', type: 'galaxy' },
-  'NGC6302': { catalog: 'NGC6302', name: 'Bug Nebula', type: 'nebula' },
-  'NGC6334': { catalog: 'NGC6334', name: 'Cat\'s Paw Nebula', type: 'nebula' },
-  'NGC6543': { catalog: 'NGC6543', name: 'Cat\'s Eye Nebula', type: 'nebula' },
-  'NGC6720': { catalog: 'NGC6720', name: 'Ring Nebula', type: 'nebula' },
-  'NGC6888': { catalog: 'NGC6888', name: 'Crescent Nebula', type: 'nebula' },
-  'NGC6939': { catalog: 'NGC6939', name: 'NGC6939 Cluster', type: 'star cluster' },
+  
+  // NGC Catalog (New General Catalogue)
+  'NGC7000': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
+  'NGC7635': { catalog: 'NGC7635', name: 'Bubble Nebula', type: 'nebula' },
   'NGC6960': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
   'NGC6992': { catalog: 'NGC6992', name: 'Eastern Veil Nebula', type: 'nebula' },
-  'NGC7000': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
+  'NGC2070': { catalog: 'NGC2070', name: 'Tarantula Nebula', type: 'nebula' },
+  'NGC281': { catalog: 'NGC281', name: 'Pacman Nebula', type: 'nebula' },
   'NGC7293': { catalog: 'NGC7293', name: 'Helix Nebula', type: 'nebula' },
-  'NGC7380': { catalog: 'NGC7380', name: 'Wizard Nebula', type: 'nebula' },
-  'NGC7635': { catalog: 'NGC7635', name: 'Bubble Nebula', type: 'nebula' },
-  'NGC7822': { catalog: 'NGC7822', name: 'NGC7822 Nebula', type: 'nebula' },
-
-  // ===== IC CATALOG - Popular Objects =====
-  'IC63': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' },
-  'IC410': { catalog: 'IC410', name: 'Tadpoles Nebula', type: 'nebula' },
-  'IC417': { catalog: 'IC417', name: 'Spider Nebula', type: 'nebula' },
-  'IC434': { catalog: 'IC434', name: 'Horsehead Nebula', type: 'nebula' },
-  'IC443': { catalog: 'IC443', name: 'Jellyfish Nebula', type: 'nebula' },
-  'IC1284': { catalog: 'IC1284', name: 'IC1284 Nebula', type: 'nebula' },
-  'IC1295': { catalog: 'IC1295', name: 'IC1295 Nebula', type: 'nebula' },
-  'IC1318': { catalog: 'IC1318', name: 'Butterfly Nebula', type: 'nebula' },
+  'NGC1976': { catalog: 'NGC1976', name: 'Orion Nebula', type: 'nebula' },
+  'NGC598': { catalog: 'NGC598', name: 'Triangulum Galaxy', type: 'galaxy' },
+  'NGC224': { catalog: 'NGC224', name: 'Andromeda Galaxy', type: 'galaxy' },
+  
+  // IC Catalog (Index Catalogue)
+  'IC445': { catalog: 'IC445', name: 'Jellyfish Nebula', type: 'nebula' },
   'IC1396': { catalog: 'IC1396', name: 'Elephant\'s Trunk Nebula', type: 'nebula' },
+  'IC410': { catalog: 'IC410', name: 'Tadpoles Nebula', type: 'nebula' },
   'IC1805': { catalog: 'IC1805', name: 'Heart Nebula', type: 'nebula' },
   'IC1848': { catalog: 'IC1848', name: 'Soul Nebula', type: 'nebula' },
-  'IC2118': { catalog: 'IC2118', name: 'Witch Head Nebula', type: 'nebula' },
-  'IC2177': { catalog: 'IC2177', name: 'Seagull Nebula', type: 'nebula' },
-  'IC4628': { catalog: 'IC4628', name: 'Prawn Nebula', type: 'nebula' },
-  'IC5070': { catalog: 'IC5070', name: 'Pelican Nebula', type: 'nebula' },
-  'IC5146': { catalog: 'IC5146', name: 'Cocoon Nebula', type: 'nebula' },
-
-  // ===== CALDWELL CATALOG - Popular Objects =====
-  'C1': { catalog: 'C1', name: 'NGC188', type: 'star cluster' },
-  'C2': { catalog: 'C2', name: 'NGC40', type: 'nebula' },
-  'C4': { catalog: 'C4', name: 'Iris Nebula', type: 'nebula' },
-  'C14': { catalog: 'C14', name: 'Double Cluster', type: 'star cluster' },
-  'C20': { catalog: 'C20', name: 'North America Nebula', type: 'nebula' },
-  'C27': { catalog: 'C27', name: 'Crescent Nebula', type: 'nebula' },
-  'C33': { catalog: 'C33', name: 'Eastern Veil Nebula', type: 'nebula' },
-  'C34': { catalog: 'C34', name: 'Western Veil Nebula', type: 'nebula' },
-  'C49': { catalog: 'C49', name: 'Rosette Nebula', type: 'nebula' },
-  'C50': { catalog: 'C50', name: 'Cone Nebula', type: 'nebula' },
-
-  // ===== SHARPLESS CATALOG - Popular Emission Nebulae =====
-  'SH2-101': { catalog: 'Sh2-101', name: 'Tulip Nebula', type: 'nebula' },
-  'SH2-115': { catalog: 'Sh2-115', name: 'Abell 71', type: 'nebula' },
-  'SH2-129': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
-  'SH2-132': { catalog: 'Sh2-132', name: 'Lion Nebula', type: 'nebula' },
-  'SH2-140': { catalog: 'Sh2-140', name: 'Wizard Nebula', type: 'nebula' },
+  
+  // Sharpless Catalog (Sh2)
+  'SH2-132': { catalog: 'Sh2-132', name: 'Lobster Claw Nebula', type: 'nebula' },
   'SH2-155': { catalog: 'Sh2-155', name: 'Cave Nebula', type: 'nebula' },
-  'SH2-185': { catalog: 'Sh2-185', name: 'Sh2-185 Nebula', type: 'nebula' },
-  'SH2-212': { catalog: 'Sh2-212', name: 'Sh2-212 Nebula', type: 'nebula' },
-  'SH2-216': { catalog: 'Sh2-216', name: 'Lower\'s Nebula', type: 'nebula' },
-  'SH2-240': { catalog: 'Sh2-240', name: 'Simeis 147', type: 'nebula' },
-  'SH2-254': { catalog: 'Sh2-254', name: 'Sh2-254 Nebula', type: 'nebula' },
-  'SH2-308': { catalog: 'Sh2-308', name: 'Dolphin Head Nebula', type: 'nebula' },
-
-  // ===== BARNARD CATALOG - Dark Nebulae =====
-  'B33': { catalog: 'B33', name: 'Horsehead Nebula', type: 'dark nebula' },
-  'B72': { catalog: 'B72', name: 'Snake Nebula', type: 'dark nebula' },
-  'B86': { catalog: 'B86', name: 'Ink Spot Nebula', type: 'dark nebula' },
-  'B142': { catalog: 'B142', name: 'E Nebula', type: 'dark nebula' },
-  'B143': { catalog: 'B143', name: 'E Nebula', type: 'dark nebula' },
-  'B150': { catalog: 'B150', name: 'Seahorse Nebula', type: 'dark nebula' },
-
-  // ===== ABELL CATALOG - Planetary Nebulae =====
-  'A21': { catalog: 'Abell 21', name: 'Medusa Nebula', type: 'nebula' },
-  'A39': { catalog: 'Abell 39', name: 'Abell 39', type: 'nebula' },
-  'A426': { catalog: 'Abell 426', name: 'Perseus Cluster', type: 'galaxy cluster' },
-
-  // ===== VAN DEN BERGH CATALOG - Reflection Nebulae =====
-  'VDB14': { catalog: 'vdB 14', name: 'vdB 14', type: 'nebula' },
-  'VDB15': { catalog: 'vdB 15', name: 'vdB 15', type: 'nebula' },
-  'VDB149': { catalog: 'vdB 149', name: 'Reflection Nebula vdB 149', type: 'nebula' },
-  'VDB152': { catalog: 'vdB 152', name: 'Reflection Nebula vdB 152', type: 'nebula' },
-
-  // ===== COMMON NAME MAPPINGS =====
+  'SH2-140': { catalog: 'Sh2-140', name: 'Wizard Nebula', type: 'nebula' },
+  'SH2-129': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
+  'SH2-101': { catalog: 'Sh2-101', name: 'Tulip Nebula', type: 'nebula' },
+  
+  // Common alternative names mapping to proper catalogs
+  'PELICAN': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
+  'JELLYFISH': { catalog: 'IC445', name: 'Jellyfish Nebula', type: 'nebula' },
+  'LOBSTERCLAW': { catalog: 'Sh2-132', name: 'Lobster Claw Nebula', type: 'nebula' },
+  'WIZARD': { catalog: 'Sh2-140', name: 'Wizard Nebula', type: 'nebula' },
+  'CRAB': { catalog: 'M1', name: 'Crab Nebula', type: 'nebula' },
   'ANDROMEDA': { catalog: 'M31', name: 'Andromeda Galaxy', type: 'galaxy' },
   'ORION': { catalog: 'M42', name: 'Orion Nebula', type: 'nebula' },
   'PLEIADES': { catalog: 'M45', name: 'Pleiades', type: 'star cluster' },
-  'WHIRLPOOL': { catalog: 'M51', name: 'Whirlpool Galaxy', type: 'galaxy' },
-  'CRAB': { catalog: 'M1', name: 'Crab Nebula', type: 'nebula' },
-  'RING': { catalog: 'M57', name: 'Ring Nebula', type: 'nebula' },
-  'EAGLE': { catalog: 'M16', name: 'Eagle Nebula', type: 'nebula' },
-  'LAGOON': { catalog: 'M8', name: 'Lagoon Nebula', type: 'nebula' },
-  'TRIFID': { catalog: 'M20', name: 'Trifid Nebula', type: 'nebula' },
-  'DUMBBELL': { catalog: 'M27', name: 'Dumbbell Nebula', type: 'nebula' },
-  'TRIANGULUM': { catalog: 'M33', name: 'Triangulum Galaxy', type: 'galaxy' },
-  'PINWHEEL': { catalog: 'M101', name: 'Pinwheel Galaxy', type: 'galaxy' },
-  'SOMBRERO': { catalog: 'M104', name: 'Sombrero Galaxy', type: 'galaxy' },
-  'BODES': { catalog: 'M81', name: 'Bode\'s Galaxy', type: 'galaxy' },
-  'CIGAR': { catalog: 'M82', name: 'Cigar Galaxy', type: 'galaxy' },
-  'OWL': { catalog: 'M97', name: 'Owl Nebula', type: 'nebula' },
-  'SUNFLOWER': { catalog: 'M63', name: 'Sunflower Galaxy', type: 'galaxy' },
-  'BLACKEYE': { catalog: 'M64', name: 'Black Eye Galaxy', type: 'galaxy' },
-  'BEEHIVE': { catalog: 'M44', name: 'Beehive Cluster', type: 'star cluster' },
-  'HERCULES': { catalog: 'M13', name: 'Great Globular Cluster in Hercules', type: 'star cluster' },
-  
-  'HORSEHEAD': { catalog: 'B33', name: 'Horsehead Nebula', type: 'dark nebula' },
-  'FLAME': { catalog: 'NGC2024', name: 'Flame Nebula', type: 'nebula' },
-  'ROSETTE': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
-  'CONE': { catalog: 'NGC2264', name: 'Cone Nebula', type: 'nebula' },
-  'CALIFORNIA': { catalog: 'NGC1499', name: 'California Nebula', type: 'nebula' },
-  'RUNNING': { catalog: 'NGC1977', name: 'Running Man Nebula', type: 'nebula' },
-  'HEART': { catalog: 'IC1805', name: 'Heart Nebula', type: 'nebula' },
-  'SOUL': { catalog: 'IC1848', name: 'Soul Nebula', type: 'nebula' },
-  'WITCH': { catalog: 'IC2118', name: 'Witch Head Nebula', type: 'nebula' },
-  'SEAGULL': { catalog: 'IC2177', name: 'Seagull Nebula', type: 'nebula' },
-  'COCOON': { catalog: 'IC5146', name: 'Cocoon Nebula', type: 'nebula' },
-  'PELICAN': { catalog: 'IC5070', name: 'Pelican Nebula', type: 'nebula' },
-  'ELEPHANT': { catalog: 'IC1396', name: 'Elephant\'s Trunk Nebula', type: 'nebula' },
-  'TADPOLES': { catalog: 'IC410', name: 'Tadpoles Nebula', type: 'nebula' },
-  'BUTTERFLY': { catalog: 'IC1318', name: 'Butterfly Nebula', type: 'nebula' },
-  'JELLYFISH': { catalog: 'IC443', name: 'Jellyfish Nebula', type: 'nebula' },
-  'SPIDER': { catalog: 'IC417', name: 'Spider Nebula', type: 'nebula' },
-  
-  'CRESCENT': { catalog: 'NGC6888', name: 'Crescent Nebula', type: 'nebula' },
-  'BUBBLE': { catalog: 'NGC7635', name: 'Bubble Nebula', type: 'nebula' },
-  'VEIL': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
-  'EASTERN': { catalog: 'NGC6992', name: 'Eastern Veil Nebula', type: 'nebula' },
-  'WESTERN': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
-  'NORTH': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
-  'AMERICA': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
-  'HELIX': { catalog: 'NGC7293', name: 'Helix Nebula', type: 'nebula' },
-  'PACMAN': { catalog: 'NGC281', name: 'Pacman Nebula', type: 'nebula' },
-  'WIZARD': { catalog: 'NGC7380', name: 'Wizard Nebula', type: 'nebula' },
-  'CARINA': { catalog: 'NGC3372', name: 'Carina Nebula', type: 'nebula' },
-  'NEEDLE': { catalog: 'NGC4565', name: 'Needle Galaxy', type: 'galaxy' },
-  'CENTAURUS': { catalog: 'NGC5128', name: 'Centaurus A', type: 'galaxy' },
-  'THOR': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
-  'HELMET': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
-  'MONKEY': { catalog: 'NGC2175', name: 'Monkey Head Nebula', type: 'nebula' },
-  'TARANTULA': { catalog: 'NGC2070', name: 'Tarantula Nebula', type: 'nebula' },
-  'CATS': { catalog: 'NGC6543', name: 'Cat\'s Eye Nebula', type: 'nebula' },
-  'CATS': { catalog: 'NGC6334', name: 'Cat\'s Paw Nebula', type: 'nebula' },
-  'BUG': { catalog: 'NGC6302', name: 'Bug Nebula', type: 'nebula' },
-  'MEDUSA': { catalog: 'Abell 21', name: 'Medusa Nebula', type: 'nebula' },
-  
-  'TULIP': { catalog: 'Sh2-101', name: 'Tulip Nebula', type: 'nebula' },
-  'CAVE': { catalog: 'Sh2-155', name: 'Cave Nebula', type: 'nebula' },
-  'FLYING': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
-  'BAT': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
-  'LION': { catalog: 'Sh2-132', name: 'Lion Nebula', type: 'nebula' },
-  'DOLPHIN': { catalog: 'Sh2-308', name: 'Dolphin Head Nebula', type: 'nebula' },
-  
-  'DOUBLE': { catalog: 'NGC869', name: 'Double Cluster', type: 'star cluster' },
-  'IRIS': { catalog: 'C4', name: 'Iris Nebula', type: 'nebula' },
-  'SCULPTOR': { catalog: 'NGC253', name: 'Sculptor Galaxy', type: 'galaxy' },
-  'SILVER': { catalog: 'NGC891', name: 'Silver Sliver Galaxy', type: 'galaxy' },
-  'SLIVER': { catalog: 'NGC891', name: 'Silver Sliver Galaxy', type: 'galaxy' },
-  'FORNAX': { catalog: 'NGC1316', name: 'Fornax A Galaxy', type: 'galaxy' },
-  'PRAWN': { catalog: 'IC4628', name: 'Prawn Nebula', type: 'nebula' },
-  'GHOST': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' },
-  'CASSIOPEIA': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' }
+  'WHIRLPOOL': { catalog: 'M51', name: 'Whirlpool Galaxy', type: 'galaxy' }
 };
 
 // Parse astronomical object from filename
@@ -347,7 +159,7 @@ function parseAstronomicalObject(filename) {
       }
     }
     
-    // NGC: NGC + number (handle both NGC1234 and NGC 1234 formats)
+    // NGC: NGC + number
     if (/^NGC\d+$/.test(upperPart)) {
       if (ASTRONOMICAL_OBJECTS[upperPart]) {
         const obj = ASTRONOMICAL_OBJECTS[upperPart];
@@ -361,23 +173,7 @@ function parseAstronomicalObject(filename) {
       }
     }
     
-    // NGC with space: NGC + number in next part
-    if (upperPart === 'NGC' && i + 1 < parts.length && /^\d+$/.test(parts[i + 1])) {
-      const number = parts[i + 1];
-      const normalizedNgc = `NGC${number}`;
-      if (ASTRONOMICAL_OBJECTS[normalizedNgc]) {
-        const obj = ASTRONOMICAL_OBJECTS[normalizedNgc];
-        catalogDesignation = obj.catalog;
-        objectName = obj.name;
-        break;
-      } else {
-        catalogDesignation = `NGC${number}`;
-        objectName = `NGC${number}`;
-        break;
-      }
-    }
-    
-    // IC: IC + number (handle both IC1234 and IC 1234 formats)
+    // IC: IC + number
     if (/^IC\d+$/.test(upperPart)) {
       if (ASTRONOMICAL_OBJECTS[upperPart]) {
         const obj = ASTRONOMICAL_OBJECTS[upperPart];
@@ -387,22 +183,6 @@ function parseAstronomicalObject(filename) {
       } else {
         catalogDesignation = upperPart;
         objectName = `${upperPart}`;
-        break;
-      }
-    }
-    
-    // IC with space: IC + number in next part
-    if (upperPart === 'IC' && i + 1 < parts.length && /^\d+$/.test(parts[i + 1])) {
-      const number = parts[i + 1];
-      const normalizedIc = `IC${number}`;
-      if (ASTRONOMICAL_OBJECTS[normalizedIc]) {
-        const obj = ASTRONOMICAL_OBJECTS[normalizedIc];
-        catalogDesignation = obj.catalog;
-        objectName = obj.name;
-        break;
-      } else {
-        catalogDesignation = `IC${number}`;
-        objectName = `IC${number}`;
         break;
       }
     }
@@ -450,66 +230,6 @@ function parseAstronomicalObject(filename) {
       } else {
         catalogDesignation = `Sh2-${number}`;
         objectName = catalogDesignation;
-        break;
-      }
-    }
-    
-    // Caldwell: C + number
-    if (/^C\d+$/.test(upperPart)) {
-      if (ASTRONOMICAL_OBJECTS[upperPart]) {
-        const obj = ASTRONOMICAL_OBJECTS[upperPart];
-        catalogDesignation = obj.catalog;
-        objectName = obj.name;
-        break;
-      } else {
-        catalogDesignation = upperPart;
-        objectName = `Caldwell ${upperPart.substring(1)}`;
-        break;
-      }
-    }
-    
-    // Barnard: B + number
-    if (/^B\d+$/.test(upperPart)) {
-      if (ASTRONOMICAL_OBJECTS[upperPart]) {
-        const obj = ASTRONOMICAL_OBJECTS[upperPart];
-        catalogDesignation = obj.catalog;
-        objectName = obj.name;
-        break;
-      } else {
-        catalogDesignation = upperPart;
-        objectName = `Barnard ${upperPart.substring(1)}`;
-        break;
-      }
-    }
-    
-    // Abell: A + number or ABELL + number
-    if (/^A\d+$/.test(upperPart) || /^ABELL\d+$/.test(upperPart)) {
-      const number = upperPart.startsWith('ABELL') ? upperPart.substring(5) : upperPart.substring(1);
-      const normalizedA = `A${number}`;
-      if (ASTRONOMICAL_OBJECTS[normalizedA]) {
-        const obj = ASTRONOMICAL_OBJECTS[normalizedA];
-        catalogDesignation = obj.catalog;
-        objectName = obj.name;
-        break;
-      } else {
-        catalogDesignation = `Abell ${number}`;
-        objectName = `Abell ${number}`;
-        break;
-      }
-    }
-    
-    // van den Bergh: VDB + number, VdB + number, or VDB + number
-    if (/^VDB\d+$/.test(upperPart) || /^VdB\d+$/.test(upperPart)) {
-      const number = upperPart.substring(3);
-      const normalizedVdb = `VDB${number}`;
-      if (ASTRONOMICAL_OBJECTS[normalizedVdb]) {
-        const obj = ASTRONOMICAL_OBJECTS[normalizedVdb];
-        catalogDesignation = obj.catalog;
-        objectName = obj.name;
-        break;
-      } else {
-        catalogDesignation = `vdB ${number}`;
-        objectName = `vdB ${number}`;
         break;
       }
     }
@@ -641,8 +361,6 @@ function getImageType(folder) {
     return 'terrestrial';
   } else if (folder === 'equipment') {
     return 'equipment';
-  } else if (folder.includes('events')) {
-    return 'celestial-events';
   } else {
     return 'astrophotography';
   }
@@ -662,15 +380,6 @@ function createMetadataEntry(image) {
       return {
         "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
         "equipmentInfo": ""  // e.g., "Smart Telescope by ZWO"
-      };
-      
-    case 'celestial-events':
-      return {
-        "catalogDesignation": "",
-        "objectName": generateCleanName(image.filename), // e.g., "Total Eclipse" instead of "2017 Total Eclipse1"
-        "location": "Maple Valley, WA",
-        "equipment": "",
-        "exposure": ""
       };
       
     default: // astrophotography
@@ -742,21 +451,14 @@ function updateMetadata() {
         }
       } else if (imageType === 'equipment') {
         const entry = existingMetadata[image.filename];
-        // Only update if both equipmentName and equipmentInfo are empty/missing
-        // This preserves any manual edits to equipment descriptions
-        const needsUpdate = (!entry.equipmentName || entry.equipmentName === '') && 
-                           (!entry.equipmentInfo || entry.equipmentInfo === '');
+        const needsUpdate = !entry.equipmentName || entry.equipmentName === '';
         
         if (needsUpdate) {
           console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
           entry.equipmentName = generateCleanName(image.filename);
-          // Don't overwrite equipmentInfo if it already has content
-          if (!entry.equipmentInfo) {
-            entry.equipmentInfo = '';
-          }
           updatedEntries++;
         } else {
-          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder}) - preserving manual edits`);
+          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
         }
       } else {
         console.log(`🔄 Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
