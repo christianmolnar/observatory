@@ -282,6 +282,117 @@ function generateObjectName(filename) {
   return name;
 }
 
+// Helper function to clean terrestrial/equipment names from filename
+function generateCleanName(filename) {
+  // Remove file extension
+  let name = filename.replace(/\.[^.]+$/, '');
+  
+  // Handle camelCase by inserting spaces before uppercase letters
+  name = name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  
+  // Replace hyphens, underscores, and dots with spaces
+  name = name.replace(/[-_.]/g, ' ');
+  
+  // Remove numbers at the end (like IMG_1234, DSC_5678, etc.)
+  name = name.replace(/\s*\d+\s*$/, '');
+  
+  // Remove common camera/phone prefixes and suffixes
+  name = name.replace(/^(IMG|DSC|DSCN|P|PHOTO|PIC|IMAGE)\s*/i, '');
+  name = name.replace(/\s*(JPG|JPEG|PNG|AVIF|WEBP|iOS)$/i, '');
+  
+  // Remove sequences of numbers in the middle or end
+  name = name.replace(/\s+\d{8,}\s*/g, ' '); // Remove 8+ digit sequences (timestamps)
+  name = name.replace(/\s+\d{4,}\s*$/, ''); // Remove 4+ digits at end
+  
+  // Clean up extra spaces
+  name = name.replace(/\s+/g, ' ').trim();
+  
+  // Capitalize each word properly
+  name = name.split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+    
+  return name || 'Untitled';
+}
+
+// Helper function to generate location from folder path
+function generateLocationFromFolder(folder) {
+  if (!folder.startsWith('terrestrial/')) {
+    return '';
+  }
+  
+  // Extract the location part after 'terrestrial/'
+  const locationPart = folder.replace('terrestrial/', '');
+  
+  // Convert folder names to proper location names
+  const locationMap = {
+    'yellowstone': 'Yellowstone National Park',
+    'grand-tetons': 'Grand Teton National Park',
+    'grand-teton': 'Grand Teton National Park',
+    'yosemite': 'Yosemite National Park',
+    'glacier': 'Glacier National Park',
+    'zion': 'Zion National Park',
+    'bryce': 'Bryce Canyon National Park',
+    'arches': 'Arches National Park',
+    'death-valley': 'Death Valley National Park',
+    'joshua-tree': 'Joshua Tree National Park',
+    'crater-lake': 'Crater Lake National Park',
+    'olympic': 'Olympic National Park',
+    'mount-rainier': 'Mount Rainier National Park',
+    'north-cascades': 'North Cascades National Park'
+  };
+  
+  // Check if we have a specific mapping
+  if (locationMap[locationPart]) {
+    return locationMap[locationPart];
+  }
+  
+  // Otherwise, clean up the folder name
+  return locationPart
+    .replace(/[-_]/g, ' ')
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
+
+function getImageType(folder) {
+  if (folder.startsWith('terrestrial/')) {
+    return 'terrestrial';
+  } else if (folder === 'equipment') {
+    return 'equipment';
+  } else {
+    return 'astrophotography';
+  }
+}
+
+function createMetadataEntry(image) {
+  const imageType = getImageType(image.folder);
+  
+  switch (imageType) {
+    case 'terrestrial':
+      return {
+        "location": generateLocationFromFolder(image.folder), // e.g., "Yellowstone National Park"
+        "name": generateCleanName(image.filename)      // e.g., "Mammoth Springs"
+      };
+      
+    case 'equipment':
+      return {
+        "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
+        "equipmentInfo": ""  // e.g., "Smart Telescope by ZWO"
+      };
+      
+    default: // astrophotography
+      const parsed = parseAstronomicalObject(image.filename);
+      return {
+        "catalogDesignation": parsed.catalogDesignation,
+        "objectName": parsed.objectName,
+        "location": "Maple Valley, WA",
+        "equipment": "",
+        "exposure": ""
+      };
+  }
+}
+
 function updateMetadata() {
   console.log('🔍 Scanning for images...');
   
@@ -297,25 +408,45 @@ function updateMetadata() {
   // Add/update entries for all images
   allImages.forEach(image => {
     const isNewEntry = !existingMetadata[image.filename];
+    const imageType = getImageType(image.folder);
     
     if (isNewEntry) {
-      console.log(`➕ Adding metadata for: ${image.filename} (in ${image.folder})`);
+      console.log(`➕ Adding ${imageType} metadata for: ${image.filename} (in ${image.folder})`);
       newEntries++;
+      
+      // Create new entry with appropriate fields for image type
+      existingMetadata[image.filename] = createMetadataEntry(image);
     } else {
-      console.log(`🔄 Updating metadata for: ${image.filename} (in ${image.folder})`);
-      updatedEntries++;
+      // For terrestrial and equipment images, update if fields are empty
+      if (imageType === 'terrestrial') {
+        const entry = existingMetadata[image.filename];
+        const needsUpdate = !entry.location || !entry.name || entry.location === '' || entry.name === '';
+        
+        if (needsUpdate) {
+          console.log(`🔄 Updating terrestrial metadata for: ${image.filename} (${imageType} in ${image.folder})`);
+          entry.location = generateLocationFromFolder(image.folder);
+          entry.name = generateCleanName(image.filename);
+          updatedEntries++;
+        } else {
+          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+        }
+      } else if (imageType === 'equipment') {
+        const entry = existingMetadata[image.filename];
+        const needsUpdate = !entry.equipmentName || entry.equipmentName === '';
+        
+        if (needsUpdate) {
+          console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
+          entry.equipmentName = generateCleanName(image.filename);
+          updatedEntries++;
+        } else {
+          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+        }
+      } else {
+        console.log(`🔄 Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+        updatedEntries++;
+        // Keep existing astrophotography entry as-is since user may have manually edited it
+      }
     }
-    
-    // Parse astronomical object from filename
-    const parsed = parseAstronomicalObject(image.filename);
-    
-    existingMetadata[image.filename] = {
-      "catalogDesignation": parsed.catalogDesignation,
-      "objectName": parsed.objectName,
-      "location": "Maple Valley, WA",
-      "equipment": "",
-      "exposure": ""
-    };
   });
   
   if (newEntries > 0 || updatedEntries > 0) {

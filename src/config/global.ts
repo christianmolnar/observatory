@@ -112,20 +112,20 @@ export const solarSystemConfig = {
 // Terrestrial Categories Configuration
 export const terrestrialConfig = {
   title: 'Terrestrial Photography',
-  backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
+  backgroundImage: '/images/terrestrial/yellowstone/Upper Basin1.jpg',
   description: 'Capturing the natural beauty of our planet, from the geothermal wonders of Yellowstone to the majestic peaks of the Grand Tetons.',
   categories: [
     {
       title: 'Yellowstone',
       href: '/terrestrial/yellowstone',
-      backgroundImage: '/images/astrophotography/featured/Wizard-Lr-PI.jpg', // Replace with actual Yellowstone image
+      backgroundImage: '/images/terrestrial/yellowstone/Midway Basin1.jpg', // Replace with actual Yellowstone image
       description: 'Geysers, hot springs, and wildlife of America\'s first national park',
       imageFolder: 'terrestrial/yellowstone'
     },
     {
       title: 'Grand Tetons',
       href: '/terrestrial/grand-tetons',
-      backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg', // Replace with actual Tetons image
+      backgroundImage: '/images/terrestrial/grand-tetons/20210728_185518800_iOS-2.jpg', // Replace with actual Tetons image
       description: 'Majestic peaks and alpine landscapes of Wyoming',
       imageFolder: 'terrestrial/grand-tetons'
     }

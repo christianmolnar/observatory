@@ -18,7 +18,7 @@ interface ImageData {
 
 // Dynamically import all images from the featured folder
 function getFeaturedImages(): ImageData[] {
-  // @ts-ignore
+  // @ts-expect-error - require.context is a webpack-specific function
   const context = require.context('../../public/images/astrophotography/featured', false, /\.(jpg|jpeg|png|avif|webp)$/);
   return context.keys().map((key: string) => {
     const src = key.replace(/^\./, '/images/astrophotography/featured');
@@ -84,7 +84,7 @@ export default function LatestCapturesCarousel() {
 
     document.addEventListener('keydown', handleKeydown);
     return () => document.removeEventListener('keydown', handleKeydown);
-  }, [modalOpen]);
+  }, [modalOpen, nextImage, prevImage]);
 
   return (
     <section className="w-full flex flex-col items-center py-2">

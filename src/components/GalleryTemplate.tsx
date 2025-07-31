@@ -9,11 +9,15 @@ import metadata from '@/data/metadata.json';
 interface ImageMetadata {
   src: string;
   filename: string;
-  catalogDesignation: string;
-  objectName: string;
+  // Astrophotography fields
+  catalogDesignation?: string;
+  objectName?: string;
+  equipment?: string;
+  exposure?: string;
+  // Terrestrial fields
+  name?: string;
+  // Common fields
   location: string;
-  equipment: string;
-  exposure: string;
 }
 
 interface GalleryTemplateProps {
@@ -25,7 +29,7 @@ interface GalleryTemplateProps {
 // Dynamically import gallery images
 function getGalleryImages(imageFolder: string): ImageMetadata[] {
   try {
-    // @ts-ignore
+    // @ts-expect-error - require.context is a webpack-specific function
     const context = require.context('../../public/images', true, /\.(jpg|jpeg|png|avif|webp)$/);
     return context.keys()
       .filter((key: string) => key.includes(imageFolder))
@@ -41,9 +45,9 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
         };
         return { src, filename, ...imageMetadata };
       });
-  } catch (error) {
+  } catch {
     // Fallback to featured images if the specific folder doesn't exist
-    // @ts-ignore
+    // @ts-expect-error - require.context is a webpack-specific function
     const context = require.context('../../public/images/astrophotography/featured', false, /\.(jpg|jpeg|png|avif|webp)$/);
     return context.keys().map((key: string) => {
       const src = key.replace(/^\./, '/images/astrophotography/featured');
@@ -102,7 +106,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
 
     document.addEventListener('keydown', handleKeydown);
     return () => document.removeEventListener('keydown', handleKeydown);
-  }, [modalOpen]);
+  }, [modalOpen, nextImage, prevImage]);
 
   return (
     <div className="min-h-screen bg-black">
@@ -132,11 +136,12 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
 
           {/* Gallery Grid - Centered */}
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-[1400px]">
+            <div className="flex flex-wrap justify-center gap-6 max-w-[1400px]">
               {images.map((image: ImageMetadata, index: number) => (
               <div
                 key={image.filename}
                 className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
+                style={{ width: '280px' }}
                 onClick={() => openModal(index)}
               >
                 {/* Glass Card */}
@@ -145,7 +150,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                   <div className="aspect-[3/4] relative">
                     <Image
                       src={image.src}
-                      alt={image.objectName}
+                      alt={image.objectName || image.name || 'Gallery Image'}
                       fill
                       className="object-cover"
                       quality={90}
@@ -154,15 +159,27 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                   
                   {/* Bottom Label with Thicker Border - Two Lines */}
                   <div className="relative bg-black/60 backdrop-blur-sm border-t-2 border-white/20 p-3 min-h-[60px] flex flex-col justify-center">
-                    {image.catalogDesignation && (
-                      <h3 className="text-white/90 text-xs font-medium tracking-widest text-center mb-1">
-                        {image.catalogDesignation}
-                      </h3>
-                    )}
-                    {image.objectName && (
-                      <h4 className="text-white text-sm font-medium tracking-wide text-center">
-                        {image.objectName}
-                      </h4>
+                    {/* For astrophotography images */}
+                    {(image.catalogDesignation || image.objectName) ? (
+                      <>
+                        {image.catalogDesignation && (
+                          <h3 className="text-white/90 text-xs font-medium tracking-widest text-center mb-1">
+                            {image.catalogDesignation}
+                          </h3>
+                        )}
+                        {image.objectName && (
+                          <h4 className="text-white text-sm font-medium tracking-wide text-center">
+                            {image.objectName}
+                          </h4>
+                        )}
+                      </>
+                    ) : (
+                      /* For terrestrial images */
+                      image.name && (
+                        <h4 className="text-white text-sm font-medium tracking-wide text-center">
+                          {image.name}
+                        </h4>
+                      )
                     )}
                   </div>
                 </div>
@@ -254,7 +271,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
             <div className="relative max-w-[85vw] max-h-[70vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
               <Image
                 src={images[currentImage].src}
-                alt={images[currentImage].objectName}
+                alt={images[currentImage].objectName || images[currentImage].name || 'Gallery Image'}
                 width={1400}
                 height={1000}
                 className="object-contain w-full h-full"
@@ -275,19 +292,33 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                 {(() => {
                   const metadataItems = [];
                   
-                  // Object name (catalog designation + object name or either one)
-                  if (images[currentImage].catalogDesignation && images[currentImage].objectName) {
-                    metadataItems.push(
-                      <span key="name" className="font-medium tracking-wide">
-                        {`${images[currentImage].catalogDesignation} - ${images[currentImage].objectName}`}
-                      </span>
-                    );
-                  } else if (images[currentImage].catalogDesignation || images[currentImage].objectName) {
-                    metadataItems.push(
-                      <span key="name" className="font-medium tracking-wide">
-                        {images[currentImage].catalogDesignation || images[currentImage].objectName}
-                      </span>
-                    );
+                  // Check if this is an astrophotography or terrestrial image
+                  const isAstrophotography = images[currentImage].catalogDesignation || images[currentImage].objectName;
+                  
+                  if (isAstrophotography) {
+                    // Astrophotography: Object name (catalog designation + object name or either one)
+                    if (images[currentImage].catalogDesignation && images[currentImage].objectName) {
+                      metadataItems.push(
+                        <span key="name" className="font-medium tracking-wide">
+                          {`${images[currentImage].catalogDesignation} - ${images[currentImage].objectName}`}
+                        </span>
+                      );
+                    } else if (images[currentImage].catalogDesignation || images[currentImage].objectName) {
+                      metadataItems.push(
+                        <span key="name" className="font-medium tracking-wide">
+                          {images[currentImage].catalogDesignation || images[currentImage].objectName}
+                        </span>
+                      );
+                    }
+                  } else {
+                    // Terrestrial: Show name if available
+                    if (images[currentImage].name) {
+                      metadataItems.push(
+                        <span key="name" className="font-medium tracking-wide">
+                          {images[currentImage].name}
+                        </span>
+                      );
+                    }
                   }
                   
                   // Location
@@ -297,15 +328,15 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                     );
                   }
                   
-                  // Equipment
-                  if (images[currentImage].equipment) {
+                  // Equipment (only for astrophotography)
+                  if (isAstrophotography && images[currentImage].equipment) {
                     metadataItems.push(
                       <span key="equipment">{images[currentImage].equipment}</span>
                     );
                   }
                   
-                  // Exposure
-                  if (images[currentImage].exposure) {
+                  // Exposure (only for astrophotography)
+                  if (isAstrophotography && images[currentImage].exposure) {
                     metadataItems.push(
                       <span key="exposure">{images[currentImage].exposure}</span>
                     );

@@ -3,16 +3,20 @@
 
 :root {
   /* ===== FONTS ===== */
-  /* Apple San Francisco inspired font stack */
-  --font-primary: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Poppins Extra Light as primary font with fallbacks */
+  --font-primary: var(--font-poppins), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", "Courier New", monospace;
 
   /* Font Weights */
+  --font-weight-extra-light: 200;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  
+  /* Default font weight for body text */
+  --font-weight-default: 200;
 
   /* Font Sizes */
   --font-size-xs: 0.75rem;   /* 12px */

@@ -14,6 +14,17 @@
     color: var(--color-text-primary);
     line-height: var(--line-height-normal);
     overflow-x: hidden;
+    font-weight: 200 !important; /* Force Poppins Extra Light */
+  }
+
+  /* Ensure all text elements use extra light weight by default */
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    font-weight: 200 !important;
+  }
+  
+  /* Override Tailwind font-light to be extra light */
+  .font-light {
+    font-weight: 200 !important;
   }
 
   /* Selection styling */
