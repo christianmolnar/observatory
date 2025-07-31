@@ -125,7 +125,7 @@ export const terrestrialConfig = {
     {
       title: 'Grand Tetons',
       href: '/terrestrial/grand-tetons',
-      backgroundImage: '/images/terrestrial/grand-tetons/20210728_185518800_iOS-2.jpg', // Replace with actual Tetons image
+      backgroundImage: '/images/terrestrial/grand-tetons/Grand Tetons1.jpg', // Replace with actual Tetons image
       description: 'Majestic peaks and alpine landscapes of Wyoming',
       imageFolder: 'terrestrial/grand-tetons'
     }
