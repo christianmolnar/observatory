@@ -18,6 +18,7 @@ export const navigationConfig = {
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
+    { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ]
 };

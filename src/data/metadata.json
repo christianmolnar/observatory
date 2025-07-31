@@ -141,6 +141,13 @@
     "location": "Grand Teton National Park",
     "name": "Grand Tetons"
   },
+  "Heart Nebula.jpg": {
+    "catalogDesignation": "IC1805",
+    "objectName": "Heart Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
   "Hubble and Me.jpg": {
     "catalogDesignation": "",
     "objectName": "Hubble And Me",
@@ -379,12 +386,8 @@
     "equipmentInfo": "My current setup, with ZWO ASI 533MC and 676MC cameras, mounted on a Meade LXD75, driven with ASIAIR software."
   },
   "My Gear1.jpg": {
-    "equipmentName": "ZWO SeeStar S50",
-    "equipmentInfo": "Smart telescope with built-in camera and automated goto mount"
-  },
-  "My Gear2.jpg": {
-    "equipmentName": "My Gear",
-    "equipmentInfo": ""
+    "equipmentName": "Meade LX 65",
+    "equipmentInfo": "Great double OTA mount I wish I'd Kept."
   },
   "My Gear5.jpg": {
     "equipmentName": "My Gear",
