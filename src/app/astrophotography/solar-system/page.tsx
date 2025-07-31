@@ -9,6 +9,7 @@ export default function SolarSystemPage() {
       title={solarSystem.title}
       backgroundImage={solarSystem.backgroundImage}
       categories={solarSystem.categories}
+      description={solarSystem.description}
     />
   );
 }

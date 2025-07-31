@@ -14,6 +14,7 @@ export const navigationConfig = {
   items: [
     { label: 'Home', href: '/' },
     { label: 'Deep Sky', href: '/astrophotography/deep-sky' },
+    { label: 'All Sky', href: '/wide-field' },
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
@@ -45,27 +46,28 @@ export const homepageConfig = {
 export const deepSkyConfig = {
   title: 'Deep Sky Objects',
   backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
+  description: 'Explore the distant reaches of space with detailed captures of galaxies, nebulas, and star clusters millions of light-years away.',
   categories: [
     {
       title: 'Galaxies',
       href: '/astrophotography/deep-sky/galaxies',
       backgroundImage: '/images/astrophotography/featured/M33-Done.jpg',
       description: 'Distant island universes beyond our Milky Way',
-      imageFolder: 'astrophotography/galaxies'
+      imageFolder: 'astrophotography/deep-sky/galaxies'
     },
     {
       title: 'Nebulas',
       href: '/astrophotography/deep-sky/nebulas',
       backgroundImage: '/images/astrophotography/featured/NGC7000-Pelican-1.jpg',
       description: 'Stellar nurseries and cosmic clouds of gas and dust',
-      imageFolder: 'astrophotography/nebulas'
+      imageFolder: 'astrophotography/deep-sky/nebulas'
     },
     {
       title: 'Star Clusters',
       href: '/astrophotography/deep-sky/star-clusters',
       backgroundImage: '/images/astrophotography/featured/Wizard-Lr-PI.jpg',
       description: 'Gravitationally bound groups of stars',
-      imageFolder: 'astrophotography/star-clusters'
+      imageFolder: 'astrophotography/deep-sky/star-clusters'
     }
   ]
 };
@@ -74,34 +76,35 @@ export const deepSkyConfig = {
 export const solarSystemConfig = {
   title: 'Solar System',
   backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
+  description: 'Explore our cosmic neighborhood with detailed captures of the Sun, Moon, planets, and celestial events within our solar system.',
   categories: [
     {
       title: 'Solar',
       href: '/astrophotography/solar-system/solar',
       backgroundImage: '/images/astrophotography/featured/NGC7000-Pelican-1.jpg',
       description: 'The Sun, solar eclipses, and solar phenomena',
-      imageFolder: 'astrophotography/solar'
+      imageFolder: 'astrophotography/solar-system/solar'
     },
     {
       title: 'Lunar',
       href: '/astrophotography/solar-system/lunar',
       backgroundImage: '/images/astrophotography/featured/IC445-The-Jellyfish.jpg',
       description: 'Moon phases and surface details',
-      imageFolder: 'astrophotography/lunar'
+      imageFolder: 'astrophotography/solar-system/lunar'
     },
     {
       title: 'Planets',
       href: '/astrophotography/solar-system/planets',
       backgroundImage: '/images/astrophotography/featured/M33-Done.jpg',
       description: 'Jupiter, Saturn, Mars, and other planetary bodies',
-      imageFolder: 'astrophotography/planets'
+      imageFolder: 'astrophotography/solar-system/planets'
     },
     {
       title: 'Celestial Events',
       href: '/astrophotography/solar-system/events',
       backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg',
       description: 'Eclipses, conjunctions, transits, and rare astronomical events',
-      imageFolder: 'astrophotography/events'
+      imageFolder: 'astrophotography/solar-system/events'
     }
   ]
 };
@@ -110,6 +113,7 @@ export const solarSystemConfig = {
 export const terrestrialConfig = {
   title: 'Terrestrial Photography',
   backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
+  description: 'Capturing the natural beauty of our planet, from the geothermal wonders of Yellowstone to the majestic peaks of the Grand Tetons.',
   categories: [
     {
       title: 'Yellowstone',
@@ -128,6 +132,14 @@ export const terrestrialConfig = {
   ]
 };
 
+// Wide Field Astrophotography Configuration
+export const wideFieldConfig = {
+  title: 'ALL SKY PHOTOGRAPHY',
+  backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
+  imageFolder: 'wide-field',
+  description: 'Wide-angle captures of the night sky, constellations, and Milky Way panoramas showcasing the grandeur of our cosmic neighborhood.'
+};
+
 // Equipment Page Configuration
 export const equipmentConfig = {
   title: 'MY GEAR',
@@ -140,16 +152,17 @@ export const equipmentConfig = {
 export const imageFoldersConfig = {
   featured: 'astrophotography/featured',
   deepSky: {
-    galaxies: 'astrophotography/galaxies',
-    nebulas: 'astrophotography/nebulas',
-    starClusters: 'astrophotography/star-clusters'
+    galaxies: 'astrophotography/deep-sky/galaxies',
+    nebulas: 'astrophotography/deep-sky/nebulas',
+    starClusters: 'astrophotography/deep-sky/star-clusters'
   },
   solarSystem: {
-    solar: 'astrophotography/solar',
-    lunar: 'astrophotography/lunar',
-    planets: 'astrophotography/planets',
-    events: 'astrophotography/events'
+    solar: 'astrophotography/solar-system/solar',
+    lunar: 'astrophotography/solar-system/lunar',
+    planets: 'astrophotography/solar-system/planets',
+    events: 'astrophotography/solar-system/events'
   },
+  wideField: 'wide-field',
   terrestrial: {
     yellowstone: 'terrestrial/yellowstone',
     grandTetons: 'terrestrial/grand-tetons'
@@ -189,6 +202,7 @@ export const globalConfig = {
   homepage: homepageConfig,
   deepSky: deepSkyConfig,
   solarSystem: solarSystemConfig,
+  wideField: wideFieldConfig,
   terrestrial: terrestrialConfig,
   equipment: equipmentConfig,
   imageFolders: imageFoldersConfig,

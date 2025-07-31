@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
@@ -44,7 +45,6 @@ export default function LatestCapturesCarousel() {
   const [modalOpen, setModalOpen] = useState(false);
   const length = images.length;
 
-
   useEffect(() => {
     if (modalOpen || !autoScroll) return;
     const timer = setInterval(() => {
@@ -52,8 +52,39 @@ export default function LatestCapturesCarousel() {
     }, 4000);
     return () => clearInterval(timer);
   }, [length, modalOpen, autoScroll]);
+  
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+
+  const nextImage = () => {
+    setCurrent((prev) => (prev + 1) % length);
+  };
+
+  const prevImage = () => {
+    setCurrent((prev) => (prev - 1 + length) % length);
+  };
+
+  // Keyboard navigation for modal
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    const handleKeydown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case 'Escape':
+          closeModal();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
+  }, [modalOpen]);
 
   return (
     <section className="w-full flex flex-col items-center py-2">
@@ -177,6 +208,52 @@ export default function LatestCapturesCarousel() {
           >
             ✕
           </button>
+
+          {/* Previous Image Button */}
+          {images.length > 1 && (
+            <button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white text-4xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+              aria-label="Previous image"
+              style={{ 
+                zIndex: 100000,
+                width: '48px',
+                height: '48px',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                fontSize: '24px',
+                fontWeight: 300
+              }}
+            >
+              ‹
+            </button>
+          )}
+
+          {/* Next Image Button */}
+          {images.length > 1 && (
+            <button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white text-4xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+              aria-label="Next image"
+              style={{ 
+                zIndex: 100000,
+                width: '48px',
+                height: '48px',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                fontSize: '24px',
+                fontWeight: 300
+              }}
+            >
+              ›
+            </button>
+          )}
           {/* Image and Metadata Container */}
           <div className="flex flex-col items-center justify-center w-full h-full p-6">
             <div className="relative max-w-[85vw] max-h-[70vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
@@ -249,6 +326,15 @@ export default function LatestCapturesCarousel() {
                 })()}
               </div>
             </div>
+
+            {/* Image Counter */}
+            {images.length > 1 && (
+              <div className="mt-3 text-center">
+                <span className="text-white/60 text-sm font-light tracking-wide">
+                  {current + 1} of {images.length}
+                </span>
+              </div>
+            )}
           </div>
         </div>,
         document.body

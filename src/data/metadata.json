@@ -1,45 +1,73 @@
 {
-  "NGC7000-Pelican-1.jpg": {
-    "catalogDesignation": "NGC 7000",
-    "objectName": "NORTH AMERICA NEBULA",
-    "location": "Maple Valley, WA", 
-    "equipment": "SeeStar S50",
-    "exposure": "15x300sec"
+  "IC1396-Elephant-Lr.jpg": {
+    "catalogDesignation": "IC1396",
+    "objectName": "Elephant's Trunk Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
   },
   "IC445-The-Jellyfish.jpg": {
-    "catalogDesignation": "IC 445",
-    "objectName": "THE JELLYFISH",
+    "catalogDesignation": "IC445",
+    "objectName": "Jellyfish Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "SeeStar S50",
-    "exposure": "25x180sec"
+    "equipment": "",
+    "exposure": ""
+  },
+  "Jellyfish-IC443.jpg": {
+    "catalogDesignation": "IC445",
+    "objectName": "Jellyfish Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
   },
   "M33-Done.jpg": {
     "catalogDesignation": "M33",
-    "objectName": "TRIANGULUM GALAXY",
+    "objectName": "Triangulum Galaxy",
     "location": "Maple Valley, WA",
-    "equipment": "SeeStar S50",
-    "exposure": "30x240sec"
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC7000-Pelican-1.jpg": {
+    "catalogDesignation": "NGC7000",
+    "objectName": "North America Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC7000-Pelican.jpg": {
+    "catalogDesignation": "NGC7000",
+    "objectName": "North America Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
   },
   "SH2-132-The-LobsterClaw.jpg": {
-    "catalogDesignation": "SH2-132",
-    "objectName": "THE LOBSTERCLAW",
+    "catalogDesignation": "Sh2-132",
+    "objectName": "Lobster Claw Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "SeeStar S50",
-    "exposure": "18x300sec"
+    "equipment": "",
+    "exposure": ""
   },
   "Wizard-Lr-PI.jpg": {
-    "catalogDesignation": "NGC 7380",
-    "objectName": "WIZARD NEBULA",
+    "catalogDesignation": "Sh2-140",
+    "objectName": "Wizard Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "SeeStar S50",
-    "exposure": "22x240sec"
+    "equipment": "",
+    "exposure": ""
   },
   "temp1-NGC7000-Pelican-1.jpg": {
     "catalogDesignation": "NGC 7000",
     "objectName": "NORTH AMERICA NEBULA",
-    "location": "Dark Sky Site, OR", 
+    "location": "Dark Sky Site, OR",
     "equipment": "SeeStar S50",
     "exposure": "20x300sec"
+  },
+  "temp10-Wizard-Lr-PI.jpg": {
+    "catalogDesignation": "NGC 7380",
+    "objectName": "WIZARD NEBULA",
+    "location": "Atacama Desert, Chile",
+    "equipment": "SeeStar S30",
+    "exposure": "45x240sec"
   },
   "temp2-IC445-The-Jellyfish.jpg": {
     "catalogDesignation": "IC 445",
@@ -72,7 +100,7 @@
   "temp6-NGC7000-Pelican-1.jpg": {
     "catalogDesignation": "NGC 7000",
     "objectName": "NORTH AMERICA NEBULA",
-    "location": "Death Valley, CA", 
+    "location": "Death Valley, CA",
     "equipment": "SeeStar S30",
     "exposure": "35x300sec"
   },
@@ -96,12 +124,5 @@
     "location": "Cherry Springs, PA",
     "equipment": "SeeStar S30",
     "exposure": "32x300sec"
-  },
-  "temp10-Wizard-Lr-PI.jpg": {
-    "catalogDesignation": "NGC 7380",
-    "objectName": "WIZARD NEBULA",
-    "location": "Atacama Desert, Chile",
-    "equipment": "SeeStar S30",
-    "exposure": "45x240sec"
   }
 }

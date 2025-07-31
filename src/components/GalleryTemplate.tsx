@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
@@ -74,6 +74,36 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
     setModalOpen(false);
   };
 
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    const handleKeydown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case 'Escape':
+          closeModal();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
+  }, [modalOpen]);
+
   return (
     <div className="min-h-screen bg-black">
       <Navigation />
@@ -100,9 +130,10 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
             </h1>
           </div>
 
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            {images.map((image: ImageMetadata, index: number) => (
+          {/* Gallery Grid - Centered */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-[1400px]">
+              {images.map((image: ImageMetadata, index: number) => (
               <div
                 key={image.filename}
                 className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
@@ -137,6 +168,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </main>
@@ -170,6 +202,52 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
           >
             ✕
           </button>
+
+          {/* Previous Image Button */}
+          {images.length > 1 && (
+            <button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white text-4xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+              aria-label="Previous image"
+              style={{ 
+                zIndex: 100000,
+                width: '48px',
+                height: '48px',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                fontSize: '24px',
+                fontWeight: 300
+              }}
+            >
+              ‹
+            </button>
+          )}
+
+          {/* Next Image Button */}
+          {images.length > 1 && (
+            <button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white text-4xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+              aria-label="Next image"
+              style={{ 
+                zIndex: 100000,
+                width: '48px',
+                height: '48px',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                fontSize: '24px',
+                fontWeight: 300
+              }}
+            >
+              ›
+            </button>
+          )}
 
           {/* Image Container */}
           <div className="flex flex-col items-center justify-center w-full h-full p-6">
@@ -243,6 +321,15 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                 })()}
               </div>
             </div>
+
+            {/* Image Counter */}
+            {images.length > 1 && (
+              <div className="mt-3 text-center">
+                <span className="text-white/60 text-sm font-light tracking-wide">
+                  {currentImage + 1} of {images.length}
+                </span>
+              </div>
+            )}
           </div>
         </div>,
         document.body

@@ -9,6 +9,7 @@ export default function TerrestrialPage() {
       title={terrestrial.title}
       backgroundImage={terrestrial.backgroundImage}
       categories={terrestrial.categories}
+      description={terrestrial.description}
     />
   );
 }

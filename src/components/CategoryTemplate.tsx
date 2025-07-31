@@ -16,9 +16,10 @@ interface CategoryPageProps {
   title: string;
   backgroundImage: string;
   categories: CategoryItem[];
+  description?: string;
 }
 
-export default function CategoryTemplate({ title, backgroundImage, categories }: CategoryPageProps) {
+export default function CategoryTemplate({ title, backgroundImage, categories, description }: CategoryPageProps) {
   return (
     <div className="min-h-screen bg-black">
       <Navigation />
@@ -43,6 +44,11 @@ export default function CategoryTemplate({ title, backgroundImage, categories }:
             <h1 className="text-3xl md:text-4xl font-light text-white tracking-[0.2em] mb-8">
               {title.toUpperCase()}
             </h1>
+            {description && (
+              <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed">
+                {description}
+              </p>
+            )}
           </div>
 
           {/* Category Grid - Larger Square Cards - Centered */}

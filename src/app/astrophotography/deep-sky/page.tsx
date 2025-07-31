@@ -9,6 +9,7 @@ export default function DeepSkyPage() {
       title={deepSky.title}
       backgroundImage={deepSky.backgroundImage}
       categories={deepSky.categories}
+      description={deepSky.description}
     />
   );
 }
