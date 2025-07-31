@@ -14,7 +14,7 @@ export const navigationConfig = {
   items: [
     { label: 'Home', href: '/' },
     { label: 'Deep Sky', href: '/astrophotography/deep-sky' },
-    { label: 'All Sky', href: '/wide-field' },
+    { label: 'Wide Field', href: '/wide-field' },
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
@@ -150,7 +150,7 @@ export const terrestrialConfig = {
 
 // Wide Field Astrophotography Configuration
 export const wideFieldConfig = {
-  title: 'ALL SKY PHOTOGRAPHY',
+  title: 'WIDE FIELD PHOTOGRAPHY',
   backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
   imageFolder: 'wide-field',
   description: 'Wide-angle captures of the night sky, constellations, and Milky Way panoramas showcasing the grandeur of our cosmic neighborhood.'

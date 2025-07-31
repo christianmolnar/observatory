@@ -1,4 +1,11 @@
 {
+  "20 Day Old Moon.jpg": {
+    "catalogDesignation": "",
+    "objectName": "Day Old Moon",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
   "2017 Total Eclipse1.jpg": {
     "catalogDesignation": "",
     "objectName": "2017 Total Eclipse",
@@ -48,104 +55,6 @@
     "equipment": "",
     "exposure": ""
   },
-  "20230709_104218472_iOS 2.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20230714_145653268_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20230714_150758515_iOS.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240205_055008338_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240216_180015165_iOS-2.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240316_053700000_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240317_040919951_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240317_061324306_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240317_061415884_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240317_061442742_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240317_073841733_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240608_060534708_iOS.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240712_100142000_iOS.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240712_162034934_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
   "20240717_221502717_iOS.jpg": {
     "catalogDesignation": "",
     "objectName": "Ios",
@@ -160,58 +69,30 @@
     "equipment": "",
     "exposure": ""
   },
-  "20240727_102822000_iOS 2.jpg": {
+  "Albireo.jpg": {
     "catalogDesignation": "",
-    "objectName": "Ios",
+    "objectName": "Albireo",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
   },
-  "20240805_062650412_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240805_081009319_iOS.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240805_162518307_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20240830_150532784_iOS 1.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ios",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "20DayOldMoon-1600x1087.jpg": {
-    "catalogDesignation": "",
-    "objectName": "20dayoldmoon 1600x1087",
+  "Bubble Nebula.jpg": {
+    "catalogDesignation": "NGC7635",
+    "objectName": "Bubble Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
   },
   "Cocoon-28x300sec-tight-800x555.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Cocoon 28x300sec Tight 800x555",
+    "catalogDesignation": "IC5146",
+    "objectName": "Cocoon Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
   },
   "Cocoon-28x300sec-wide-800x562.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Cocoon 28x300sec Wide 800x562",
+    "catalogDesignation": "IC5146",
+    "objectName": "Cocoon Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
@@ -223,9 +104,23 @@
     "equipment": "",
     "exposure": ""
   },
-  "Full-8-21-2005-wide-1600x1070.jpg": {
+  "Crescent Moon.jpg": {
+    "catalogDesignation": "NGC6888",
+    "objectName": "Crescent Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "Crescent Nebula.jpg": {
+    "catalogDesignation": "NGC6888",
+    "objectName": "Crescent Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "Full Moon.jpg": {
     "catalogDesignation": "",
-    "objectName": "Full Wide 1600x1070",
+    "objectName": "Full Moon",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
@@ -274,20 +169,6 @@
     "equipment": "",
     "exposure": ""
   },
-  "IC5070 - Sept 2023.jpg": {
-    "catalogDesignation": "IC5070",
-    "objectName": "IC5070",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "IC5070-23x300sec-1600x1133.jpg": {
-    "catalogDesignation": "IC5070",
-    "objectName": "IC5070",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
   "Jellyfish-IC443.jpg": {
     "catalogDesignation": "IC445",
     "objectName": "Jellyfish Nebula",
@@ -295,9 +176,23 @@
     "equipment": "",
     "exposure": ""
   },
-  "M27-1600x1096.jpg": {
+  "M16.jpg": {
+    "catalogDesignation": "M16",
+    "objectName": "Eagle Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "M27.jpg": {
     "catalogDesignation": "M27",
-    "objectName": "Messier 27",
+    "objectName": "Dumbbell Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "M3.jpg": {
+    "catalogDesignation": "M3",
+    "objectName": "Globular Cluster M3",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
@@ -330,9 +225,23 @@
     "equipment": "",
     "exposure": ""
   },
-  "M42-8x240sec-1600x1178.jpg": {
-    "catalogDesignation": "M42",
-    "objectName": "Orion Nebula",
+  "M44.jpg": {
+    "catalogDesignation": "M44",
+    "objectName": "Beehive Cluster",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "M53.jpg": {
+    "catalogDesignation": "M53",
+    "objectName": "Messier 53",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "M97.jpg": {
+    "catalogDesignation": "M97",
+    "objectName": "Owl Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
@@ -465,22 +374,15 @@
     "location": "Yellowstone National Park",
     "name": "Midway Basin"
   },
-  "Moon-8-27-2005-1600x1188.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Moon 1600x1188",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
+  "My Gear0.jpg": {
+    "equipmentName": "William Optics & Meade 8-inch ACF",
+    "equipmentInfo": "My current setup, with ZWO ASI 533MC and 676MC cameras, mounted on a Meade LXD75, driven with ASIAIR software."
   },
   "My Gear1.jpg": {
     "equipmentName": "ZWO SeeStar S50",
     "equipmentInfo": "Smart telescope with built-in camera and automated goto mount"
   },
   "My Gear2.jpg": {
-    "equipmentName": "My Gear",
-    "equipmentInfo": ""
-  },
-  "My Gear4.jpg": {
     "equipmentName": "My Gear",
     "equipmentInfo": ""
   },
@@ -500,21 +402,56 @@
     "equipmentName": "My Gear",
     "equipmentInfo": ""
   },
-  "NGC1499-6x300sec-1600x1132.jpg": {
-    "catalogDesignation": "NGC1499",
-    "objectName": "NGC1499",
+  "NGC 2244.jpg": {
+    "catalogDesignation": "NGC2244",
+    "objectName": "Rosette Nebula Open Cluster",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
   },
-  "NGC7000-Pelican-1.jpg": {
+  "NGC 281W.jpg": {
+    "catalogDesignation": "",
+    "objectName": "Ngc 281w",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC 3628.jpg": {
+    "catalogDesignation": "NGC3628",
+    "objectName": "NGC3628",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC 6939.jpg": {
+    "catalogDesignation": "NGC6939",
+    "objectName": "NGC6939 Cluster",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC 7000-Pelican.jpg": {
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
   },
-  "NGC7000-Pelican.jpg": {
+  "NGC 7000.jpg": {
+    "catalogDesignation": "NGC7000",
+    "objectName": "North America Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC1499.jpg": {
+    "catalogDesignation": "NGC1499",
+    "objectName": "California Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "NGC7000-Pelican-1.jpg": {
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
@@ -574,23 +511,30 @@
     "equipment": "",
     "exposure": ""
   },
-  "Twilight Moon - 6-20-2021 - Tycho Region.jpg": {
+  "Thor's Helmet.jpg": {
+    "catalogDesignation": "NGC2359",
+    "objectName": "Thor's Helmet",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "Twilight Moon - Copernicus.jpg": {
+    "catalogDesignation": "",
+    "objectName": "Twilight Moon Copernicus",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "Twilight Moon - Tycho Region.jpg": {
     "catalogDesignation": "",
     "objectName": "Twilight Moon Tycho Region",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""
   },
-  "Twilight Moon 6-19-2021 - Finished.jpg": {
+  "Twilight Moon.jpg": {
     "catalogDesignation": "",
     "objectName": "Twilight Moon",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
-  },
-  "Twilight Moon 6-20-2021 Copernicus.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Twilight Moon Copernicus",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": ""

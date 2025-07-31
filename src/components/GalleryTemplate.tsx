@@ -79,12 +79,13 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
       }
     });
     
-    return allMedia;
+    // Sort all media alphabetically by filename
+    return allMedia.sort((a, b) => a.filename.localeCompare(b.filename));
   } catch {
     // Fallback to featured images if the specific folder doesn't exist
     // @ts-expect-error - require.context is a webpack-specific function
     const context = require.context('../../public/images/astrophotography/featured', false, /\.(jpg|jpeg|png|avif|webp)$/);
-    return context.keys().map((key: string) => {
+    const fallbackImages = context.keys().map((key: string) => {
       const src = key.replace(/^\./, '/images/astrophotography/featured');
       const filename = src.split('/').pop() || '';
       const imageMetadata = metadata[filename as keyof typeof metadata] || {
@@ -96,6 +97,7 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
       };
       return { src, filename, ...imageMetadata };
     });
+    return fallbackImages.sort((a: ImageMetadata, b: ImageMetadata) => a.filename.localeCompare(b.filename));
   }
 }
 
@@ -381,8 +383,9 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                 {(() => {
                   const metadataItems = [];
                   
-                  // Check if this is an astrophotography or terrestrial image
+                  // Check if this is an astrophotography, terrestrial, or equipment image
                   const isAstrophotography = images[currentImage].catalogDesignation || images[currentImage].objectName;
+                  const isEquipment = images[currentImage].equipmentName;
                   
                   if (isAstrophotography) {
                     // Astrophotography: Object name (catalog designation + object name or either one)
@@ -399,6 +402,18 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                         </span>
                       );
                     }
+                  } else if (isEquipment) {
+                    // Equipment: Show equipment name and info
+                    metadataItems.push(
+                      <span key="name" className="font-medium tracking-wide">
+                        {images[currentImage].equipmentName}
+                      </span>
+                    );
+                    if (images[currentImage].equipmentInfo) {
+                      metadataItems.push(
+                        <span key="equipmentInfo">{images[currentImage].equipmentInfo}</span>
+                      );
+                    }
                   } else {
                     // Terrestrial: Show name if available
                     if (images[currentImage].name) {
@@ -410,8 +425,8 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                     }
                   }
                   
-                  // Location
-                  if (images[currentImage].location) {
+                  // Location (only for non-equipment items, since equipment doesn't typically have location in the same way)
+                  if (!isEquipment && images[currentImage].location) {
                     metadataItems.push(
                       <span key="location">{images[currentImage].location}</span>
                     );
