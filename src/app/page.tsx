@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import LatestCapturesCarousel from '@/components/LatestCapturesCarousel';
+import ClearSkyClockEmbed from '@/components/ClearSkyClockEmbed';
 import observatoryConfig from '@/config/observatory';
 
 export default function Home() {
@@ -43,7 +44,7 @@ export default function Home() {
                 deep sky objects forever, adding my interpretation in the painstaking processing of each image.
               </p>
               <p className="text-sm md:text-base text-gray-400 leading-relaxed font-light mt-4">
-                I have also decided that this site will be a place where I can share the beauty of this planet we live in, so in it you will find my efforts to 
+                This site is also a place where I can share the beauty of this planet we live in, so in it you will find my efforts to 
                 share the places I have had the good fortune to visit.
               </p>
             </div>
@@ -53,7 +54,7 @@ export default function Home() {
 
       {/* Latest Captures Section - Reduced top space and fun copy */}
       <section
-        className="py-8 px-6 relative"
+        className="py-8 px-6 relative overflow-hidden"
         style={{
           backgroundColor: '#000',
           backgroundImage: 'url(/images/assets/NGC2070-Finished.jpg)',
@@ -61,7 +62,11 @@ export default function Home() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto">
+        {/* Top gradient overlay for smooth blend */}
+        <div className="absolute top-0 left-0 w-full h-24 pointer-events-none" style={{background: 'linear-gradient(to bottom, #000 0%, transparent 100%)', zIndex: 2}} />
+        {/* Bottom gradient overlay for smooth blend */}
+        <div className="absolute bottom-0 left-0 w-full h-24 pointer-events-none" style={{background: 'linear-gradient(to top, #000 0%, transparent 100%)', zIndex: 2}} />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-4">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-white mb-2 uppercase">
               LATEST CAPTURES
@@ -70,10 +75,16 @@ export default function Home() {
               Just came out of the oven. Careful. The plate is very hot!
             </p>
             <div className="flex justify-center">
-              <div className="w-[400px] h-1 bg-white"></div>
+              <div className="flex justify-center pb-2">
+                <div className="w-[800px] h-px bg-white"></div>
+              </div>
             </div>
           </div>
           <LatestCapturesCarousel />
+          {/* Clear Sky Clock Embed */}
+          <div className="mt-12">
+            <ClearSkyClockEmbed />
+          </div>
         </div>
       </section>
     </>

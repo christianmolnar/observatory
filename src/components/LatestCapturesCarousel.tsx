@@ -1,21 +1,21 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
-const images = [
-  {
-    src: '/images/astrophotography/featured/M33-Done.jpg',
-    alt: 'M33 Galaxy',
-  },
-  {
-    src: '/images/astrophotography/featured/SH2-248-The-Jellyfish.jpg',
-    alt: 'SH2-248 The Jellyfish',
-  },
-  {
-    src: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg',
-    alt: 'SH2-132 The Lobster Claw',
-  },
-];
+// Dynamically import all images from the featured folder
+function getFeaturedImages() {
+  // @ts-ignore
+  const context = require.context('../../public/images/astrophotography/featured', false, /\.(jpg|jpeg|png|avif|webp)$/);
+  return context.keys().map((key: string) => {
+    const src = key.replace(/^\./, '/images/astrophotography/featured');
+    // Alt text from filename
+    const alt = src.split('/').pop()?.replace(/[-_]/g, ' ').replace(/\.[^.]+$/, '') || 'Astrophotography';
+    return { src, alt };
+  });
+}
+
+const images = getFeaturedImages();
 
 // ...existing code...
 export default function LatestCapturesCarousel() {
@@ -111,7 +111,7 @@ export default function LatestCapturesCarousel() {
         </div>
         {/* Dots */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-          {images.map((_, idx) => (
+          {images.map((_: {src: string; alt: string}, idx: number) => (
             <button
               key={idx}
               onClick={() => goTo(idx)}
@@ -121,28 +121,65 @@ export default function LatestCapturesCarousel() {
           ))}
         </div>
       </div>
-      {/* Modal for full-screen image */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg">
+
+      {/* Modal rendered as a portal to document.body for complete independence */}
+      {modalOpen && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="fixed inset-0 flex items-center justify-center bg-black/95 backdrop-blur-lg"
+          style={{ 
+            zIndex: 99999,
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
+        >
+          {/* Close button with elegant, subtle design */}
           <button
             onClick={closeModal}
-            className="absolute top-8 right-8 text-white text-3xl font-bold bg-black/60 rounded-full p-2 hover:bg-yellow-400/80 transition-colors"
+            className="absolute top-2 right-2 text-white/80 hover:text-white text-2xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
             aria-label="Close full screen image"
+            style={{ 
+              zIndex: 100000,
+              position: 'absolute',
+              top: '8px',
+              right: '8px',
+              width: '32px',
+              height: '32px',
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              fontSize: '18px',
+              fontWeight: 300
+            }}
           >
-            &times;
+            ✕
           </button>
-          <div className="max-w-4xl w-full flex items-center justify-center">
-            <Image
-              src={images[current].src}
-              alt={images[current].alt}
-              width={1200}
-              height={800}
-              className="object-contain rounded-2xl shadow-2xl"
-              priority
-              style={{ width: '100%', height: 'auto' }}
-            />
+          {/* Center image with flexbox, responsive */}
+          <div className="flex items-center justify-center w-full h-full p-6">
+            <div className="relative max-w-[85vw] max-h-[75vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <Image
+                src={images[current].src}
+                alt={images[current].alt}
+                width={1400}
+                height={1000}
+                className="object-contain w-full h-full"
+                priority
+                style={{ 
+                  width: 'auto', 
+                  height: 'auto',
+                  maxWidth: '85vw',
+                  maxHeight: '75vh',
+                  minWidth: '300px'
+                }}
+              />
+            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

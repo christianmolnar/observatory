@@ -20,7 +20,7 @@ A complete redesign of MapleValleyObservatory.com to create a modern, beautiful 
 - Call-to-action buttons: "View Astrophotography" | "Explore Terrestrial"
 
 **Featured Sections:**
-- Latest captures (3-4 recent images)
+- Latest captures (dynamically loads all images from a folder; new images appear automatically)
 - Equipment spotlight (SeeStar telescopes)
 - Clear Sky Clock widget integration
 - Quick stats (total images, years capturing, equipment used)
@@ -39,15 +39,13 @@ A complete redesign of MapleValleyObservatory.com to create a modern, beautiful 
 - Star clusters
 - Each image with metadata: equipment, exposure details, processing notes
 
-#### Planetary (`/astrophotography/planetary`)
-- Moon phases and features
-- Planets (Jupiter, Saturn, Mars, etc.)
-- Solar system objects
-
-#### Solar (`/astrophotography/solar`)
+#### Solar System (`/astrophotography/solar`)
 - Sun photography
 - Solar eclipses
 - Solar features and phenomena
+- Moon phases and features
+- Planets (Jupiter, Saturn, Mars, etc.)
+- Solar system objects
 
 #### Wide Field (`/astrophotography/wide-field`)
 - Milky Way photography
@@ -173,6 +171,7 @@ Each collection page includes:
 - Hover effects revealing image metadata
 - Quick preview on hover
 - Click to open lightbox
+- All galleries (Latest Captures, Deep Sky, Solar System, Wide Field, Terrestrial, Equipment) load images dynamically from their respective folders or metadata files. Adding new images to a folder automatically updates the gallery—no code changes required.
 
 **Lightbox Features:**
 - Full-screen viewing
@@ -262,6 +261,7 @@ Each collection page includes:
 #### Option A: File-Based (Recommended for Start)
 - Markdown files for content
 - JSON for image metadata
+- Images loaded dynamically from folders for all galleries
 - Git-based workflow
 - Easy to version control
 
