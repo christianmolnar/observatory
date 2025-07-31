@@ -2,16 +2,35 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import metadata from '@/data/metadata.json';
+
+interface ImageData {
+  src: string;
+  alt: string;
+  filename: string;
+  catalogDesignation: string;
+  objectName: string;
+  location: string;
+  equipment: string;
+  exposure: string;
+}
 
 // Dynamically import all images from the featured folder
-function getFeaturedImages() {
+function getFeaturedImages(): ImageData[] {
   // @ts-ignore
   const context = require.context('../../public/images/astrophotography/featured', false, /\.(jpg|jpeg|png|avif|webp)$/);
   return context.keys().map((key: string) => {
     const src = key.replace(/^\./, '/images/astrophotography/featured');
-    // Alt text from filename
-    const alt = src.split('/').pop()?.replace(/[-_]/g, ' ').replace(/\.[^.]+$/, '') || 'Astrophotography';
-    return { src, alt };
+    const filename = src.split('/').pop() || '';
+    const alt = filename.replace(/[-_]/g, ' ').replace(/\.[^.]+$/, '') || 'Astrophotography';
+    const imageMetadata = metadata[filename as keyof typeof metadata] || {
+      catalogDesignation: '',
+      objectName: filename.replace(/[-_]/g, ' ').replace(/\.[^.]+$/, '').toUpperCase(),
+      location: 'Maple Valley, WA',
+      equipment: 'SeeStar S50',
+      exposure: 'Unknown'
+    };
+    return { src, alt, filename, ...imageMetadata };
   });
 }
 
@@ -111,7 +130,7 @@ export default function LatestCapturesCarousel() {
         </div>
         {/* Dots */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-          {images.map((_: {src: string; alt: string}, idx: number) => (
+          {images.map((_: ImageData, idx: number) => (
             <button
               key={idx}
               onClick={() => goTo(idx)}
@@ -158,9 +177,9 @@ export default function LatestCapturesCarousel() {
           >
             ✕
           </button>
-          {/* Center image with flexbox, responsive */}
-          <div className="flex items-center justify-center w-full h-full p-6">
-            <div className="relative max-w-[85vw] max-h-[75vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
+          {/* Image and Metadata Container */}
+          <div className="flex flex-col items-center justify-center w-full h-full p-6">
+            <div className="relative max-w-[85vw] max-h-[70vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
               <Image
                 src={images[current].src}
                 alt={images[current].alt}
@@ -172,10 +191,63 @@ export default function LatestCapturesCarousel() {
                   width: 'auto', 
                   height: 'auto',
                   maxWidth: '85vw',
-                  maxHeight: '75vh',
+                  maxHeight: '70vh',
                   minWidth: '300px'
                 }}
               />
+            </div>
+            
+            {/* Metadata Bar */}
+            <div className="mt-6 bg-black/60 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/10">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-white/90 text-sm">
+                {(() => {
+                  const metadataItems = [];
+                  
+                  // Object name (catalog designation + object name or either one)
+                  if (images[current].catalogDesignation && images[current].objectName) {
+                    metadataItems.push(
+                      <span key="name" className="font-medium tracking-wide">
+                        {`${images[current].catalogDesignation} - ${images[current].objectName}`}
+                      </span>
+                    );
+                  } else if (images[current].catalogDesignation || images[current].objectName) {
+                    metadataItems.push(
+                      <span key="name" className="font-medium tracking-wide">
+                        {images[current].catalogDesignation || images[current].objectName}
+                      </span>
+                    );
+                  }
+                  
+                  // Location
+                  if (images[current].location) {
+                    metadataItems.push(
+                      <span key="location">{images[current].location}</span>
+                    );
+                  }
+                  
+                  // Equipment
+                  if (images[current].equipment) {
+                    metadataItems.push(
+                      <span key="equipment">{images[current].equipment}</span>
+                    );
+                  }
+                  
+                  // Exposure
+                  if (images[current].exposure) {
+                    metadataItems.push(
+                      <span key="exposure">{images[current].exposure}</span>
+                    );
+                  }
+                  
+                  // Join with bullet separators
+                  return metadataItems.map((item, index) => (
+                    <React.Fragment key={index}>
+                      {item}
+                      {index < metadataItems.length - 1 && <span className="text-white/60">•</span>}
+                    </React.Fragment>
+                  ));
+                })()}
+              </div>
             </div>
           </div>
         </div>,

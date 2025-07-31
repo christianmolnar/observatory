@@ -1,0 +1,107 @@
+{
+  "NGC7000-Pelican-1.jpg": {
+    "catalogDesignation": "NGC 7000",
+    "objectName": "NORTH AMERICA NEBULA",
+    "location": "Maple Valley, WA", 
+    "equipment": "SeeStar S50",
+    "exposure": "15x300sec"
+  },
+  "IC445-The-Jellyfish.jpg": {
+    "catalogDesignation": "IC 445",
+    "objectName": "THE JELLYFISH",
+    "location": "Maple Valley, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "25x180sec"
+  },
+  "M33-Done.jpg": {
+    "catalogDesignation": "M33",
+    "objectName": "TRIANGULUM GALAXY",
+    "location": "Maple Valley, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "30x240sec"
+  },
+  "SH2-132-The-LobsterClaw.jpg": {
+    "catalogDesignation": "SH2-132",
+    "objectName": "THE LOBSTERCLAW",
+    "location": "Maple Valley, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "18x300sec"
+  },
+  "Wizard-Lr-PI.jpg": {
+    "catalogDesignation": "NGC 7380",
+    "objectName": "WIZARD NEBULA",
+    "location": "Maple Valley, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "22x240sec"
+  },
+  "temp1-NGC7000-Pelican-1.jpg": {
+    "catalogDesignation": "NGC 7000",
+    "objectName": "NORTH AMERICA NEBULA",
+    "location": "Dark Sky Site, OR", 
+    "equipment": "SeeStar S50",
+    "exposure": "20x300sec"
+  },
+  "temp2-IC445-The-Jellyfish.jpg": {
+    "catalogDesignation": "IC 445",
+    "objectName": "THE JELLYFISH",
+    "location": "Mount Rainier, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "30x180sec"
+  },
+  "temp3-M33-Done.jpg": {
+    "catalogDesignation": "M33",
+    "objectName": "TRIANGULUM GALAXY",
+    "location": "Goldendale, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "40x240sec"
+  },
+  "temp4-SH2-132-The-LobsterClaw.jpg": {
+    "catalogDesignation": "SH2-132",
+    "objectName": "THE LOBSTERCLAW",
+    "location": "Olympic Peninsula, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "25x300sec"
+  },
+  "temp5-Wizard-Lr-PI.jpg": {
+    "catalogDesignation": "NGC 7380",
+    "objectName": "WIZARD NEBULA",
+    "location": "Cascade Mountains, WA",
+    "equipment": "SeeStar S50",
+    "exposure": "28x240sec"
+  },
+  "temp6-NGC7000-Pelican-1.jpg": {
+    "catalogDesignation": "NGC 7000",
+    "objectName": "NORTH AMERICA NEBULA",
+    "location": "Death Valley, CA", 
+    "equipment": "SeeStar S30",
+    "exposure": "35x300sec"
+  },
+  "temp7-IC445-The-Jellyfish.jpg": {
+    "catalogDesignation": "IC 445",
+    "objectName": "THE JELLYFISH",
+    "location": "Joshua Tree, CA",
+    "equipment": "SeeStar S30",
+    "exposure": "40x180sec"
+  },
+  "temp8-M33-Done.jpg": {
+    "catalogDesignation": "M33",
+    "objectName": "TRIANGULUM GALAXY",
+    "location": "Big Bend, TX",
+    "equipment": "SeeStar S30",
+    "exposure": "50x240sec"
+  },
+  "temp9-SH2-132-The-LobsterClaw.jpg": {
+    "catalogDesignation": "SH2-132",
+    "objectName": "THE LOBSTERCLAW",
+    "location": "Cherry Springs, PA",
+    "equipment": "SeeStar S30",
+    "exposure": "32x300sec"
+  },
+  "temp10-Wizard-Lr-PI.jpg": {
+    "catalogDesignation": "NGC 7380",
+    "objectName": "WIZARD NEBULA",
+    "location": "Atacama Desert, Chile",
+    "equipment": "SeeStar S30",
+    "exposure": "45x240sec"
+  }
+}

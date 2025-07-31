@@ -20,7 +20,7 @@ export const observatoryConfig = {
   // Owner Information
   owner: {
     name: "Christian Molnar",
-    email: "contact@maplevalleyobservatory.com", // Update as needed
+    email: "chrismolhome@hotmail.com", // Update as needed
     socialMedia: {
       facebook: "https://www.facebook.com/christian.molnar.7",
       linkedin: "https://www.linkedin.com/in/christianmolnar/"

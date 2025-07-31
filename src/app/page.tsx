@@ -3,9 +3,11 @@ import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import LatestCapturesCarousel from '@/components/LatestCapturesCarousel';
 import ClearSkyClockEmbed from '@/components/ClearSkyClockEmbed';
-import observatoryConfig from '@/config/observatory';
+import { globalConfig } from '@/config/global';
 
 export default function Home() {
+  const { homepage } = globalConfig;
+
   return (
     <>
       <Navigation />
@@ -14,8 +16,8 @@ export default function Home() {
         {/* Hero Image - Smaller height so Latest Captures are clearly visible */}
         <div className="h-[75vh] relative overflow-hidden">
           <Image
-            src="/images/hero/NGC7000-Pelican-1.jpg"
-            alt="NGC7000 Pelican Nebula - Maple Valley Observatory"
+            src={homepage.hero.image}
+            alt={homepage.hero.alt}
             fill
             className="object-cover"
             priority
@@ -30,23 +32,19 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-6 text-center">
             {/* Main Title - Smaller to fit one line */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-yellow-400 mb-2 uppercase">
-              {observatoryConfig.name}
+              {homepage.hero.title}
             </h1>
             {/* Tagline right under title - back to nav font style */}
             <p className="text-base md:text-lg text-gray-300 mb-8 font-light tracking-wide">
-              {observatoryConfig.tagline}
+              {homepage.hero.tagline}
             </p>
             {/* Description Paragraph - Smaller font */}
             <div className="max-w-3xl mx-auto">
-              <p className="text-sm md:text-base text-gray-400 leading-relaxed font-light">
-                Ever since I was a child, I&apos;ve been obsessed with capturing photons from the distant past. Armed with modest gear and my love for 
-                astronomy and astrophotography, I set out to absorb light particles in all of their raw form and preserve the beauty of distant planets and 
-                deep sky objects forever, adding my interpretation in the painstaking processing of each image.
-              </p>
-              <p className="text-sm md:text-base text-gray-400 leading-relaxed font-light mt-4">
-                This site is also a place where I can share the beauty of this planet we live in, so in it you will find my efforts to 
-                share the places I have had the good fortune to visit.
-              </p>
+              {homepage.hero.description.map((paragraph, index) => (
+                <p key={index} className="text-sm md:text-base text-gray-400 leading-relaxed font-light mt-4 first:mt-0">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -57,7 +55,7 @@ export default function Home() {
         className="py-8 px-6 relative overflow-hidden"
         style={{
           backgroundColor: '#000',
-          backgroundImage: 'url(/images/assets/NGC2070-Finished.jpg)',
+          backgroundImage: `url(${homepage.latestCaptures.backgroundImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -69,10 +67,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-4">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-white mb-2 uppercase">
-              LATEST CAPTURES
+              {homepage.latestCaptures.title}
             </h2>
             <p className="text-lg md:text-xl text-white font-semibold mb-4 drop-shadow-lg">
-              Just came out of the oven. Careful. The plate is very hot!
+              {homepage.latestCaptures.subtitle}
             </p>
             <div className="flex justify-center">
               <div className="flex justify-center pb-2">
@@ -82,9 +80,11 @@ export default function Home() {
           </div>
           <LatestCapturesCarousel />
           {/* Clear Sky Clock Embed */}
-          <div className="mt-12">
-            <ClearSkyClockEmbed />
-          </div>
+          {homepage.latestCaptures.showClearSkyClock && (
+            <div className="mt-12">
+              <ClearSkyClockEmbed />
+            </div>
+          )}
         </div>
       </section>
     </>
