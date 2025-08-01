@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 // Load Poppins with emphasis on light weights
@@ -126,6 +127,7 @@ export default function RootLayout({
         style={{ fontWeight: 200, fontFamily: 'var(--font-poppins), sans-serif' }}
       >
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
