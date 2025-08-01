@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: "Astrophotography from Maple Valley, Washington. Explore deep sky objects, nebulas, galaxies, and terrestrial photography.",
     images: [
       {
-        url: "https://www.maplevalleyobservatory.com/images/social/og-featured.jpg", // Featured astrophoto
+        url: "https://www.maplevalleyobservatory.com/images/og-preview.jpg", // Featured astrophoto
         width: 1200,
         height: 675,
         alt: "North America Nebula - Astrophotography by Maple Valley Observatory",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
     description: "Astrophotography and celestial imaging from Maple Valley, Washington.",
-    images: ["https://www.maplevalleyobservatory.com/images/social/og-featured.jpg"],
+    images: ["https://www.maplevalleyobservatory.com/images/og-preview.jpg"],
   },
   robots: {
     index: true,
