@@ -295,7 +295,9 @@ const ASTRONOMICAL_OBJECTS = {
   'CATS': { catalog: 'NGC6543', name: 'Cat\'s Eye Nebula', type: 'nebula' },
   'WITCH': { catalog: 'IC2118', name: 'Witch Head Nebula', type: 'nebula' },
   'SEAGULL': { catalog: 'IC2177', name: 'Seagull Nebula', type: 'nebula' },
-  'GHOST': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' }
+  'GHOST': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' },
+  'THOR': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
+  'HELMET': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' }
 };
 
 // Parse astronomical object from filename

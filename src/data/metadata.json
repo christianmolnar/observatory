@@ -131,14 +131,6 @@
     "exposure": "",
     "protected": false
   },
-  "Heart Nebula-2.jpg": {
-    "catalogDesignation": "IC1805",
-    "objectName": "Heart Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "protected": false
-  },
   "Heart Nebula.jpg": {
     "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
@@ -610,7 +602,7 @@
     "protected": false
   },
   "Thor's Helmet.jpg": {
-    "catalogDesignation": "",
+    "catalogDesignation": "NGC2359",
     "objectName": "Thor's Helmet",
     "location": "Maple Valley, WA",
     "equipment": "",
