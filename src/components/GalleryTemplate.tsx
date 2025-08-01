@@ -536,14 +536,14 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                   }
                   
                   // Equipment (only for astrophotography)
-                  if (isAstrophotography && images[currentImage].equipment) {
+                  if (isAstrophotography && images[currentImage].equipment && images[currentImage].equipment.trim() !== '') {
                     metadataItems.push(
                       <span key="equipment">{images[currentImage].equipment}</span>
                     );
                   }
                   
                   // Exposure (only for astrophotography)
-                  if (isAstrophotography && images[currentImage].exposure) {
+                  if (isAstrophotography && images[currentImage].exposure && images[currentImage].exposure.trim() !== '') {
                     metadataItems.push(
                       <span key="exposure">{images[currentImage].exposure}</span>
                     );

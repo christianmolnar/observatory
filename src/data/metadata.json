@@ -561,6 +561,14 @@
     "name": "Old Faithful",
     "protected": false
   },
+  "Orion-wide-death-valley.jpg": {
+    "catalogDesignation": "M42",
+    "objectName": "Orion Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
+  },
   "SH2-132-The-LobsterClaw.jpg": {
     "catalogDesignation": "Sh2-132",
     "objectName": "Lobster Claw Nebula",
@@ -568,6 +576,14 @@
     "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
+  },
+  "Sadr Region.jpg": {
+    "catalogDesignation": "",
+    "objectName": "Sadr Region in Cygnus",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": true
   },
   "Sun .jpg": {
     "catalogDesignation": "",

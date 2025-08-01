@@ -18,7 +18,7 @@ const SCAN_FOLDERS = [
   'astrophotography/solar-system/planets',
   'astrophotography/solar-system/events',
   'astrophotography/solar-system/events/total-eclipse-2017',
-  'wide-field',
+  'astrophotography/deep-sky/wide-field',
   'terrestrial/yellowstone',
   'terrestrial/grand-tetons',
   'equipment'
