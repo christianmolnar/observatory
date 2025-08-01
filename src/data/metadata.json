@@ -10,7 +10,7 @@
   "2017 Total Eclipse1.jpg": {
     "catalogDesignation": "",
     "objectName": "Total Eclipse1",
-    "location": "Maple Valley, WA",
+    "location": "Portland, OR",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -18,7 +18,7 @@
   "2017 Total Eclipse10.jpg": {
     "catalogDesignation": "",
     "objectName": "Total Eclipse10",
-    "location": "Maple Valley, WA",
+    "location": "Portland, OR",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -26,7 +26,7 @@
   "2017 Total Eclipse2.mp4": {
     "catalogDesignation": "",
     "objectName": "Total Eclipse2",
-    "location": "Maple Valley, WA",
+    "location": "Portland, OR",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -34,7 +34,7 @@
   "2017 Total Eclipse8.jpg": {
     "catalogDesignation": "",
     "objectName": "Total Eclipse8",
-    "location": "Maple Valley, WA",
+    "location": "Portland, OR",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -42,7 +42,7 @@
   "2017 Total Eclipse87.jpg": {
     "catalogDesignation": "",
     "objectName": "Total Eclipse87",
-    "location": "Maple Valley, WA",
+    "location": "Portland, OR",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -58,7 +58,7 @@
   "2017 Total Eclipse9.jpg": {
     "catalogDesignation": "",
     "objectName": "Total Eclipse9",
-    "location": "Maple Valley, WA",
+    "location": "Portland, OR",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -67,7 +67,7 @@
     "catalogDesignation": "IC5146",
     "objectName": "Cocoon Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "Konus 8 indh Reflector and ASI Camera",
     "exposure": "",
     "protected": false
   },
@@ -75,22 +75,22 @@
     "catalogDesignation": "IC5146",
     "objectName": "Cocoon Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "Konus 8 indh Reflector and ASI Camera",
     "exposure": "",
     "protected": false
   },
   "Crescent Moon.jpg": {
     "catalogDesignation": "NGC6888",
     "objectName": "Crescent Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
   "Crescent Nebula.jpg": {
     "catalogDesignation": "NGC6888",
     "objectName": "Crescent Nebula",
-    "location": "Maple Valley, WA",
+    "location": "Ravensdale, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -126,16 +126,16 @@
   "Heart Nebula-1.jpg": {
     "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
   "Heart Nebula.jpg": {
     "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -143,30 +143,30 @@
     "catalogDesignation": "",
     "objectName": "Hubble And Me",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "Konus 8 indh Reflector and ASI Camera",
     "exposure": "",
     "protected": false
   },
   "IC1396-Elephant-Lr.jpg": {
     "catalogDesignation": "IC1396",
     "objectName": "Elephant's Trunk Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "IC1396-The Elephant.jpg": {
     "catalogDesignation": "IC1396",
     "objectName": "Elephant's Trunk Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "IC434.jpg": {
     "catalogDesignation": "IC434",
     "objectName": "Horsehead Nebula",
-    "location": "Maple Valley, WA",
+    "location": "Ravensdale, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -174,7 +174,7 @@
   "M1 - The Crab Nebula.jpg": {
     "catalogDesignation": "M1",
     "objectName": "Crab Nebula",
-    "location": "Maple Valley, WA",
+    "location": "Ravensdale, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
@@ -182,48 +182,48 @@
   "M16.jpg": {
     "catalogDesignation": "M16",
     "objectName": "Eagle Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
   "M27.jpg": {
     "catalogDesignation": "M27",
     "objectName": "Dumbbell Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
   "M31-25x300sec-Tight-1600x1131.jpg": {
     "catalogDesignation": "M31",
     "objectName": "Andromeda Galaxy",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
   "M31-Final.jpg": {
     "catalogDesignation": "M31",
     "objectName": "Andromeda Galaxy",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "M33 - The Triangulum Galaxy.jpg": {
     "catalogDesignation": "M33",
     "objectName": "Triangulum Galaxy",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "M33.jpg": {
     "catalogDesignation": "M33",
     "objectName": "Triangulum Galaxy",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -231,23 +231,23 @@
     "catalogDesignation": "M42",
     "objectName": "Orion Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "Orion 80mm ED APO and Canon EOS",
     "exposure": "",
     "protected": false
   },
   "M45 - Pleiades.jpg": {
     "catalogDesignation": "M45",
     "objectName": "Pleiades",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
   "M97.jpg": {
     "catalogDesignation": "M97",
     "objectName": "Owl Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
@@ -445,7 +445,7 @@
     "catalogDesignation": "NGC1499",
     "objectName": "California Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -453,31 +453,31 @@
     "catalogDesignation": "NGC2244",
     "objectName": "Rosette Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
   "NGC2264.jpg": {
     "catalogDesignation": "NGC2264",
     "objectName": "Cone Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
   "NGC281.jpg": {
     "catalogDesignation": "NGC281",
     "objectName": "Pacman Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
   "NGC7000-Pelican-1.jpg": {
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S30 Mosaic",
     "exposure": "",
     "protected": false
   },
@@ -485,39 +485,39 @@
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
   "NGC7635 - The Bubble Nebula - Tight.jpg": {
     "catalogDesignation": "NGC7635",
     "objectName": "Bubble Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "NGC7635 - The Bubble Nebula-Wide.jpg": {
     "catalogDesignation": "NGC7635",
     "objectName": "Bubble Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "NGC869 and NGC884 - The Double Cluster.jpg": {
     "catalogDesignation": "NGC869",
     "objectName": "Double Cluster in Persei",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": true
   },
   "North America and The Pelican.jpg": {
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S30 Mosaic",
     "exposure": "",
     "protected": false
   },
@@ -565,15 +565,15 @@
     "catalogDesignation": "Sh2-132",
     "objectName": "Lobster Claw Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
   "Sun .jpg": {
     "catalogDesignation": "",
     "objectName": "Sun",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
@@ -589,23 +589,23 @@
     "catalogDesignation": "M65, M66, NGC3628",
     "objectName": "The Leo Trio",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": true
   },
   "The Soul Nebula.jpg": {
     "catalogDesignation": "IC1848",
     "objectName": "Soul Nebula",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Ravensdale, WA",
+    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
   "Thor's Helmet.jpg": {
     "catalogDesignation": "NGC2359",
     "objectName": "Thor's Helmet",
-    "location": "Maple Valley, WA",
-    "equipment": "",
+    "location": "Cabo San Lucas, Mexico",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
@@ -629,7 +629,7 @@
     "catalogDesignation": "",
     "objectName": "Twilight Moon",
     "location": "Maple Valley, WA",
-    "equipment": "",
+    "equipment": "SeeStar S50",
     "exposure": "",
     "protected": false
   },
