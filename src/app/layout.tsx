@@ -117,6 +117,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Raw Open Graph meta tags for better Facebook compatibility */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.maplevalleyobservatory.com/" />
+        <meta property="og:title" content="Maple Valley Observatory | Astrophotography & Astronomy" />
+        <meta property="og:description" content="Astrophotography from Maple Valley, Washington. Explore deep sky objects, nebulas, galaxies, and terrestrial photography." />
+        <meta property="og:image" content="https://www.maplevalleyobservatory.com/images/og-preview.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="675" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:site_name" content="Maple Valley Observatory" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Maple Valley Observatory | Astrophotography & Astronomy" />
+        <meta name="twitter:description" content="Astrophotography and celestial imaging from Maple Valley, Washington." />
+        <meta name="twitter:image" content="https://www.maplevalleyobservatory.com/images/og-preview.jpg" />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
