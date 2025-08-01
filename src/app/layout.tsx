@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Load Poppins with emphasis on light weights
@@ -92,8 +93,8 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "Maple Valley Observatory",
     "description": "Professional astrophotography and celestial imaging from Maple Valley, Washington",
-    "url": "https://maplevalleyobservatory.com", // Replace with your actual domain
-    "logo": "https://maplevalleyobservatory.com/images/logo/maple-valley-observatory-logo.png", // Replace with your actual domain
+    "url": "https://maplevalleyobservatory.com",
+    "logo": "https://maplevalleyobservatory.com/images/logo/maple-valley-observatory-logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "general"
@@ -128,6 +129,7 @@ export default function RootLayout({
       >
         {children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
