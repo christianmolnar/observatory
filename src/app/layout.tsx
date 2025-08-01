@@ -91,8 +91,8 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "Maple Valley Observatory",
     "description": "Professional astrophotography and celestial imaging from Maple Valley, Washington",
-    "url": "https://your-domain.com", // Replace with your actual domain
-    "logo": "https://your-domain.com/images/logo/maple-valley-observatory-logo.png", // Replace with your actual domain
+    "url": "https://maplevalleyobservatory.com", // Replace with your actual domain
+    "logo": "https://maplevalleyobservatory.com/images/logo/maple-valley-observatory-logo.png", // Replace with your actual domain
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "general"
