@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import SiteLayout from '@/components/SiteLayout';
 import metadata from '@/data/metadata.json';
+import fileTimestamps from '@/data/file-timestamps.json';
 
 interface ImageMetadata {
   src: string;
@@ -123,7 +124,80 @@ function isVideoFile(filename: string): boolean {
 export default function GalleryTemplate({ title, backgroundImage, imageFolder }: GalleryTemplateProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const images = getGalleryImages(imageFolder);
+  let images = getGalleryImages(imageFolder);
+
+  // Sort images by newest first ONLY on specific gallery pages that show individual images
+  const shouldSortByNewest = 
+    imageFolder === 'astrophotography/deep-sky/nebulas' ||     // Nebulas gallery
+    imageFolder === 'astrophotography/deep-sky/galaxies' ||    // Galaxies gallery  
+    imageFolder === 'astrophotography/deep-sky/star-clusters' || // Star Clusters gallery
+    imageFolder === 'astrophotography/deep-sky/wide-field' ||  // Deep Sky Wide Field gallery
+    imageFolder === 'astrophotography/solar-system/solar' ||   // Solar gallery
+    imageFolder === 'astrophotography/solar-system/lunar' ||   // Lunar gallery
+    imageFolder === 'astrophotography/solar-system/planets' || // Planets gallery
+    imageFolder === 'terrestrial/yellowstone' ||               // Yellowstone gallery
+    imageFolder === 'terrestrial/grand-tetons';                // Grand Tetons gallery
+
+  // Temporary debugging
+  console.log('🔍 Gallery Debug:', {
+    imageFolder,
+    shouldSortByNewest,
+    imagesCount: images.length,
+    firstThreeImages: images.slice(0, 3).map(img => img.filename)
+  });
+
+  if (shouldSortByNewest) {
+    images = [...images].sort((a, b) => {
+      // Get actual file modification times from captured timestamps
+      const getFileModTime = (imageData: { filename: string }) => {
+        // Look for the file in timestamps using the exact imageFolder path
+        const filename = imageData.filename;
+        const fullPath = `${imageFolder}/${filename}`;
+        
+        if (fileTimestamps[fullPath as keyof typeof fileTimestamps]) {
+          // Use Date Modified (mtime) instead of created time
+          return fileTimestamps[fullPath as keyof typeof fileTimestamps].mtimeMs;
+        }
+        
+        // Fallback: extract date from filename if present
+        const extractDateFromFilename = (filename: string) => {
+          const datePatterns = [
+            /(\d{4})[_-](\d{1,2})[_-](\d{1,2})/,  // YYYY-MM-DD or YYYY_MM_DD
+            /(\d{1,2})[_-](\d{1,2})[_-](\d{4})/,  // MM-DD-YYYY or MM_DD_YYYY
+            /(\d{4})(\d{2})(\d{2})/,              // YYYYMMDD
+          ];
+          
+          for (const pattern of datePatterns) {
+            const match = filename.match(pattern);
+            if (match) {
+              let year, month, day;
+              if (pattern === datePatterns[0] || pattern === datePatterns[2]) {
+                [, year, month, day] = match;
+              } else {
+                [, month, day, year] = match;
+              }
+              return new Date(parseInt(year), parseInt(month) - 1, parseInt(day)).getTime();
+            }
+          }
+          return 0;
+        };
+        
+        return extractDateFromFilename(filename);
+      };
+      
+      // Get modification times for both files
+      const timeA = getFileModTime(a);
+      const timeB = getFileModTime(b);
+      
+      // Sort by modification time (newest first)
+      if (timeA !== timeB) {
+        return timeB - timeA; // Higher timestamp = newer = first
+      }
+      
+      // Final fallback: reverse alphabetical (assumes newer files have "later" names)
+      return b.filename.localeCompare(a.filename);
+    });
+  }
 
   const openModal = (index: number) => {
     setCurrentImage(index);

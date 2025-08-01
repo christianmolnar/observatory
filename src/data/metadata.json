@@ -63,40 +63,32 @@
     "exposure": "",
     "protected": false
   },
-  "Cocoon-28x300sec-tight-800x555.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Cocoon 28x300sec Tight 800x555",
+  "Cocoon Nebula Tight.jpg": {
+    "catalogDesignation": "IC5146",
+    "objectName": "Cocoon Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
   },
-  "Cocoon-28x300sec-wide-800x562.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Cocoon 28x300sec Wide 800x562",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "protected": false
-  },
-  "Cone Nebula.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Cone Nebula",
+  "Cocoon Nebula Wide.jpg": {
+    "catalogDesignation": "IC5146",
+    "objectName": "Cocoon Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
   },
   "Crescent Moon.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Crescent Moon",
+    "catalogDesignation": "NGC6888",
+    "objectName": "Crescent Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
   },
   "Crescent Nebula.jpg": {
-    "catalogDesignation": "",
+    "catalogDesignation": "NGC6888",
     "objectName": "Crescent Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
@@ -132,7 +124,7 @@
     "protected": false
   },
   "Heart Nebula-1.jpg": {
-    "catalogDesignation": "",
+    "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
@@ -140,7 +132,7 @@
     "protected": false
   },
   "Heart Nebula-2.jpg": {
-    "catalogDesignation": "",
+    "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
@@ -148,7 +140,7 @@
     "protected": false
   },
   "Heart Nebula.jpg": {
-    "catalogDesignation": "",
+    "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
@@ -171,9 +163,17 @@
     "exposure": "",
     "protected": false
   },
-  "IC434-3.jpg": {
+  "IC1396-The Elephant.jpg": {
+    "catalogDesignation": "IC1396",
+    "objectName": "Elephant's Trunk Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
+  },
+  "IC434.jpg": {
     "catalogDesignation": "IC434",
-    "objectName": "IC434",
+    "objectName": "Horsehead Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
@@ -189,7 +189,7 @@
   },
   "M16.jpg": {
     "catalogDesignation": "M16",
-    "objectName": "Messier 16",
+    "objectName": "Eagle Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
@@ -197,7 +197,7 @@
   },
   "M27.jpg": {
     "catalogDesignation": "M27",
-    "objectName": "Messier 27",
+    "objectName": "Dumbbell Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
@@ -235,7 +235,7 @@
     "exposure": "",
     "protected": false
   },
-  "M42-20x240sec-2-7-2005-1600x1139.jpg": {
+  "M42 The Orion Nebula.jpg": {
     "catalogDesignation": "M42",
     "objectName": "Orion Nebula",
     "location": "Maple Valley, WA",
@@ -253,7 +253,7 @@
   },
   "M97.jpg": {
     "catalogDesignation": "M97",
-    "objectName": "Messier 97",
+    "objectName": "Owl Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
@@ -449,23 +449,39 @@
     "equipmentInfo": "",
     "protected": false
   },
-  "NGC 2244.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ngc",
+  "NGC1499.jpg": {
+    "catalogDesignation": "NGC1499",
+    "objectName": "California Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
   },
-  "NGC 281W.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ngc 281w",
+  "NGC2244.jpg": {
+    "catalogDesignation": "NGC2244",
+    "objectName": "Rosette Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
     "protected": false
   },
-  "NGC 7000-Pelican.jpg": {
+  "NGC2264.jpg": {
+    "catalogDesignation": "NGC2264",
+    "objectName": "Cone Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
+  },
+  "NGC281.jpg": {
+    "catalogDesignation": "NGC281",
+    "objectName": "Pacman Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
+  },
+  "NGC7000-Pelican-1.jpg": {
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
@@ -473,31 +489,7 @@
     "exposure": "",
     "protected": false
   },
-  "NGC 7000.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ngc",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "protected": false
-  },
-  "NGC 869 and NGC 884 - The Double Cluster.jpg": {
-    "catalogDesignation": "",
-    "objectName": "Ngc And Ngc The Double Cluster",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "protected": false
-  },
-  "NGC1499.jpg": {
-    "catalogDesignation": "NGC1499",
-    "objectName": "NGC1499",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "protected": false
-  },
-  "NGC7000-Pelican-1.jpg": {
+  "NGC7000.jpg": {
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
@@ -513,9 +505,25 @@
     "exposure": "",
     "protected": false
   },
-  "NGC7635 - The Bubble Nebula-2.jpg": {
+  "NGC7635 - The Bubble Nebula-Wide.jpg": {
     "catalogDesignation": "NGC7635",
     "objectName": "Bubble Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
+  },
+  "NGC869 and NGC884 - The Double Cluster.jpg": {
+    "catalogDesignation": "NGC869",
+    "objectName": "Double Cluster in Persei",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": true
+  },
+  "North America and The Pelican.jpg": {
+    "catalogDesignation": "NGC7000",
+    "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
@@ -593,9 +601,9 @@
     "exposure": "",
     "protected": true
   },
-  "The Soul Nebula - Sept 2023.jpg": {
-    "catalogDesignation": "",
-    "objectName": "The Soul Nebula Sept",
+  "The Soul Nebula.jpg": {
+    "catalogDesignation": "IC1848",
+    "objectName": "Soul Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",

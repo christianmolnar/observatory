@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "node scripts/capture-file-times.js && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "capture-timestamps": "node scripts/capture-file-times.js"
   },
   "dependencies": {
     "react": "19.1.0",

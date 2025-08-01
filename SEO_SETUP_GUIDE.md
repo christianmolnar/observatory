@@ -11,6 +11,7 @@
 - **Dynamic sitemap.xml** listing all your pages
 - **Improved alt tags** for all images with descriptive, SEO-friendly text
 - **Performance optimizations** in next.config.js
+- **Smart image sorting** - newest images first on main gallery pages (Deep Sky, Solar System, Terrestrial, Wide Field)
 
 ### 🔧 Manual Setup Required
 
