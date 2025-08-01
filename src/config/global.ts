@@ -70,7 +70,7 @@ export const deepSkyConfig = {
     {
       title: 'Galaxies',
       href: '/astrophotography/deep-sky/galaxies',
-      backgroundImage: '/images/astrophotography/featured/M33-Done.jpg',
+      backgroundImage: '/images/assets/M33.jpg',
       description: 'Distant island universes beyond our Milky Way',
       imageFolder: 'astrophotography/deep-sky/galaxies'
     },
