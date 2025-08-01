@@ -44,10 +44,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-domain.com", // Replace with your actual domain
+    url: "https://maplevalleyobservatory.com", // Replace with your actual domain
     siteName: "Maple Valley Observatory",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
-    description: "Professional astrophotography and celestial imaging from Maple Valley, Washington. Explore deep sky objects, nebulas, galaxies, and terrestrial photography.",
+    description: "Astrophotography from Maple Valley, Washington. Explore deep sky objects, nebulas, galaxies, and terrestrial photography.",
     images: [
       {
         url: "/images/assets/NGC7000-Pelican-1.jpg", // Featured astrophoto
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
-    description: "Professional astrophotography and celestial imaging from Maple Valley, Washington.",
+    description: "Astrophotography and celestial imaging from Maple Valley, Washington.",
     images: ["/images/assets/NGC7000-Pelican-1.jpg"],
   },
   robots: {
