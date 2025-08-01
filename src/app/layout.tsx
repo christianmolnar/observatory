@@ -39,20 +39,20 @@ export const metadata: Metadata = {
   authors: [{ name: "Maple Valley Observatory" }],
   creator: "Maple Valley Observatory",
   publisher: "Maple Valley Observatory",
-  metadataBase: new URL("https://maplevalleyobservatory.com"), // Replace with your actual domain
+  metadataBase: new URL("https://www.maplevalleyobservatory.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://maplevalleyobservatory.com",
+    url: "https://www.maplevalleyobservatory.com",
     siteName: "Maple Valley Observatory",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
     description: "Astrophotography from Maple Valley, Washington. Explore deep sky objects, nebulas, galaxies, and terrestrial photography.",
     images: [
       {
-        url: "https://maplevalleyobservatory.com/images/social/og-featured.jpg", // Featured astrophoto
+        url: "https://www.maplevalleyobservatory.com/images/social/og-featured.jpg", // Featured astrophoto
         width: 1200,
         height: 675,
         alt: "North America Nebula - Astrophotography by Maple Valley Observatory",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
     description: "Astrophotography and celestial imaging from Maple Valley, Washington.",
-    images: ["https://maplevalleyobservatory.com/images/social/og-featured.jpg"],
+    images: ["https://www.maplevalleyobservatory.com/images/social/og-featured.jpg"],
   },
   robots: {
     index: true,
@@ -94,8 +94,8 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "Maple Valley Observatory",
     "description": "Professional astrophotography and celestial imaging from Maple Valley, Washington",
-    "url": "https://maplevalleyobservatory.com",
-    "logo": "https://maplevalleyobservatory.com/images/logo/maple-valley-observatory-logo.png",
+    "url": "https://www.maplevalleyobservatory.com",
+    "logo": "https://www.maplevalleyobservatory.com/images/logo/maple-valley-observatory-logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "general"
