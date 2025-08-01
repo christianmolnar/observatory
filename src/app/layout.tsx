@@ -118,6 +118,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Raw Open Graph meta tags for better Facebook compatibility */}
+        <meta property="fb:app_id" content="1396805241625567" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.maplevalleyobservatory.com/" />
         <meta property="og:title" content="Maple Valley Observatory | Astrophotography & Astronomy" />
