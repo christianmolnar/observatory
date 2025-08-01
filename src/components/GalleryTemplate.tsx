@@ -221,7 +221,15 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                     ) : (
                       <Image
                         src={image.src}
-                        alt={image.objectName || image.name || image.equipmentName || 'Gallery Image'}
+                        alt={
+                          image.objectName 
+                            ? `${image.objectName} ${image.catalogDesignation ? `(${image.catalogDesignation})` : ''} - Astrophotography by Maple Valley Observatory`
+                            : image.equipmentName 
+                            ? `${image.equipmentName} - Telescope and Astrophotography Equipment`
+                            : image.name 
+                            ? `${image.name} - Photography by Maple Valley Observatory`
+                            : 'Astronomy and Photography by Maple Valley Observatory'
+                        }
                         fill
                         className="object-cover"
                         quality={90}
@@ -372,7 +380,15 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               ) : (
                 <Image
                   src={images[currentImage].src}
-                  alt={images[currentImage].objectName || images[currentImage].name || images[currentImage].equipmentName || 'Gallery Image'}
+                  alt={
+                    images[currentImage].objectName 
+                      ? `${images[currentImage].objectName} ${images[currentImage].catalogDesignation ? `(${images[currentImage].catalogDesignation})` : ''} - Astrophotography by Maple Valley Observatory`
+                      : images[currentImage].equipmentName 
+                      ? `${images[currentImage].equipmentName} - Telescope and Astrophotography Equipment`
+                      : images[currentImage].name 
+                      ? `${images[currentImage].name} - Photography by Maple Valley Observatory`
+                      : 'Astronomy and Photography by Maple Valley Observatory'
+                  }
                   width={1400}
                   height={1000}
                   className="object-contain w-full h-full"

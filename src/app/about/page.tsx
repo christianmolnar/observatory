@@ -3,8 +3,22 @@ import Navigation from '@/components/Navigation';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About | Maple Valley Observatory',
-  description: 'Learn about Christian Molnar and his journey in astrophotography and astronomy from Maple Valley, Washington.',
+  title: 'About',
+  description: 'Learn about Christian Molnar and Maple Valley Observatory - dedicated to astrophotography and astronomy from Maple Valley, Washington. Discover our equipment, techniques, and passion for capturing the cosmos.',
+  keywords: [
+    'Christian Molnar',
+    'Maple Valley Observatory',
+    'astrophotographer',
+    'astronomer',
+    'telescope setup',
+    'Washington astronomy',
+    'observatory founder'
+  ],
+  openGraph: {
+    title: 'About Maple Valley Observatory',
+    description: 'Learn about Christian Molnar and his journey in astrophotography and astronomy from Maple Valley, Washington.',
+    type: 'website',
+  },
 };
 
 export default function AboutPage() {
