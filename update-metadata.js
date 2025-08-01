@@ -191,6 +191,7 @@ const ASTRONOMICAL_OBJECTS = {
   'NGC2244': { catalog: 'NGC2244', name: 'Rosette Nebula', type: 'nebula' },
   'NGC2237': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
   'NGC2264': { catalog: 'NGC2264', name: 'Cone Nebula', type: 'star cluster' },
+  'NGC2359': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
   'NGC2392': { catalog: 'NGC2392', name: 'Eskimo Nebula', type: 'nebula' },
   'NGC3031': { catalog: 'NGC3031', name: 'Bode\'s Galaxy', type: 'galaxy' },
   'NGC3034': { catalog: 'NGC3034', name: 'Cigar Galaxy', type: 'galaxy' },
