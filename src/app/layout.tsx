@@ -46,16 +46,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://maplevalleyobservatory.com", // Replace with your actual domain
+    url: "https://maplevalleyobservatory.com",
     siteName: "Maple Valley Observatory",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
     description: "Astrophotography from Maple Valley, Washington. Explore deep sky objects, nebulas, galaxies, and terrestrial photography.",
     images: [
       {
-        url: "/images/astrophotography/deep-sky/nebulas/NGC7000.jpg", // Featured astrophoto
-        width: 1504,
-        height: 1167,
+        url: "https://maplevalleyobservatory.com/images/social/og-featured.jpg", // Featured astrophoto
+        width: 1200,
+        height: 675,
         alt: "North America Nebula - Astrophotography by Maple Valley Observatory",
+        type: "image/jpeg",
       },
     ],
   },
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Maple Valley Observatory | Astrophotography & Astronomy",
     description: "Astrophotography and celestial imaging from Maple Valley, Washington.",
-    images: ["/images/astrophotography/deep-sky/nebulas/NGC7000.jpg"],
+    images: ["https://maplevalleyobservatory.com/images/social/og-featured.jpg"],
   },
   robots: {
     index: true,
