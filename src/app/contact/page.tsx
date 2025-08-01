@@ -40,7 +40,7 @@ export default function ContactPage() {
             </h1>
             <p className="text-lg text-slate-300 max-w-2xl mx-auto">
               Have questions about the astronomy and astrophotography hobby? 
-              We'd love to hear from you.
+              We&apos;d love to hear from you.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export default function ContactPage() {
                 ✓ Message Sent Successfully!
               </div>
               <p className="text-slate-300 text-sm">
-                Thank you for reaching out. We'll get back to you soon.
+                Thank you for reaching out. We&apos;ll get back to you soon.
               </p>
             </div>
           </div>
