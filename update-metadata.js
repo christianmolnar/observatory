@@ -373,13 +373,15 @@ function createMetadataEntry(image) {
     case 'terrestrial':
       return {
         "location": generateLocationFromFolder(image.folder), // e.g., "Yellowstone National Park"
-        "name": generateCleanName(image.filename)      // e.g., "Mammoth Springs"
+        "name": generateCleanName(image.filename),      // e.g., "Mammoth Springs"
+        "protected": false    // Set to true to prevent automatic updates
       };
       
     case 'equipment':
       return {
         "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
-        "equipmentInfo": ""  // e.g., "Smart Telescope by ZWO"
+        "equipmentInfo": "",  // e.g., "Smart Telescope by ZWO"
+        "protected": false    // Set to true to prevent automatic updates
       };
       
     default: // astrophotography
@@ -389,7 +391,8 @@ function createMetadataEntry(image) {
         "objectName": parsed.objectName,
         "location": "Maple Valley, WA",
         "equipment": "",
-        "exposure": ""
+        "exposure": "",
+        "protected": false    // Set to true to prevent automatic updates
       };
   }
 }
@@ -406,6 +409,13 @@ function updateMetadata() {
   let totalImages = allImages.length;
   
   console.log(`📁 Found ${totalImages} images across all folders`);
+  
+  // Ensure all existing entries have a protected field
+  Object.keys(existingMetadata).forEach(filename => {
+    if (typeof existingMetadata[filename].protected === 'undefined') {
+      existingMetadata[filename].protected = false;
+    }
+  });
   
   // First, check for entries that no longer have corresponding files (cleanup)
   const currentImageFilenames = new Set(allImages.map(img => img.filename));
@@ -436,34 +446,52 @@ function updateMetadata() {
       // Create new entry with appropriate fields for image type
       existingMetadata[image.filename] = createMetadataEntry(image);
     } else {
-      // For terrestrial and equipment images, update if fields are empty
+      // For terrestrial and equipment images, update if not protected
       if (imageType === 'terrestrial') {
         const entry = existingMetadata[image.filename];
-        const needsUpdate = !entry.location || !entry.name || entry.location === '' || entry.name === '';
-        
-        if (needsUpdate) {
-          console.log(`🔄 Updating terrestrial metadata for: ${image.filename} (${imageType} in ${image.folder})`);
-          entry.location = generateLocationFromFolder(image.folder);
-          entry.name = generateCleanName(image.filename);
-          updatedEntries++;
+        // PROTECTION: Check protected flag first
+        if (entry.protected) {
+          console.log(`🔒 PROTECTED: Manual entry preserved for: ${image.filename} - "${entry.name}"`);
         } else {
-          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+          const needsUpdate = !entry.location || !entry.name || entry.location === '' || entry.name === '';
+          
+          if (needsUpdate) {
+            console.log(`🔄 Updating terrestrial metadata for: ${image.filename} (${imageType} in ${image.folder})`);
+            entry.location = generateLocationFromFolder(image.folder);
+            entry.name = generateCleanName(image.filename);
+            updatedEntries++;
+          } else {
+            console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+          }
         }
       } else if (imageType === 'equipment') {
         const entry = existingMetadata[image.filename];
-        const needsUpdate = !entry.equipmentName || entry.equipmentName === '';
-        
-        if (needsUpdate) {
-          console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
-          entry.equipmentName = generateCleanName(image.filename);
-          updatedEntries++;
+        // PROTECTION: Check protected flag first
+        if (entry.protected) {
+          console.log(`🔒 PROTECTED: Manual entry preserved for: ${image.filename} - "${entry.equipmentName}"`);
         } else {
-          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+          // FALLBACK: Don't override manual entries - only update if completely empty or generic
+          const genericNames = ['My Gear', 'Equipment', generateCleanName(image.filename)];
+          const isGenericOrEmpty = !entry.equipmentName || entry.equipmentName === '' || genericNames.includes(entry.equipmentName);
+          
+          if (isGenericOrEmpty) {
+            console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
+            entry.equipmentName = generateCleanName(image.filename);
+            updatedEntries++;
+          } else {
+            console.log(`🔒 PROTECTED: Manual equipment entry preserved for: ${image.filename} - "${entry.equipmentName}"`);
+          }
         }
       } else {
-        console.log(`🔄 Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
-        updatedEntries++;
-        // Keep existing astrophotography entry as-is since user may have manually edited it
+        const entry = existingMetadata[image.filename];
+        // PROTECTION: Check protected flag for astrophotography entries
+        if (entry.protected) {
+          console.log(`� PROTECTED: Manual astrophotography entry preserved for: ${image.filename}`);
+        } else {
+          console.log(`�🔄 Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+          updatedEntries++;
+          // Keep existing astrophotography entry as-is since user may have manually edited it
+        }
       }
     }
   });

@@ -16,6 +16,9 @@ interface ImageMetadata {
   exposure?: string;
   // Terrestrial fields
   name?: string;
+  // Equipment fields
+  equipmentName?: string;
+  equipmentInfo?: string;
   // Common fields
   location: string;
 }
@@ -218,7 +221,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                     ) : (
                       <Image
                         src={image.src}
-                        alt={image.objectName || image.name || 'Gallery Image'}
+                        alt={image.objectName || image.name || image.equipmentName || 'Gallery Image'}
                         fill
                         className="object-cover"
                         quality={90}
@@ -240,6 +243,18 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                           <h4 className="text-white text-sm font-medium tracking-wide text-center">
                             {image.objectName}
                           </h4>
+                        )}
+                      </>
+                    ) : image.equipmentName ? (
+                      /* For equipment images */
+                      <>
+                        <h4 className="text-white text-sm font-medium tracking-wide text-center">
+                          {image.equipmentName}
+                        </h4>
+                        {image.equipmentInfo && (
+                          <p className="text-white/70 text-xs text-center mt-1">
+                            {image.equipmentInfo}
+                          </p>
                         )}
                       </>
                     ) : (
@@ -357,7 +372,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               ) : (
                 <Image
                   src={images[currentImage].src}
-                  alt={images[currentImage].objectName || images[currentImage].name || 'Gallery Image'}
+                  alt={images[currentImage].objectName || images[currentImage].name || images[currentImage].equipmentName || 'Gallery Image'}
                   width={1400}
                   height={1000}
                   className="object-contain w-full h-full"
@@ -379,8 +394,9 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                 {(() => {
                   const metadataItems = [];
                   
-                  // Check if this is an astrophotography or terrestrial image
+                  // Check if this is an astrophotography, equipment, or terrestrial image
                   const isAstrophotography = images[currentImage].catalogDesignation || images[currentImage].objectName;
+                  const isEquipment = images[currentImage].equipmentName;
                   
                   if (isAstrophotography) {
                     // Astrophotography: Object name (catalog designation + object name or either one)
@@ -394,6 +410,20 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                       metadataItems.push(
                         <span key="name" className="font-medium tracking-wide">
                           {images[currentImage].catalogDesignation || images[currentImage].objectName}
+                        </span>
+                      );
+                    }
+                  } else if (isEquipment) {
+                    // Equipment: Show equipment name and info
+                    metadataItems.push(
+                      <span key="equipmentName" className="font-medium tracking-wide">
+                        {images[currentImage].equipmentName}
+                      </span>
+                    );
+                    if (images[currentImage].equipmentInfo) {
+                      metadataItems.push(
+                        <span key="equipmentInfo" className="text-white/70">
+                          {images[currentImage].equipmentInfo}
                         </span>
                       );
                     }

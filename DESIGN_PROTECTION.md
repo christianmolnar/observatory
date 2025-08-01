@@ -87,6 +87,39 @@ if (segments.length >= 2 && segments[0] === 'terrestrial') {
 
 ---
 
+### 4. Manual Metadata Entries (`/src/data/metadata.json`)
+
+**Simple Protection System:**
+All metadata entries now include a `"protected": true/false` field for complete user control.
+
+**How It Works:**
+- `"protected": false` → Entry can be automatically updated
+- `"protected": true` → Entry is fully protected from any automatic changes
+
+**Protected Entry Example:**
+```json
+{
+  "my-telescope.jpg": {
+    "equipmentName": "My Custom Telescope Name", 
+    "equipmentInfo": "Special details I wrote",
+    "protected": true  // ← This prevents ANY automatic updates
+  },
+  "auto-generated.jpg": {
+    "equipmentName": "Auto Generated Name",
+    "equipmentInfo": "",
+    "protected": false  // ← This allows automatic updates
+  }
+}
+```
+
+**Benefits:**
+- ✅ Simple boolean control - no guessing about protection logic
+- ✅ Complete protection when enabled - no edge cases
+- ✅ Granular control - protect individual entries, not entire categories
+- ✅ Clear intent - easy to see which entries are manually customized
+
+---
+
 ## Example Protected vs Allowed Changes
 
 ### ❌ **REQUIRES PERMISSION:**
