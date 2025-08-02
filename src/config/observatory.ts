@@ -4,7 +4,7 @@
 export const observatoryConfig = {
   // Basic Information
   name: "Maple Valley Observatory",
-  tagline: "Capturing Photons Since Last Century",
+  tagline: "Capturing Photons Since the 1900s...",
   
   // Location Details
   location: {
