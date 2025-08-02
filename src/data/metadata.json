@@ -83,7 +83,7 @@
     "catalogDesignation": "NGC6888",
     "objectName": "Crescent Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -127,7 +127,7 @@
     "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -135,7 +135,7 @@
     "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -151,7 +151,7 @@
     "catalogDesignation": "IC1396",
     "objectName": "Elephant's Trunk Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -159,7 +159,7 @@
     "catalogDesignation": "IC1396",
     "objectName": "Elephant's Trunk Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -199,7 +199,7 @@
     "catalogDesignation": "M31",
     "objectName": "Andromeda Galaxy",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -207,7 +207,7 @@
     "catalogDesignation": "M31",
     "objectName": "Andromeda Galaxy",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -215,7 +215,7 @@
     "catalogDesignation": "M33",
     "objectName": "Triangulum Galaxy",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -223,7 +223,7 @@
     "catalogDesignation": "M33",
     "objectName": "Triangulum Galaxy",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -239,7 +239,7 @@
     "catalogDesignation": "M45",
     "objectName": "Pleiades",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -412,7 +412,7 @@
     "protected": false
   },
   "My Gear0.jpg": {
-    "equipmentName": "Meade 8 inch ACF SFT and William Optics Redcat 71",
+    "equipmentName": "Meade 8 inch ACF SFT and William Optics Zenithstar 81",
     "equipmentInfo": "My current setup, with ZWO ASI 533MC and 676MC cameras.",
     "protected": true
   },
@@ -445,7 +445,7 @@
     "catalogDesignation": "NGC1499",
     "objectName": "California Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -485,7 +485,7 @@
     "catalogDesignation": "NGC7000",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
@@ -493,7 +493,7 @@
     "catalogDesignation": "NGC7635",
     "objectName": "Bubble Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -501,7 +501,7 @@
     "catalogDesignation": "NGC7635",
     "objectName": "Bubble Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -509,7 +509,7 @@
     "catalogDesignation": "NGC869",
     "objectName": "Double Cluster in Persei",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": true
   },
@@ -573,7 +573,7 @@
     "catalogDesignation": "Sh2-132",
     "objectName": "Lobster Claw Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 676MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 676MC",
     "exposure": "",
     "protected": false
   },
@@ -613,7 +613,7 @@
     "catalogDesignation": "IC1848",
     "objectName": "Soul Nebula",
     "location": "Ravensdale, WA",
-    "equipment": "William Optics Redcat 71 and ZWO ASI 533MC",
+    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
   },
