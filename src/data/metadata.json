@@ -123,14 +123,6 @@
     "name": "Grand Tetons",
     "protected": false
   },
-  "Heart Nebula-1.jpg": {
-    "catalogDesignation": "IC1805",
-    "objectName": "Heart Nebula",
-    "location": "Ravensdale, WA",
-    "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
-    "exposure": "",
-    "protected": false
-  },
   "Heart Nebula.jpg": {
     "catalogDesignation": "IC1805",
     "objectName": "Heart Nebula",
@@ -138,6 +130,14 @@
     "equipment": "William Optics Zenithstar 81 and ZWO ASI 533MC",
     "exposure": "",
     "protected": false
+  },
+  "Heart and Soul Nebulas-4.jpg": {
+    "catalogDesignation": "IC1805 and IC1848",
+    "objectName": "Heart and Soul Nebulas",
+    "location": "Ravensdale, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": true
   },
   "Hubble and Me.jpg": {
     "catalogDesignation": "",
@@ -184,6 +184,22 @@
     "objectName": "Eagle Nebula",
     "location": "Ravensdale, WA",
     "equipment": "SeeStar S50",
+    "exposure": "",
+    "protected": false
+  },
+  "M27-2-1.jpg": {
+    "catalogDesignation": "M27",
+    "objectName": "Dumbbell Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
+  },
+  "M27-2-2.jpg": {
+    "catalogDesignation": "M27",
+    "objectName": "Dumbbell Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
     "exposure": "",
     "protected": false
   },
@@ -584,6 +600,14 @@
     "equipment": "",
     "exposure": "",
     "protected": true
+  },
+  "Soul Nebula.jpg": {
+    "catalogDesignation": "IC1848",
+    "objectName": "Soul Nebula",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false
   },
   "Sun .jpg": {
     "catalogDesignation": "",
