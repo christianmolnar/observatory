@@ -189,11 +189,11 @@
   },
   "M27-2-1.jpg": {
     "catalogDesignation": "M27",
-    "objectName": "Dumbbell Nebula",
-    "location": "Maple Valley, WA",
+    "objectName": "The Dumbbell Nebula",
+    "location": "Ravensdale, WA",
     "equipment": "",
     "exposure": "",
-    "protected": false
+    "protected": true
   },
   "M27-2-2.jpg": {
     "catalogDesignation": "M27",
