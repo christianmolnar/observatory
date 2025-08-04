@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Maple Valley Observatory
 
-## Getting Started
+A Next.js astrophotography website featuring contemplative viewing experiences with curated YouTube content.
 
-First, run the development server:
+## 🚀 Quick Start
 
 ```bash
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📚 Documentation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**For complete site management, setup, and usage instructions, see the [docs/](docs/) folder:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **[📖 Site Management Guide](docs/SITE_MANAGEMENT_GUIDE.md)** - **START HERE** - Complete operational guide
+- **[🎵 Contemplation System](docs/CONTEMPLATION_INVENTORY_GUIDE.md)** - Video assignment and inventory management
+- **[🎨 Design Documentation](docs/DESIGN_DOCUMENT.md)** - Complete design system and components
+- **[⚙️ Setup Guides](docs/)** - SEO, contact forms, and configuration
 
-## Learn More
+## 🎯 Common Tasks
 
-To learn more about Next.js, take a look at the following resources:
+### Adding New Images
+```bash
+# 1. Place images in /public/images/[category]/
+# 2. Update metadata
+node update-metadata.js
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Managing Contemplation Videos
+```bash
+# Check current assignments
+node update-metadata.js inventory
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Add video to an image
+node update-metadata.js add-video "image.jpg" "youtube-url" "Video Title"
+```
 
-## Deploy on Vercel
+## 🌟 Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Responsive Astrophotography Gallery** - Mobile-optimized image viewing
+- **YouTube Contemplation Overlay** - Meditative viewing experiences
+- **Automated Content Management** - CLI tools for metadata and video management
+- **SEO Optimized** - Full search engine optimization
+- **Terrestrial Photography** - National parks and landscape sections
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📊 Current Status
+
+- **135 total images** in collection
+- **24 images** with contemplation videos assigned
+- **111 images** available for new assignments
+- **8 content categories** (jazz, gratitude, poetry, cosmic, etc.)
+
+## 🔧 Technology Stack
+
+- **Next.js 15.4.5** with Turbopack
+- **React 19.1.0** 
+- **TypeScript 5**
+- **Tailwind CSS 4**
+- **Vercel Analytics & Speed Insights**
+
+## 📁 Project Structure
+
+```
+├── docs/                          # Complete documentation
+├── src/
+│   ├── app/                       # Next.js app router pages
+│   ├── components/                # React components
+│   ├── data/                      # Metadata and content
+│   └── config/                    # Site configuration
+├── public/images/                 # Image assets
+├── update-metadata.js             # Content management CLI
+└── contemplation-inventory.json   # Automated tracking
+```
+
+## 📖 Documentation Index
+
+All comprehensive documentation is organized in the [`docs/`](docs/) folder:
+
+- **Getting Started**: [Site Management Guide](docs/SITE_MANAGEMENT_GUIDE.md)
+- **Content Management**: [Contemplation Inventory Guide](docs/CONTEMPLATION_INVENTORY_GUIDE.md)
+- **Design System**: [Design Document](docs/DESIGN_DOCUMENT.md)
+- **Configuration**: [Setup Guides](docs/)
+- **Content Library**: [YouTube Contemplation Links](docs/youtube-contemplation-links.md)
+
+For detailed instructions on any aspect of the site, start with the [📖 Site Management Guide](docs/SITE_MANAGEMENT_GUIDE.md).

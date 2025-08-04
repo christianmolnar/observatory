@@ -18,6 +18,7 @@ export const navigationConfig = {
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
+    { label: 'Resources', href: '/resources' },
     { label: 'Contact', href: '/contact' },
   ]
 };
@@ -100,21 +101,21 @@ export const solarSystemConfig = {
     {
       title: 'Solar',
       href: '/astrophotography/solar-system/solar',
-      backgroundImage: '/images/astrophotography/featured/NGC7000-Pelican-1.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/solar/Sun.jpg',
       description: 'The Sun, solar eclipses, and solar phenomena',
       imageFolder: 'astrophotography/solar-system/solar'
     },
     {
       title: 'Lunar',
       href: '/astrophotography/solar-system/lunar',
-      backgroundImage: '/images/astrophotography/featured/IC445-The-Jellyfish.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/lunar/Twilight Moon.jpg',
       description: 'Moon phases and surface details',
       imageFolder: 'astrophotography/solar-system/lunar'
     },
     {
       title: 'Planets',
       href: '/astrophotography/solar-system/planets',
-      backgroundImage: '/images/astrophotography/featured/M33-Done.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/planets/Hubble and Me.jpg',
       description: 'Jupiter, Saturn, Mars, and other planetary bodies',
       imageFolder: 'astrophotography/solar-system/planets'
     },
@@ -183,6 +184,27 @@ export const equipmentConfig = {
   description: observatoryConfig.equipmentDescription
 };
 
+// Resources Configuration
+export const resourcesConfig = {
+  title: 'Resources',
+  backgroundImage: '/images/astrophotography/deep-sky/nebulas/North America and The Pelican.jpg',
+  description: 'Explore curated resources for astronomy, astrophotography, mindfulness, and wellbeing. Discover guides, articles, and tools to enhance your journey.',
+  categories: [
+    {
+      title: 'Astronomy & Astrophotography',
+      href: '/resources/astronomy-astrophotography',
+      backgroundImage: '/images/astrophotography/deep-sky/nebulas/North America and The Pelican.jpg',
+      description: 'Guides, communities, and tools for exploring the universe'
+    },
+    {
+      title: 'Mindfulness',
+      href: '/resources/mindfulness',
+      backgroundImage: '/images/astrophotography/deep-sky/nebulas/North America and The Pelican.jpg',
+      description: 'Resources for meditation, wellbeing, and mindful living'
+    }
+  ]
+};
+
 // Gallery Image Folders Configuration
 export const imageFoldersConfig = {
   featured: 'astrophotography/featured',
@@ -245,6 +267,7 @@ export const globalConfig = {
   wideField: wideFieldConfig,
   terrestrial: terrestrialConfig,
   equipment: equipmentConfig,
+  resources: resourcesConfig,
   imageFolders: imageFoldersConfig,
   style: styleConfig
 };

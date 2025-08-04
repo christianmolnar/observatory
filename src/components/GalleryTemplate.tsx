@@ -22,6 +22,9 @@ interface ImageMetadata {
   equipmentInfo?: string;
   // Common fields
   location: string;
+  // YouTube contemplation fields
+  youtubeLink?: string;
+  youtubeTitle?: string;
 }
 
 interface GalleryTemplateProps {
@@ -114,6 +117,33 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
   }
 }
 
+// Helper function to extract YouTube video ID from various URL formats
+function getYouTubeVideoId(url: string): string {
+  if (!url) return '';
+  
+  // Handle regular YouTube URLs (watch?v=)
+  if (url.includes('watch?v=')) {
+    return url.split('v=')[1]?.split('&')[0] || '';
+  }
+  
+  // Handle YouTube Shorts URLs (/shorts/)
+  if (url.includes('/shorts/')) {
+    return url.split('/shorts/')[1]?.split('?')[0] || '';
+  }
+  
+  // Handle YouTube embed URLs (/embed/)
+  if (url.includes('/embed/')) {
+    return url.split('/embed/')[1]?.split('?')[0] || '';
+  }
+  
+  // Handle youtu.be short URLs
+  if (url.includes('youtu.be/')) {
+    return url.split('youtu.be/')[1]?.split('?')[0] || '';
+  }
+  
+  return '';
+}
+
 // Helper function to check if file is a video
 function isVideoFile(filename: string): boolean {
   const videoExtensions = ['.mp4', '.mov', '.avi', '.webm'];
@@ -124,6 +154,7 @@ function isVideoFile(filename: string): boolean {
 export default function GalleryTemplate({ title, backgroundImage, imageFolder }: GalleryTemplateProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [showYouTubeOverlay, setShowYouTubeOverlay] = useState(false);
   let images = getGalleryImages(imageFolder);
 
   // Sort images by newest first ONLY on specific gallery pages that show individual images
@@ -206,14 +237,25 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
 
   const closeModal = () => {
     setModalOpen(false);
+    setShowYouTubeOverlay(false); // Close YouTube overlay when modal closes
+  };
+
+  const openYouTubeOverlay = () => {
+    setShowYouTubeOverlay(true);
+  };
+
+  const closeYouTubeOverlay = () => {
+    setShowYouTubeOverlay(false);
   };
 
   const nextImage = () => {
     setCurrentImage((prev) => (prev + 1) % images.length);
+    setShowYouTubeOverlay(false); // Close YouTube overlay when changing images
   };
 
   const prevImage = () => {
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    setShowYouTubeOverlay(false); // Close YouTube overlay when changing images
   };
 
   // Keyboard navigation
@@ -305,7 +347,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                             : 'Astronomy and Photography by Maple Valley Observatory'
                         }
                         fill
-                        className="object-cover"
+                        className="object-contain bg-black/20"
                         quality={90}
                       />
                     )}
@@ -432,9 +474,49 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
             </button>
           )}
 
-          {/* Media Container */}
-          <div className="flex flex-col items-center justify-center w-full h-full p-6">
-            <div className="relative max-w-[85vw] max-h-[70vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
+          {/* Media Container - Maximized for fullscreen viewing */}
+          <div className="flex flex-col items-center justify-center w-full h-full p-2">
+            {/* YouTube Contemplation Link - Top Overlay */}
+            {images[currentImage].youtubeLink && (
+              <div 
+                className="mb-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10 max-w-[98vw] mx-auto cursor-pointer hover:bg-black/80 hover:border-white/20 transition-all duration-300 group"
+                onClick={openYouTubeOverlay}
+              >
+                <div className="flex items-center justify-center gap-2 text-white/90 text-xs">
+                  <span className="text-white/70">🎵</span>
+                  <span className="group-hover:text-white transition-colors duration-300">
+                    Click for something to contemplate while you explore this cosmic wonder...
+                  </span>
+                </div>
+              </div>
+            )}
+            
+            {/* YouTube Video Overlay - Upper Right Corner */}
+            {showYouTubeOverlay && images[currentImage].youtubeLink && (
+              <div className="fixed top-4 right-20 z-[100001] bg-black/90 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden shadow-2xl">
+                <div className="flex items-center justify-between bg-black/60 px-3 py-2 border-b border-white/10">
+                  <span className="text-white/90 text-xs">{images[currentImage].youtubeTitle || "Contemplative Sounds"}</span>
+                  <button
+                    onClick={closeYouTubeOverlay}
+                    className="text-white/80 hover:text-white transition-colors duration-200"
+                    aria-label="Close video"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <iframe
+                  src={`https://www.youtube.com/embed/${getYouTubeVideoId(images[currentImage].youtubeLink || '')}?autoplay=1&controls=1&rel=0`}
+                  title="Contemplative Music"
+                  width="320"
+                  height="180"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="border-0"
+                />
+              </div>
+            )}
+            
+            <div className="relative max-w-[98vw] max-h-[92vh] rounded-lg overflow-hidden shadow-2xl bg-black">
               {isVideoFile(images[currentImage].src) ? (
                 <video
                   src={images[currentImage].src}
@@ -443,8 +525,8 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                   style={{ 
                     width: 'auto', 
                     height: 'auto',
-                    maxWidth: '85vw',
-                    maxHeight: '70vh',
+                    maxWidth: '98vw',
+                    maxHeight: '92vh',
                     minWidth: '300px'
                   }}
                   preload="metadata"
@@ -470,17 +552,17 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
                   style={{ 
                     width: 'auto', 
                     height: 'auto',
-                    maxWidth: '85vw',
-                    maxHeight: '70vh',
+                    maxWidth: '98vw',
+                    maxHeight: '92vh',
                     minWidth: '300px'
                   }}
                 />
               )}
             </div>
             
-            {/* Metadata Bar */}
-            <div className="mt-6 bg-black/60 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/10">
-              <div className="flex flex-wrap items-center justify-center gap-2 text-white/90 text-sm">
+            {/* Compact Metadata Overlay */}
+            <div className="mt-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10 max-w-[98vw] mx-auto">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-white/90 text-xs">
                 {(() => {
                   const metadataItems = [];
                   

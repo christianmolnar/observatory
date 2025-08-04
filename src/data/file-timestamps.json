@@ -83,26 +83,12 @@
     "ctimeMs": 1754020516250.8901,
     "filename": "Cocoon Nebula Wide.jpg"
   },
-  "astrophotography/deep-sky/nebulas/Cone Nebula.jpg": {
-    "mtime": "1979-11-30T08:00:00.000Z",
-    "mtimeMs": 312796800000,
-    "ctime": "2025-07-31T06:58:51.140Z",
-    "ctimeMs": 1753945131139.9072,
-    "filename": "Cone Nebula.jpg"
-  },
   "astrophotography/deep-sky/nebulas/Crescent Nebula.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
     "mtimeMs": 312796800000,
     "ctime": "2025-07-31T08:28:53.170Z",
     "ctimeMs": 1753950533169.7717,
     "filename": "Crescent Nebula.jpg"
-  },
-  "astrophotography/deep-sky/nebulas/Heart Nebula-2.jpg": {
-    "mtime": "2025-08-01T00:03:16.617Z",
-    "mtimeMs": 1754006596616.7043,
-    "ctime": "2025-08-01T00:03:16.617Z",
-    "ctimeMs": 1754006596616.7043,
-    "filename": "Heart Nebula-2.jpg"
   },
   "astrophotography/deep-sky/nebulas/Heart Nebula.jpg": {
     "mtime": "2025-07-31T09:03:52.479Z",
@@ -111,12 +97,26 @@
     "ctimeMs": 1754006443565.3762,
     "filename": "Heart Nebula.jpg"
   },
+  "astrophotography/deep-sky/nebulas/Heart and Soul Nebulas-4.jpg": {
+    "mtime": "2025-08-02T21:31:57.883Z",
+    "mtimeMs": 1754170317882.6536,
+    "ctime": "2025-08-02T21:31:57.883Z",
+    "ctimeMs": 1754170317883.3252,
+    "filename": "Heart and Soul Nebulas-4.jpg"
+  },
   "astrophotography/deep-sky/nebulas/IC1396-The Elephant.jpg": {
     "mtime": "2025-07-30T18:46:17.433Z",
     "mtimeMs": 1753901177432.7502,
     "ctime": "2025-08-01T03:55:51.383Z",
     "ctimeMs": 1754020551382.6658,
     "filename": "IC1396-The Elephant.jpg"
+  },
+  "astrophotography/deep-sky/nebulas/IC434.jpg": {
+    "mtime": "1979-11-30T08:00:00.000Z",
+    "mtimeMs": 312796800000,
+    "ctime": "2025-08-01T04:28:21.081Z",
+    "ctimeMs": 1754022501080.7,
+    "filename": "IC434.jpg"
   },
   "astrophotography/deep-sky/nebulas/M1 - The Crab Nebula.jpg": {
     "mtime": "2025-07-31T22:11:42.317Z",
@@ -131,6 +131,13 @@
     "ctime": "2025-07-31T08:13:54.788Z",
     "ctimeMs": 1753949634788.3984,
     "filename": "M16.jpg"
+  },
+  "astrophotography/deep-sky/nebulas/M27-2-1.jpg": {
+    "mtime": "2025-08-03T00:57:50.267Z",
+    "mtimeMs": 1754182670267.4507,
+    "ctime": "2025-08-03T00:57:50.267Z",
+    "ctimeMs": 1754182670267.4507,
+    "filename": "M27-2-1.jpg"
   },
   "astrophotography/deep-sky/nebulas/M27.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
@@ -167,12 +174,19 @@
     "ctimeMs": 1754020945847.6536,
     "filename": "NGC2244.jpg"
   },
-  "astrophotography/deep-sky/nebulas/NGC281W.jpg": {
+  "astrophotography/deep-sky/nebulas/NGC2264.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
     "mtimeMs": 312796800000,
-    "ctime": "2025-08-01T04:01:43.007Z",
-    "ctimeMs": 1754020903006.9722,
-    "filename": "NGC281W.jpg"
+    "ctime": "2025-08-01T04:28:42.642Z",
+    "ctimeMs": 1754022522642.3687,
+    "filename": "NGC2264.jpg"
+  },
+  "astrophotography/deep-sky/nebulas/NGC281.jpg": {
+    "mtime": "1979-11-30T08:00:00.000Z",
+    "mtimeMs": 312796800000,
+    "ctime": "2025-08-01T04:30:35.176Z",
+    "ctimeMs": 1754022635176.4185,
+    "filename": "NGC281.jpg"
   },
   "astrophotography/deep-sky/nebulas/NGC7000.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
@@ -202,12 +216,12 @@
     "ctimeMs": 1754020728759.0308,
     "filename": "North America and The Pelican.jpg"
   },
-  "astrophotography/deep-sky/nebulas/The Horse Head.jpg": {
-    "mtime": "1979-11-30T08:00:00.000Z",
-    "mtimeMs": 312796800000,
-    "ctime": "2025-08-01T04:12:28.819Z",
-    "ctimeMs": 1754021548818.7002,
-    "filename": "The Horse Head.jpg"
+  "astrophotography/deep-sky/nebulas/SH2-132-The-LobsterClaw.jpg": {
+    "mtime": "2025-08-01T05:03:24.806Z",
+    "mtimeMs": 1754024604805.9822,
+    "ctime": "2025-08-01T05:03:24.807Z",
+    "ctimeMs": 1754024604806.5999,
+    "filename": "SH2-132-The-LobsterClaw.jpg"
   },
   "astrophotography/deep-sky/nebulas/The Soul Nebula.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
@@ -251,13 +265,6 @@
     "ctimeMs": 1753981149339.6116,
     "filename": "Sadr Region.jpg"
   },
-  "astrophotography/featured/Heart Nebula-1.jpg": {
-    "mtime": "2025-08-01T00:03:41.418Z",
-    "mtimeMs": 1754006621418.258,
-    "ctime": "2025-08-01T00:03:41.418Z",
-    "ctimeMs": 1754006621418.258,
-    "filename": "Heart Nebula-1.jpg"
-  },
   "astrophotography/featured/Heart Nebula.jpg": {
     "mtime": "2025-07-31T09:03:52.479Z",
     "mtimeMs": 1753952632479.178,
@@ -265,12 +272,26 @@
     "ctimeMs": 1754006455787.171,
     "filename": "Heart Nebula.jpg"
   },
+  "astrophotography/featured/Heart and Soul Nebulas-4.jpg": {
+    "mtime": "2025-08-02T21:31:32.268Z",
+    "mtimeMs": 1754170292268.2388,
+    "ctime": "2025-08-02T21:31:47.132Z",
+    "ctimeMs": 1754170307132.3762,
+    "filename": "Heart and Soul Nebulas-4.jpg"
+  },
   "astrophotography/featured/IC1396-Elephant-Lr.jpg": {
     "mtime": "2025-07-30T18:46:17.433Z",
     "mtimeMs": 1753901177432.7502,
     "ctime": "2025-08-01T00:00:15.309Z",
     "ctimeMs": 1754006415309.134,
     "filename": "IC1396-Elephant-Lr.jpg"
+  },
+  "astrophotography/featured/M27-2-2.jpg": {
+    "mtime": "2025-08-03T00:58:03.607Z",
+    "mtimeMs": 1754182683607.1064,
+    "ctime": "2025-08-03T00:58:03.607Z",
+    "ctimeMs": 1754182683607.1064,
+    "filename": "M27-2-2.jpg"
   },
   "astrophotography/featured/M33.jpg": {
     "mtime": "2025-07-31T23:08:40.258Z",
@@ -292,6 +313,13 @@
     "ctime": "2025-07-30T21:51:17.026Z",
     "ctimeMs": 1753912277026.2004,
     "filename": "SH2-132-The-LobsterClaw.jpg"
+  },
+  "astrophotography/featured/Soul Nebula.jpg": {
+    "mtime": "2025-08-01T00:03:41.418Z",
+    "mtimeMs": 1754006621418.258,
+    "ctime": "2025-08-02T19:47:23.872Z",
+    "ctimeMs": 1754164043872.2458,
+    "filename": "Soul Nebula.jpg"
   },
   "astrophotography/featured/Wizard-Lr-PI.jpg": {
     "mtime": "2025-07-30T18:02:51.520Z",
@@ -467,6 +495,13 @@
     "ctime": "2025-07-30T00:48:51.127Z",
     "ctimeMs": 1753836531127.1074,
     "filename": "Logo.jpg"
+  },
+  "og-preview.jpg": {
+    "mtime": "2025-08-01T17:56:12.570Z",
+    "mtimeMs": 1754070972569.6301,
+    "ctime": "2025-08-01T17:56:12.570Z",
+    "ctimeMs": 1754070972569.721,
+    "filename": "og-preview.jpg"
   },
   "terrestrial/grand-tetons/Grand Tetons1.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",

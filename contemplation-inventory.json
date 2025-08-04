@@ -1,0 +1,790 @@
+{
+  "lastUpdated": "2025-08-04T02:01:23.701Z",
+  "totalImages": 135,
+  "imagesWithVideos": 20,
+  "imagesWithoutVideos": 115,
+  "contemplationSources": {
+    "classical": 1,
+    "progressive": 1,
+    "gratitude": 3,
+    "mindfulness": 0,
+    "cosmic": 1,
+    "jazz": 7,
+    "poetry": 3,
+    "experimental": 1
+  },
+  "assignments": {
+    "Heart Nebula.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=Y1uZmnh6LwM",
+      "youtubeTitle": "Lito Vitale Cuarteto - Recuerdos en mi bemol",
+      "objectName": "Heart Nebula",
+      "catalogDesignation": "IC1805"
+    },
+    "Heart and Soul Nebulas-4.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=7xwq2QsBtoA",
+      "youtubeTitle": "A Good Day... Brother David Steindl-Rast",
+      "objectName": "Heart and Soul Nebulas",
+      "catalogDesignation": "IC1805 and IC1848"
+    },
+    "IC1396-Elephant-Lr.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=NHKhvIQXxpY",
+      "youtubeTitle": "Lito Vitale Quinteto │ Recuerdos En Mi Bemol",
+      "objectName": "Elephant's Trunk Nebula",
+      "catalogDesignation": "IC1396"
+    },
+    "M16.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=XdOt_RqDC68",
+      "youtubeTitle": "David Whyte - Blessings",
+      "objectName": "Eagle Nebula",
+      "catalogDesignation": "M16"
+    },
+    "M27-2-1.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=7xwq2QsBtoA",
+      "youtubeTitle": "A Good Day... Brother David Steindl-Rast",
+      "objectName": "The Dumbbell Nebula",
+      "catalogDesignation": "M27"
+    },
+    "M31-Final.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=evAaX3kdFEw",
+      "youtubeTitle": "Carl Sagan Cosmos Contemplation with Handpan",
+      "objectName": "Andromeda Galaxy",
+      "catalogDesignation": "M31"
+    },
+    "M33 - The Triangulum Galaxy.jpg": {
+      "youtubeLink": "https://www.youtube.com/shorts/AZGISldnsVo",
+      "youtubeTitle": "Just beyond yourself, by David Whyte",
+      "objectName": "Triangulum Galaxy",
+      "catalogDesignation": "M33"
+    },
+    "M33.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=qm-40iddr2I",
+      "youtubeTitle": "Schindler's List - John Williams Violin Performance",
+      "objectName": "Triangulum Galaxy",
+      "catalogDesignation": "M33"
+    },
+    "M42 The Orion Nebula.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=UtBsl3j0YRQ",
+      "youtubeTitle": "Brother David on Gratitude and Happiness",
+      "objectName": "Orion Nebula",
+      "catalogDesignation": "M42"
+    },
+    "M45 - Pleiades.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=nrKKxVpSnbI",
+      "youtubeTitle": "Prayer and Gratitude - Spiritual Dialogue",
+      "objectName": "Pleiades",
+      "catalogDesignation": "M45"
+    },
+    "NGC2264.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=e0FhKeexO8Y",
+      "youtubeTitle": "30-Minute Gratitude Contemplation",
+      "objectName": "Cone Nebula",
+      "catalogDesignation": "NGC2264"
+    },
+    "NGC7000-Pelican-1.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=9-BMlq_zyko",
+      "youtubeTitle": "Yes - Wondrous Stories (Official Music Video)",
+      "objectName": "North America Nebula",
+      "catalogDesignation": "NGC7000"
+    },
+    "NGC7635 - The Bubble Nebula - Tight.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=7S_P59vnw3w",
+      "youtubeTitle": "Lito Vitale Quinteto, La Orquestita │ Los instantes recordados. Una intensa calma",
+      "objectName": "Bubble Nebula",
+      "catalogDesignation": "NGC7635"
+    },
+    "NGC869 and NGC884 - The Double Cluster.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=cgGl1LzShIg",
+      "youtubeTitle": "Lito Vitale - La vida entera juntos",
+      "objectName": "Double Cluster in Persei",
+      "catalogDesignation": "NGC869"
+    },
+    "Orion-wide-death-valley.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=ogt64MHt-LA",
+      "youtubeTitle": "Lito Vitale Cuarteto │ Viento Sur │ Álbum Completo",
+      "objectName": "Orion Nebula",
+      "catalogDesignation": "M42"
+    },
+    "Sadr Region.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=fmRBQAWFu08",
+      "youtubeTitle": "Lito Vitale - La Senda Infinita",
+      "objectName": "Sadr Region in Cygnus",
+      "catalogDesignation": ""
+    },
+    "Soul Nebula.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=R4l1mRpamSg",
+      "youtubeTitle": "Ese Amigo Del Alma",
+      "objectName": "Soul Nebula",
+      "catalogDesignation": "IC1848"
+    },
+    "The Leo Trio.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=75YEC2sj_4g",
+      "youtubeTitle": "Lito Vitale - Los Instantes recordados",
+      "objectName": "The Leo Trio",
+      "catalogDesignation": "M65, M66, NGC3628"
+    },
+    "Thor's Helmet.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=5bRCtz-pzew",
+      "youtubeTitle": "I Was Always Dreaming",
+      "objectName": "Thor's Helmet",
+      "catalogDesignation": "NGC2359"
+    },
+    "Twilight Moon - Copernicus.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=s8q6WJ52oDc",
+      "youtubeTitle": "David Whyte - The Journey",
+      "objectName": "Twilight Moon Copernicus",
+      "catalogDesignation": ""
+    }
+  },
+  "availableImages": [
+    {
+      "filename": "20 Day Old Moon.jpg",
+      "objectName": "Day Old Moon",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "2017 Total Eclipse1.jpg",
+      "objectName": "Total Eclipse1",
+      "catalogDesignation": "",
+      "location": "Portland, OR"
+    },
+    {
+      "filename": "2017 Total Eclipse10.jpg",
+      "objectName": "Total Eclipse10",
+      "catalogDesignation": "",
+      "location": "Portland, OR"
+    },
+    {
+      "filename": "2017 Total Eclipse2.mp4",
+      "objectName": "Total Eclipse2",
+      "catalogDesignation": "",
+      "location": "Portland, OR"
+    },
+    {
+      "filename": "2017 Total Eclipse8.jpg",
+      "objectName": "Total Eclipse8",
+      "catalogDesignation": "",
+      "location": "Portland, OR"
+    },
+    {
+      "filename": "2017 Total Eclipse87.jpg",
+      "objectName": "Total Eclipse87",
+      "catalogDesignation": "",
+      "location": "Portland, OR"
+    },
+    {
+      "filename": "2017 Total Eclipse88.jpg",
+      "objectName": "Total Eclipse88",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "2017 Total Eclipse9.jpg",
+      "objectName": "Total Eclipse9",
+      "catalogDesignation": "",
+      "location": "Portland, OR"
+    },
+    {
+      "filename": "Cocoon Nebula Tight.jpg",
+      "objectName": "Cocoon Nebula",
+      "catalogDesignation": "IC5146",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Cocoon Nebula Wide.jpg",
+      "objectName": "Cocoon Nebula",
+      "catalogDesignation": "IC5146",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Crescent Moon.jpg",
+      "objectName": "Crescent Nebula",
+      "catalogDesignation": "NGC6888",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "Crescent Nebula.jpg",
+      "objectName": "Crescent Nebula",
+      "catalogDesignation": "NGC6888",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "Full Moon.jpg",
+      "objectName": "Full Moon",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Grand Tetons1.jpg",
+      "location": "Grand Teton National Park"
+    },
+    {
+      "filename": "Grand Tetons2.jpg",
+      "location": "Grand Teton National Park"
+    },
+    {
+      "filename": "Grand Tetons3.jpg",
+      "location": "Grand Teton National Park"
+    },
+    {
+      "filename": "Grand Tetons4.jpg",
+      "location": "Grand Teton National Park"
+    },
+    {
+      "filename": "Hubble and Me.jpg",
+      "objectName": "Hubble And Me",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "IC1396-The Elephant.jpg",
+      "objectName": "Elephant's Trunk Nebula",
+      "catalogDesignation": "IC1396",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "IC434.jpg",
+      "objectName": "Horsehead Nebula",
+      "catalogDesignation": "IC434",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "M1 - The Crab Nebula.jpg",
+      "objectName": "Crab Nebula",
+      "catalogDesignation": "M1",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "M27-2-2.jpg",
+      "objectName": "Dumbbell Nebula",
+      "catalogDesignation": "M27",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "M27.jpg",
+      "objectName": "Dumbbell Nebula",
+      "catalogDesignation": "M27",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "M31-25x300sec-Tight-1600x1131.jpg",
+      "objectName": "Andromeda Galaxy",
+      "catalogDesignation": "M31",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "M97.jpg",
+      "objectName": "Owl Nebula",
+      "catalogDesignation": "M97",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "Mammoth Hot Springs1.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs10.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs11.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs2.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs3.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs4.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs5.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs6.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs7.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs8.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Mammoth Hot Springs9.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin1.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin10.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin11.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin12.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin15.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin16.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin17.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin18.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin19.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin20.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin21.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin22.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin23.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin24.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin25.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin4.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin5.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin6.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin7.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin8.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Midway Basin9.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "My Gear0.jpg"
+    },
+    {
+      "filename": "My Gear1.jpg"
+    },
+    {
+      "filename": "My Gear5.jpg"
+    },
+    {
+      "filename": "My Gear6.jpg"
+    },
+    {
+      "filename": "My Gear7.jpg"
+    },
+    {
+      "filename": "My Gear8.jpg"
+    },
+    {
+      "filename": "NGC1499.jpg",
+      "objectName": "California Nebula",
+      "catalogDesignation": "NGC1499",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "NGC2244.jpg",
+      "objectName": "Rosette Nebula",
+      "catalogDesignation": "NGC2244",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "NGC281.jpg",
+      "objectName": "Pacman Nebula",
+      "catalogDesignation": "NGC281",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "NGC7000.jpg",
+      "objectName": "North America Nebula",
+      "catalogDesignation": "NGC7000",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "NGC7635 - The Bubble Nebula-Wide.jpg",
+      "objectName": "Bubble Nebula",
+      "catalogDesignation": "NGC7635",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "North America and The Pelican.jpg",
+      "objectName": "North America Nebula",
+      "catalogDesignation": "NGC7000",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "Old Faithful10.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful3.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful4.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful5.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful6.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful7.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful8.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Old Faithful9.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "SH2-132-The-LobsterClaw.jpg",
+      "objectName": "Lobster Claw Nebula",
+      "catalogDesignation": "Sh2-132",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Sun .jpg",
+      "objectName": "Sun",
+      "catalogDesignation": "",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "Sun.jpg",
+      "objectName": "Sun",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "The Soul Nebula.jpg",
+      "objectName": "Soul Nebula",
+      "catalogDesignation": "IC1848",
+      "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "Twilight Moon - Tycho Region.jpg",
+      "objectName": "Twilight Moon Tycho Region",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Twilight Moon.jpg",
+      "objectName": "Twilight Moon",
+      "catalogDesignation": "",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Upper Basin1.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin10.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin11.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin12.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin2.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin3.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin4.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin5.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin6.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin7.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin8.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Upper Basin9.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Wizard-Lr-PI.jpg",
+      "objectName": "Wizard Nebula",
+      "catalogDesignation": "Sh2-140",
+      "location": "Maple Valley, WA"
+    },
+    {
+      "filename": "Yellowstone Canyon13.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon14.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon16.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon2.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon4.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon6.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon7.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Canyon9.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna1.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna12.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna13.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna15.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna16.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna2.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna4.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna5.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna6.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna7.jpg",
+      "location": "Yellowstone National Park"
+    },
+    {
+      "filename": "Yellowstone Fauna8.jpg",
+      "location": "Yellowstone National Park"
+    }
+  ],
+  "usedVideos": [
+    {
+      "filename": "Heart Nebula.jpg",
+      "link": "https://www.youtube.com/watch?v=Y1uZmnh6LwM",
+      "title": "Lito Vitale Cuarteto - Recuerdos en mi bemol"
+    },
+    {
+      "filename": "Heart and Soul Nebulas-4.jpg",
+      "link": "https://www.youtube.com/watch?v=7xwq2QsBtoA",
+      "title": "A Good Day... Brother David Steindl-Rast"
+    },
+    {
+      "filename": "IC1396-Elephant-Lr.jpg",
+      "link": "https://www.youtube.com/watch?v=NHKhvIQXxpY",
+      "title": "Lito Vitale Quinteto │ Recuerdos En Mi Bemol"
+    },
+    {
+      "filename": "M16.jpg",
+      "link": "https://www.youtube.com/watch?v=XdOt_RqDC68",
+      "title": "David Whyte - Blessings"
+    },
+    {
+      "filename": "M27-2-1.jpg",
+      "link": "https://www.youtube.com/watch?v=7xwq2QsBtoA",
+      "title": "A Good Day... Brother David Steindl-Rast"
+    },
+    {
+      "filename": "M31-Final.jpg",
+      "link": "https://www.youtube.com/watch?v=evAaX3kdFEw",
+      "title": "Carl Sagan Cosmos Contemplation with Handpan"
+    },
+    {
+      "filename": "M33 - The Triangulum Galaxy.jpg",
+      "link": "https://www.youtube.com/shorts/AZGISldnsVo",
+      "title": "Just beyond yourself, by David Whyte"
+    },
+    {
+      "filename": "M33.jpg",
+      "link": "https://www.youtube.com/watch?v=qm-40iddr2I",
+      "title": "Schindler's List - John Williams Violin Performance"
+    },
+    {
+      "filename": "M42 The Orion Nebula.jpg",
+      "link": "https://www.youtube.com/watch?v=UtBsl3j0YRQ",
+      "title": "Brother David on Gratitude and Happiness"
+    },
+    {
+      "filename": "M45 - Pleiades.jpg",
+      "link": "https://www.youtube.com/watch?v=nrKKxVpSnbI",
+      "title": "Prayer and Gratitude - Spiritual Dialogue"
+    },
+    {
+      "filename": "NGC2264.jpg",
+      "link": "https://www.youtube.com/watch?v=e0FhKeexO8Y",
+      "title": "30-Minute Gratitude Contemplation"
+    },
+    {
+      "filename": "NGC7000-Pelican-1.jpg",
+      "link": "https://www.youtube.com/watch?v=9-BMlq_zyko",
+      "title": "Yes - Wondrous Stories (Official Music Video)"
+    },
+    {
+      "filename": "NGC7635 - The Bubble Nebula - Tight.jpg",
+      "link": "https://www.youtube.com/watch?v=7S_P59vnw3w",
+      "title": "Lito Vitale Quinteto, La Orquestita │ Los instantes recordados. Una intensa calma"
+    },
+    {
+      "filename": "NGC869 and NGC884 - The Double Cluster.jpg",
+      "link": "https://www.youtube.com/watch?v=cgGl1LzShIg",
+      "title": "Lito Vitale - La vida entera juntos"
+    },
+    {
+      "filename": "Orion-wide-death-valley.jpg",
+      "link": "https://www.youtube.com/watch?v=ogt64MHt-LA",
+      "title": "Lito Vitale Cuarteto │ Viento Sur │ Álbum Completo"
+    },
+    {
+      "filename": "Sadr Region.jpg",
+      "link": "https://www.youtube.com/watch?v=fmRBQAWFu08",
+      "title": "Lito Vitale - La Senda Infinita"
+    },
+    {
+      "filename": "Soul Nebula.jpg",
+      "link": "https://www.youtube.com/watch?v=R4l1mRpamSg",
+      "title": "Ese Amigo Del Alma"
+    },
+    {
+      "filename": "The Leo Trio.jpg",
+      "link": "https://www.youtube.com/watch?v=75YEC2sj_4g",
+      "title": "Lito Vitale - Los Instantes recordados"
+    },
+    {
+      "filename": "Thor's Helmet.jpg",
+      "link": "https://www.youtube.com/watch?v=5bRCtz-pzew",
+      "title": "I Was Always Dreaming"
+    },
+    {
+      "filename": "Twilight Moon - Copernicus.jpg",
+      "link": "https://www.youtube.com/watch?v=s8q6WJ52oDc",
+      "title": "David Whyte - The Journey"
+    }
+  ],
+  "availableVideos": [
+    {
+      "name": "Walking Tenderly",
+      "link": "https://www.youtube.com/watch?v=dxxnu9I7Tiw",
+      "title": "Walking Tenderly - Mother Earth Contemplation",
+      "assignedTo": null
+    },
+    {
+      "name": "Sixteen Steps of Mindful Breathing",
+      "link": "https://www.youtube.com/watch?v=inPkOzo_8XQ",
+      "title": "Mindful Breathing Practice - Thich Nhat Hanh",
+      "assignedTo": null
+    },
+    {
+      "name": "5 Minute Guided Meditation for Gratitude",
+      "link": "https://www.youtube.com/watch?v=OCorElLKFQE",
+      "title": "5 Minutes of Gratitude - Mindful Movement",
+      "assignedTo": null
+    },
+    {
+      "name": "15 Minute Morning Gratitude Meditation",
+      "link": "https://www.youtube.com/watch?v=Tl-AsufPmAQ",
+      "title": "Morning Gratitude - Start Your Day Mindfully",
+      "assignedTo": null
+    }
+  ]
+}

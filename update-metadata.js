@@ -6,6 +6,8 @@ const path = require('path');
 // Paths
 const METADATA_FILE = '/Users/christian/Repos/MapleValleyObservatory/src/data/metadata.json';
 const IMAGES_BASE = '/Users/christian/Repos/MapleValleyObservatory/public/images';
+const CONTEMPLATION_LINKS_FILE = '/Users/christian/Repos/MapleValleyObservatory/docs/youtube-contemplation-links.md';
+const INVENTORY_FILE = '/Users/christian/Repos/MapleValleyObservatory/contemplation-inventory.json';
 
 // Image folders to scan (matches the global config structure)
 const SCAN_FOLDERS = [
@@ -60,6 +62,477 @@ function loadExistingMetadata() {
     console.log('Could not load existing metadata, starting fresh');
     return {};
   }
+}
+
+// ===== CONTEMPLATION INVENTORY MANAGEMENT =====
+
+function loadInventory() {
+  try {
+    const content = fs.readFileSync(INVENTORY_FILE, 'utf8');
+    return JSON.parse(content);
+  } catch (error) {
+    console.log('Creating new inventory file');
+    return {
+      lastUpdated: new Date().toISOString(),
+      totalImages: 0,
+      imagesWithVideos: 0,
+      imagesWithoutVideos: 0,
+      contemplationSources: {
+        classical: 0,
+        progressive: 0,
+        gratitude: 0,
+        mindfulness: 0,
+        cosmic: 0,
+        jazz: 0,
+        poetry: 0,
+        experimental: 0
+      },
+      assignments: {},
+      availableImages: [],
+      usedVideos: [],
+      availableVideos: []
+    };
+  }
+}
+
+function parseContemplationLinks() {
+  try {
+    const content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
+    const availableVideos = [];
+    const assignedVideos = [];
+    
+    // Extract video links and their assignments - improved regex pattern
+    const lines = content.split('\n');
+    let currentVideo = null;
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmedLine = line.trim();
+      
+      // Look for video name/title but exclude assignment lines
+      if (trimmedLine.match(/^- \*\*([^*]+)\*\*\s*$/) && !trimmedLine.includes('🎯 Assigned to:')) {
+        if (currentVideo && currentVideo.link) {
+          // Save previous video
+          if (currentVideo.assignedTo) {
+            assignedVideos.push(currentVideo);
+          } else {
+            availableVideos.push(currentVideo);
+          }
+        }
+        
+        currentVideo = {
+          name: trimmedLine.match(/^- \*\*([^*]+)\*\*\s*$/)[1].trim(),
+          link: '',
+          title: '',
+          assignedTo: null
+        };
+      }
+      
+      // Look for link (handles any indentation)
+      if (trimmedLine.match(/^- Link: (https:\/\/[^\s]+)\s*$/) && currentVideo) {
+        currentVideo.link = trimmedLine.match(/^- Link: (https:\/\/[^\s]+)\s*$/)[1].trim();
+      }
+      
+      // Look for title (handles any indentation)
+      if (trimmedLine.match(/^- Title: "([^"]+)"\s*$/) && currentVideo) {
+        currentVideo.title = trimmedLine.match(/^- Title: "([^"]+)"\s*$/)[1].trim();
+      }
+      
+      // Look for assignment (handles indented format with 2 spaces)
+      if (trimmedLine.match(/^- \*\*🎯 Assigned to: ([^*]+)\*\*\s*$/) && currentVideo) {
+        currentVideo.assignedTo = trimmedLine.match(/^- \*\*🎯 Assigned to: ([^*]+)\*\*\s*$/)[1].trim();
+      }
+    }
+    
+    // Don't forget the last video
+    if (currentVideo && currentVideo.link) {
+      if (currentVideo.assignedTo) {
+        assignedVideos.push(currentVideo);
+      } else {
+        availableVideos.push(currentVideo);
+      }
+    }
+    
+    console.log(`📝 Parsed ${assignedVideos.length} assigned videos and ${availableVideos.length} available videos`);
+    
+    return { availableVideos, assignedVideos };
+  } catch (error) {
+    console.log(`Could not parse contemplation links file: ${error.message}`);
+    return { availableVideos: [], assignedVideos: [] };
+  }
+}
+
+function categorizeVideoByType(videoName, videoTitle) {
+  const name = videoName.toLowerCase();
+  const title = videoTitle.toLowerCase();
+  
+  if (name.includes('schindler') || name.includes('john williams')) return 'classical';
+  if (name.includes('yes') || name.includes('wondrous')) return 'progressive';
+  if (name.includes('grateful') || name.includes('gratitude')) return 'gratitude';
+  if (name.includes('mindful') || name.includes('breathing') || name.includes('thich')) return 'mindfulness';
+  if (name.includes('sagan') || name.includes('cosmos')) return 'cosmic';
+  if (name.includes('lito') || name.includes('vitale')) return 'jazz';
+  if (name.includes('whyte') || name.includes('poetry')) return 'poetry';
+  if (name.includes('dreaming') || name.includes('experimental')) return 'experimental';
+  
+  return 'other';
+}
+
+function updateInventory(metadata) {
+  console.log('\n🔄 Updating contemplation inventory...');
+  
+  const inventory = loadInventory();
+  const { availableVideos, assignedVideos } = parseContemplationLinks();
+  
+  // Reset inventory data
+  inventory.lastUpdated = new Date().toISOString();
+  inventory.totalImages = Object.keys(metadata).length;
+  inventory.imagesWithVideos = 0;
+  inventory.imagesWithoutVideos = 0;
+  inventory.assignments = {};
+  inventory.availableImages = [];
+  inventory.usedVideos = [];
+  inventory.availableVideos = availableVideos;
+  
+  // Reset contemplation source counters
+  Object.keys(inventory.contemplationSources).forEach(key => {
+    inventory.contemplationSources[key] = 0;
+  });
+  
+  // Analyze current assignments
+  Object.entries(metadata).forEach(([filename, data]) => {
+    if (data.youtubeLink && data.youtubeLink.startsWith('https://')) {
+      inventory.imagesWithVideos++;
+      inventory.assignments[filename] = {
+        youtubeLink: data.youtubeLink,
+        youtubeTitle: data.youtubeTitle,
+        objectName: data.objectName,
+        catalogDesignation: data.catalogDesignation
+      };
+      
+      // Track used videos
+      inventory.usedVideos.push({
+        filename: filename,
+        link: data.youtubeLink,
+        title: data.youtubeTitle
+      });
+      
+      // Categorize and count
+      const category = categorizeVideoByType(data.youtubeTitle, data.youtubeTitle);
+      if (inventory.contemplationSources[category] !== undefined) {
+        inventory.contemplationSources[category]++;
+      }
+    } else {
+      inventory.imagesWithoutVideos++;
+      inventory.availableImages.push({
+        filename: filename,
+        objectName: data.objectName,
+        catalogDesignation: data.catalogDesignation,
+        location: data.location
+      });
+    }
+  });
+  
+  // Save updated inventory
+  fs.writeFileSync(INVENTORY_FILE, JSON.stringify(inventory, null, 2));
+  
+  console.log(`✅ Inventory updated:`);
+  console.log(`   📊 Total images: ${inventory.totalImages}`);
+  console.log(`   🎥 Images with videos: ${inventory.imagesWithVideos}`);
+  console.log(`   📷 Images without videos: ${inventory.imagesWithoutVideos}`);
+  console.log(`   🎵 Available videos: ${inventory.availableVideos.length}`);
+  
+  return inventory;
+}
+
+function addVideoToImage(filename, videoLink, videoTitle) {
+  const metadata = loadExistingMetadata();
+  
+  // Find the actual filename with case-insensitive matching
+  const actualFilename = Object.keys(metadata).find(key => 
+    key.toLowerCase() === filename.toLowerCase()
+  );
+  
+  if (!actualFilename) {
+    console.log(`❌ Image ${filename} not found in metadata`);
+    return false;
+  }
+  
+  // Use the actual filename for the rest of the function
+  filename = actualFilename;
+  
+  // Check for exclusions - permanently exclude Terrestrial and Gear images
+  const excludedFolders = ['terrestrial', 'equipment'];
+  const imageInfo = findImages().find(img => img.filename === filename);
+  
+  if (imageInfo && excludedFolders.some(folder => imageInfo.folder.includes(folder))) {
+    console.log(`❌ Cannot assign videos to ${filename} - Terrestrial and Equipment images are excluded from video assignments`);
+    return false;
+  }
+  
+  if (metadata[filename].youtubeLink && metadata[filename].youtubeLink.startsWith('https://')) {
+    console.log(`⚠️  Image ${filename} already has a video assigned`);
+    return false;
+  }
+  
+  // Update metadata
+  metadata[filename].youtubeLink = videoLink;
+  metadata[filename].youtubeTitle = videoTitle;
+  
+  // Save metadata
+  const sortedMetadata = {};
+  Object.keys(metadata).sort().forEach(key => {
+    sortedMetadata[key] = metadata[key];
+  });
+  
+  fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
+  
+  // Update inventory
+  updateInventory(metadata);
+  
+  // Update contemplation links file with assignment annotation
+  updateContemplationLinksFile(videoLink, filename, metadata[filename].objectName);
+  
+  console.log(`✅ Added video "${videoTitle}" to ${filename}`);
+  return true;
+}
+
+function updateContemplationLinksFile(videoLink, filename, objectName) {
+  try {
+    let content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
+    
+    // Find the video entry and add assignment annotation
+    const linkPattern = new RegExp(`(- Link: ${videoLink.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n\\s*- Title: "[^"]+")`, 'g');
+    
+    content = content.replace(linkPattern, (match) => {
+      // Check if assignment already exists
+      if (match.includes('🎯 Assigned to:')) {
+        return match;
+      }
+      
+      return `${match}\n  - **🎯 Assigned to: ${filename} (${objectName})**`;
+    });
+    
+    fs.writeFileSync(CONTEMPLATION_LINKS_FILE, content);
+    console.log(`✅ Updated contemplation links file with assignment`);
+  } catch (error) {
+    console.log(`⚠️  Could not update contemplation links file: ${error.message}`);
+  }
+}
+
+function removeVideoFromImage(filename) {
+  const metadata = loadExistingMetadata();
+  
+  // Find the actual filename with case-insensitive matching
+  const actualFilename = Object.keys(metadata).find(key => 
+    key.toLowerCase() === filename.toLowerCase()
+  );
+  
+  if (!actualFilename) {
+    console.log(`❌ Image ${filename} not found in metadata`);
+    return false;
+  }
+  
+  // Use the actual filename for the rest of the function
+  filename = actualFilename;
+  
+  const videoLink = metadata[filename].youtubeLink;
+  
+  // Remove video assignment
+  metadata[filename].youtubeLink = '';
+  metadata[filename].youtubeTitle = '';
+  
+  // Save metadata
+  const sortedMetadata = {};
+  Object.keys(metadata).sort().forEach(key => {
+    sortedMetadata[key] = metadata[key];
+  });
+  
+  fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
+  
+  // Update inventory
+  updateInventory(metadata);
+  
+  // Remove assignment annotation from contemplation links file
+  if (videoLink) {
+    removeAssignmentFromContemplationLinks(videoLink);
+  }
+  
+  console.log(`✅ Removed video from ${filename}`);
+  return true;
+}
+
+function moveVideoFromImageToImage(fromFilename, toFilename) {
+  const metadata = loadExistingMetadata();
+  
+  // Find the actual filenames with case-insensitive matching
+  const actualFromFilename = Object.keys(metadata).find(key => 
+    key.toLowerCase() === fromFilename.toLowerCase()
+  );
+  
+  const actualToFilename = Object.keys(metadata).find(key => 
+    key.toLowerCase() === toFilename.toLowerCase()
+  );
+  
+  if (!actualFromFilename) {
+    console.log(`❌ Source image ${fromFilename} not found in metadata`);
+    return false;
+  }
+  
+  if (!actualToFilename) {
+    console.log(`❌ Target image ${toFilename} not found in metadata`);
+    return false;
+  }
+  
+  // Use the actual filenames for the rest of the function
+  fromFilename = actualFromFilename;
+  toFilename = actualToFilename;
+  
+  // Check if source image has a video
+  if (!metadata[fromFilename].youtubeLink || !metadata[fromFilename].youtubeLink.startsWith('https://')) {
+    console.log(`❌ Source image ${fromFilename} doesn't have a video to move`);
+    return false;
+  }
+  
+  // Check if target image already has a video
+  if (metadata[toFilename].youtubeLink && metadata[toFilename].youtubeLink.startsWith('https://')) {
+    console.log(`⚠️  Target image ${toFilename} already has a video assigned`);
+    console.log(`    Current: "${metadata[toFilename].youtubeTitle}"`);
+    console.log(`    Would replace with: "${metadata[fromFilename].youtubeTitle}"`);
+    return false;
+  }
+  
+  // Check for exclusions - permanently exclude Terrestrial and Gear images
+  const excludedFolders = ['terrestrial', 'equipment'];
+  const imageInfo = findImages().find(img => img.filename === toFilename);
+  
+  if (imageInfo && excludedFolders.some(folder => imageInfo.folder.includes(folder))) {
+    console.log(`❌ Cannot move video to ${toFilename} - Terrestrial and Equipment images are excluded from video assignments`);
+    return false;
+  }
+  
+  // Store video info before removing
+  const videoLink = metadata[fromFilename].youtubeLink;
+  const videoTitle = metadata[fromFilename].youtubeTitle;
+  
+  // Remove video from source image
+  metadata[fromFilename].youtubeLink = '';
+  metadata[fromFilename].youtubeTitle = '';
+  
+  // Add video to target image
+  metadata[toFilename].youtubeLink = videoLink;
+  metadata[toFilename].youtubeTitle = videoTitle;
+  
+  // Save metadata
+  const sortedMetadata = {};
+  Object.keys(metadata).sort().forEach(key => {
+    sortedMetadata[key] = metadata[key];
+  });
+  
+  fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
+  
+  // Update inventory
+  updateInventory(metadata);
+  
+  // Update contemplation links file with new assignment
+  updateContemplationLinksFile(videoLink, toFilename, metadata[toFilename].objectName);
+  
+  console.log(`✅ Moved video "${videoTitle}" from ${fromFilename} to ${toFilename}`);
+  return true;
+}
+
+function removeAssignmentFromContemplationLinks(videoLink) {
+  try {
+    let content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
+    
+    // Remove assignment annotation
+    const assignmentPattern = new RegExp(`\\s*- \\*\\*🎯 Assigned to: [^*]+\\*\\*`, 'g');
+    const linkPattern = new RegExp(`(- Link: ${videoLink.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?)\\n\\s*- \\*\\*🎯 Assigned to: [^*]+\\*\\*`, 'g');
+    
+    content = content.replace(linkPattern, '$1');
+    
+    fs.writeFileSync(CONTEMPLATION_LINKS_FILE, content);
+    console.log(`✅ Removed assignment annotation from contemplation links file`);
+  } catch (error) {
+    console.log(`⚠️  Could not update contemplation links file: ${error.message}`);
+  }
+}
+
+// Command line interface for video management
+function handleCliCommand() {
+  const args = process.argv.slice(2);
+  
+  if (args.length === 0) {
+    return false; // Continue with normal metadata update
+  }
+  
+  const command = args[0];
+  
+  if (command === 'add-video' && args.length === 4) {
+    const [, filename, videoLink, videoTitle] = args;
+    addVideoToImage(filename, videoLink, videoTitle);
+    return true;
+  }
+  
+  if (command === 'remove-video' && args.length === 2) {
+    const [, filename] = args;
+    removeVideoFromImage(filename);
+    return true;
+  }
+  
+  if (command === 'move-video' && args.length === 3) {
+    const [, fromFilename, toFilename] = args;
+    moveVideoFromImageToImage(fromFilename, toFilename);
+    return true;
+  }
+  
+  if (command === 'inventory') {
+    const metadata = loadExistingMetadata();
+    const inventory = updateInventory(metadata);
+    
+    console.log('\n📋 CONTEMPLATION INVENTORY REPORT');
+    console.log('================================');
+    console.log(`📊 Total Images: ${inventory.totalImages}`);
+    console.log(`🎥 Images with Videos: ${inventory.imagesWithVideos}`);
+    console.log(`📷 Images without Videos: ${inventory.imagesWithoutVideos}`);
+    console.log(`🎵 Available Videos: ${inventory.availableVideos.length}`);
+    
+    console.log('\n🎨 Content Categories:');
+    Object.entries(inventory.contemplationSources).forEach(([category, count]) => {
+      console.log(`   ${category}: ${count}`);
+    });
+    
+    console.log('\n📷 Available Images (first 10):');
+    inventory.availableImages.slice(0, 10).forEach(img => {
+      console.log(`   ${img.filename} - ${img.objectName} (${img.catalogDesignation})`);
+    });
+    
+    if (inventory.availableImages.length > 10) {
+      console.log(`   ... and ${inventory.availableImages.length - 10} more`);
+    }
+    
+    console.log('\n🎵 Available Videos (first 5):');
+    inventory.availableVideos.slice(0, 5).forEach(video => {
+      console.log(`   ${video.name} - ${video.title}`);
+    });
+    
+    if (inventory.availableVideos.length > 5) {
+      console.log(`   ... and ${inventory.availableVideos.length - 5} more`);
+    }
+    
+    return true;
+  }
+  
+  console.log(`
+Usage:
+  node update-metadata.js                              # Update metadata and inventory
+  node update-metadata.js add-video <filename> <link> <title>  # Add video to image
+  node update-metadata.js remove-video <filename>     # Remove video from image
+  node update-metadata.js move-video <from> <to>      # Move video from one image to another
+  node update-metadata.js inventory                   # Show inventory report
+`);
+  
+  return true;
 }
 
 // Comprehensive Astronomical Object Catalog Database
@@ -559,14 +1032,18 @@ function createMetadataEntry(image) {
       return {
         "location": generateLocationFromFolder(image.folder), // e.g., "Yellowstone National Park"
         "name": generateCleanName(image.filename),      // e.g., "Mammoth Springs"
-        "protected": false    // Set to true to prevent automatic updates
+        "protected": false,   // Set to true to prevent automatic updates
+        "youtubeLink": "",    // Terrestrial images excluded from video assignments
+        "youtubeTitle": ""
       };
       
     case 'equipment':
       return {
         "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
         "equipmentInfo": "",  // e.g., "Smart Telescope by ZWO"
-        "protected": false    // Set to true to prevent automatic updates
+        "protected": false,   // Set to true to prevent automatic updates
+        "youtubeLink": "",    // Equipment images excluded from video assignments
+        "youtubeTitle": ""
       };
       
     default: // astrophotography
@@ -577,7 +1054,9 @@ function createMetadataEntry(image) {
         "location": "Maple Valley, WA",
         "equipment": "",
         "exposure": "",
-        "protected": false    // Set to true to prevent automatic updates
+        "protected": false,   // Set to true to prevent automatic updates
+        "youtubeLink": "",
+        "youtubeTitle": ""
       };
   }
 }
@@ -717,7 +1196,12 @@ function updateMetadata() {
   console.log(`   New entries added: ${newEntries}`);
   console.log(`   Existing entries updated: ${updatedEntries}`);
   console.log(`   Obsolete entries removed: ${deletedEntries}`);
+  
+  // Update contemplation inventory
+  updateInventory(existingMetadata);
 }
 
 // Run the script
-updateMetadata();
+if (!handleCliCommand()) {
+  updateMetadata();
+}

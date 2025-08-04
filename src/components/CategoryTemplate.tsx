@@ -74,7 +74,7 @@ export default function CategoryTemplate({ title, backgroundImage, categories, d
                   
                   {/* Content Overlay */}
                   <div className="relative z-10 h-full flex flex-col justify-center items-center p-8 text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wider mb-4 group-hover:text-yellow-400 transition-colors duration-300">
+                    <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white tracking-wider mb-4 group-hover:text-yellow-400 transition-colors duration-300">
                       {category.title.toUpperCase()}
                     </h2>
                     {category.description && (
