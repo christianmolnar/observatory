@@ -476,21 +476,30 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
 
           {/* Media Container - Maximized for fullscreen viewing */}
           <div className="flex flex-col items-center justify-center w-full h-full p-2">
-            {/* YouTube Contemplation Link - Top Overlay */}
+            {/* YouTube Contemplation Control - Top right, elegant styling */}
             {images[currentImage].youtubeLink && (
               <div 
-                className="mb-2 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10 max-w-[98vw] mx-auto cursor-pointer hover:bg-black/80 hover:border-white/20 transition-all duration-300 group"
+                className="fixed top-4 right-24 z-10 bg-white/5 backdrop-blur-md rounded-lg px-4 py-4 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 transition-all duration-300 group shadow-2xl"
                 onClick={openYouTubeOverlay}
               >
-                <div className="flex items-center justify-center gap-2 text-white/90 text-xs">
-                  <span className="text-white/70">🎵</span>
-                  <span className="group-hover:text-white transition-colors duration-300">
-                    Click for something to contemplate while you explore this cosmic wonder...
-                  </span>
+                <div className="flex flex-col items-center justify-center gap-2 text-white/90 max-w-[168px]">
+                  <div className="flex-shrink-0">
+                    <svg className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  </div>
+                  <div className="text-sm leading-tight text-center">
+                    <div className="font-light tracking-wide group-hover:text-white transition-colors duration-300">
+                      Contemplative Sounds
+                    </div>
+                    <div className="text-xs text-white/70 group-hover:text-white/80 transition-colors duration-300 font-light">
+                      Click to play while exploring
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
-            
+
             {/* YouTube Video Overlay - Upper Right Corner */}
             {showYouTubeOverlay && images[currentImage].youtubeLink && (
               <div className="fixed top-4 right-20 z-[100001] bg-black/90 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden shadow-2xl">

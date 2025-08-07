@@ -1,0 +1,22 @@
+Phase,Equipment Type,Item,Vendor,URL,Price,Notes
+1,Mount,ZWO AM5N Mount,High Point Scientific,https://highpointscientific.com,$2499,Critical for ASIAir automation
+1,Mount Accessories,Dual Telescope Platform,ADM Accessories,https://admaccessories.com,$299,Supports dual telescope + DSLR setup
+1,Camera Upgrade,ASI2600MC Pro,High Point Scientific,https://highpointscientific.com,$1800,26MP color camera for dual-band processing
+1,Dew Control,ZWO Dew Controller + Straps,ZWO USA,https://us.zwoastro.com,$250,Phoenix climate requires dew control
+1,D5300 Integration,Piggyback Mount + Cables,William Optics,https://williamoptics.com,$200,"Mounts, cables, power for wide-field"
+1,Networking,Ethernet + WiFi Setup,Ubiquiti,https://store.ui.com,$400,Ethernet backbone + WiFi access point
+1,Cable Management,USB Hub + Organization,Amazon,https://amazon.com,$100,"USB hubs, spiral wrap, organization"
+1,Software,PixInsight + ASIAir,Owned + Included,N/A,$0,PixInsight already owned; ASIAir included
+1,SUBTOTAL,PHASE 1 TOTAL,,,,$5548,Essential Setup
+2,Dome Structure,Observa-Dome 8ft,Observa-Dome,https://observa-dome.com,$5000,"Fiberglass construction, proven design"
+2,Automation,ACE SmartDome Controller,ACE Controllers,https://acecontrollers.com,$1500,"ASCOM automation, weather integration"
+2,Installation,Professional Setup,Local Contractor,N/A,$1500,"Site prep, electrical, concrete pad"
+2,Power Solutions,12V System + Distribution,Pegasus Astro,https://pegasusastro.com,$300,"12V distribution, UPS integration"
+2,Weather Station,Davis Vantage Vue,Davis Instruments,https://davisinstruments.com,$300,Weather monitoring for automation triggers
+2,SUBTOTAL,PHASE 2 TOTAL,,,,$8600,Observatory Structure
+3,Filter Wheel,ZWO EFW 8-Position,High Point Scientific,https://highpointscientific.com,$450,"8-position, future filter automation"
+3,Additional Filters,LRGB Filter Set,Optolong,https://optolong.eu,$300,Broadband filters for color work
+3,UPS Backup,LiFePO4 Battery System,BattleBorn,https://battleborn.com,$400,Power backup for critical systems
+3,Software Upgrades,TheSkyX + TeamViewer,Various,https://bisque.com,$600,$400 TheSkyX + $200/year TeamViewer
+3,SUBTOTAL,PHASE 3 TOTAL,,,,$1750,Optional Enhancements
+TOTAL,GRAND TOTAL,Complete Observatory,,,,$15898,Professional-grade automated observatory

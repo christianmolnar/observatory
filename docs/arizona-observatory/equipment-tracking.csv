@@ -1,0 +1,16 @@
+Item,Description,Current Status,Action Required,Priority,Estimated Cost,Notes
+ZWO AM5N Mount,Harmonic drive equatorial mount,Not Owned,Purchase,$2499,Critical,Enables all automation capabilities
+ASI2600MC Pro,26MP color camera,Not Owned,Purchase,$1800,High,Dual-band processing capability
+Observa-Dome 8ft,Fiberglass observatory dome,Not Owned,Purchase + Install,$5000,Medium,Weather protection for equipment
+ACE SmartDome Controller,Dome automation system,Not Owned,Purchase,$1500,Medium,ASCOM integration with ASIAir
+Professional Installation,Site prep and dome install,Not Arranged,Contract,$1500,Medium,Includes concrete pad and electrical
+Dual Telescope Platform,ADM V-Series mounting,Not Owned,Purchase,$299,High,Required for dual telescope setup
+Dew Control System,ZWO heaters and controller,Partial,Upgrade,$250,High,Current system inadequate
+D5300 Integration,Piggyback mounting system,Partial,Complete,$200,Medium,Existing camera needs proper mounting
+Observatory Networking,Ethernet + WiFi infrastructure,Not Installed,Install,$400,Medium,Reliable connectivity for remote operation
+Power Distribution,12V system for observatory,Not Installed,Install,$300,Medium,Clean power for all equipment
+Weather Station,Davis Vantage Vue,Not Owned,Purchase,$300,Low,Automated weather monitoring
+Filter Wheel,ZWO EFW 8-position,Not Owned,Purchase (Optional),$450,Low,Future automation enhancement
+LRGB Filters,Optolong broadband set,Not Owned,Purchase (Optional),$300,Low,Additional imaging flexibility
+UPS System,LiFePO4 battery backup,Not Owned,Purchase (Optional),$400,Low,Power backup for safety
+Software Upgrades,TheSkyX + remote access,Basic,Upgrade (Optional),$600,Low,Enhanced control capabilities

@@ -26,9 +26,9 @@ const resources = [
     category: 'Guides',
     items: [
       {
-        name: "Beginner's Guide to Astrophotography",
-        link: 'https://astrobackyard.com/beginners-guide-to-astrophotography/',
-        description: 'A comprehensive introduction to astrophotography for beginners.'
+        name: 'Pixinsight Processing for Beginners',
+        link: 'https://youtu.be/4i9ZmvpMZQM?si=uweyi1QqLH2LMl-0',
+        description: 'The most basic and effective processing flow. I use this plus some light Adobe Lightroom final editing for all my pictures.'
       },
       {
         name: 'Astronomy Tools',
@@ -40,6 +40,16 @@ const resources = [
   {
     category: 'Communities',
     items: [
+      {
+        name: 'SeeStar Official ZWO Group',
+        link: 'https://www.facebook.com/groups/seestar/',
+        description: 'So many SeeStar FB groups! This is the official ZWO SeeStar community.'
+      },
+      {
+        name: 'ZWO Cameras General Group',
+        link: 'https://www.facebook.com/groups/1062849903811306',
+        description: 'A good resource and great images posted!'
+      },
       {
         name: 'Cloudy Nights Forum',
         link: 'https://www.cloudynights.com/',
