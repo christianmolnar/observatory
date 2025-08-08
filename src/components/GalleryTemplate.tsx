@@ -117,6 +117,25 @@ function getGalleryImages(imageFolder: string): ImageMetadata[] {
   }
 }
 
+// Helper function to determine if an image should show YouTube contemplation controls
+// Only astrophotography images should have contemplative videos
+function shouldShowContemplationControls(image: ImageMetadata): boolean {
+  // Must have a YouTube link
+  if (!image.youtubeLink || !image.youtubeLink.startsWith('https://')) {
+    return false;
+  }
+  
+  // Must be astrophotography (have catalog designation or be celestial object)
+  const isAstrophotography = !!(image.catalogDesignation || 
+    (image.objectName && !image.name && !image.equipmentName));
+  
+  // Should not be terrestrial or equipment
+  const isTerrestrial = !!image.name && !image.catalogDesignation && !image.objectName;
+  const isEquipment = !!image.equipmentName;
+  
+  return isAstrophotography && !isTerrestrial && !isEquipment;
+}
+
 // Helper function to extract YouTube video ID from various URL formats
 function getYouTubeVideoId(url: string): string {
   if (!url) return '';
@@ -477,7 +496,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
           {/* Media Container - Maximized for fullscreen viewing */}
           <div className="flex flex-col items-center justify-center w-full h-full p-2">
             {/* YouTube Contemplation Control - Top right, elegant styling */}
-            {images[currentImage].youtubeLink && (
+            {shouldShowContemplationControls(images[currentImage]) && (
               <div 
                 className="fixed top-4 right-24 z-10 bg-white/5 backdrop-blur-md rounded-lg px-4 py-4 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 transition-all duration-300 group shadow-2xl"
                 onClick={openYouTubeOverlay}
@@ -501,7 +520,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
             )}
 
             {/* YouTube Video Overlay - Upper Right Corner */}
-            {showYouTubeOverlay && images[currentImage].youtubeLink && (
+            {showYouTubeOverlay && shouldShowContemplationControls(images[currentImage]) && (
               <div className="fixed top-4 right-20 z-[100001] bg-black/90 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden shadow-2xl">
                 <div className="flex items-center justify-between bg-black/60 px-3 py-2 border-b border-white/10">
                   <span className="text-white/90 text-xs">{images[currentImage].youtubeTitle || "Contemplative Sounds"}</span>

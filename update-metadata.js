@@ -441,6 +441,63 @@ function moveVideoFromImageToImage(fromFilename, toFilename) {
   return true;
 }
 
+function cleanupInappropriateVideoAssignments() {
+  const metadata = loadExistingMetadata();
+  const excludedFolders = ['terrestrial', 'equipment'];
+  const allImages = findImages();
+  let removedCount = 0;
+  
+  console.log('🧹 Cleaning up inappropriate YouTube video assignments...');
+  
+  Object.keys(metadata).forEach(filename => {
+    const imageInfo = allImages.find(img => img.filename === filename);
+    
+    // Check if this image has a YouTube link
+    if (metadata[filename].youtubeLink && metadata[filename].youtubeLink.startsWith('https://')) {
+      // Check if it's in an excluded folder (terrestrial or equipment)
+      if (imageInfo && excludedFolders.some(folder => imageInfo.folder.includes(folder))) {
+        console.log(`❌ Removing YouTube video from ${filename} - ${imageInfo.folder} images should not have contemplative videos`);
+        
+        // Remove the YouTube assignment
+        metadata[filename].youtubeLink = '';
+        metadata[filename].youtubeTitle = '';
+        removedCount++;
+      } else if (!imageInfo) {
+        // File exists in metadata but not in filesystem - also clean up
+        console.log(`🗑️  Removing YouTube video from ${filename} - file not found in filesystem`);
+        metadata[filename].youtubeLink = '';
+        metadata[filename].youtubeTitle = '';
+        removedCount++;
+      } else if (!imageInfo.folder.includes('astrophotography')) {
+        // Not in astrophotography folder - should not have videos
+        console.log(`❌ Removing YouTube video from ${filename} - only astrophotography images should have contemplative videos`);
+        metadata[filename].youtubeLink = '';
+        metadata[filename].youtubeTitle = '';
+        removedCount++;
+      }
+    }
+  });
+  
+  if (removedCount > 0) {
+    // Save updated metadata
+    const sortedMetadata = {};
+    Object.keys(metadata).sort().forEach(key => {
+      sortedMetadata[key] = metadata[key];
+    });
+    
+    fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
+    
+    // Update inventory
+    updateInventory(metadata);
+    
+    console.log(`✅ Cleaned up ${removedCount} inappropriate video assignments`);
+  } else {
+    console.log('✅ No inappropriate video assignments found');
+  }
+  
+  return removedCount;
+}
+
 function removeAssignmentFromContemplationLinks(videoLink) {
   try {
     let content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
@@ -522,6 +579,11 @@ function handleCliCommand() {
     
     return true;
   }
+
+  if (command === 'cleanup-videos') {
+    cleanupInappropriateVideoAssignments();
+    return true;
+  }
   
   console.log(`
 Usage:
@@ -529,6 +591,7 @@ Usage:
   node update-metadata.js add-video <filename> <link> <title>  # Add video to image
   node update-metadata.js remove-video <filename>     # Remove video from image
   node update-metadata.js move-video <from> <to>      # Move video from one image to another
+  node update-metadata.js cleanup-videos              # Remove videos from non-astrophotography images
   node update-metadata.js inventory                   # Show inventory report
 `);
   
