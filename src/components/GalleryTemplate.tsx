@@ -185,6 +185,9 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
     imageFolder === 'astrophotography/solar-system/solar' ||   // Solar gallery
     imageFolder === 'astrophotography/solar-system/lunar' ||   // Lunar gallery
     imageFolder === 'astrophotography/solar-system/planets' || // Planets gallery
+    imageFolder === 'astrophotography/solar-system/events' ||  // Celestial Events gallery
+    imageFolder === 'astrophotography/featured' ||             // Featured gallery
+    imageFolder === 'equipment' ||                             // Equipment gallery
     imageFolder === 'terrestrial/yellowstone' ||               // Yellowstone gallery
     imageFolder === 'terrestrial/grand-tetons';                // Grand Tetons gallery
 

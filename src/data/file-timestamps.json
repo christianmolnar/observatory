@@ -118,6 +118,13 @@
     "ctimeMs": 1754022501080.7,
     "filename": "IC434.jpg"
   },
+  "astrophotography/deep-sky/nebulas/IC63.jpg": {
+    "mtime": "2025-08-13T02:11:19.711Z",
+    "mtimeMs": 1755051079710.545,
+    "ctime": "2025-08-13T04:13:12.696Z",
+    "ctimeMs": 1755058392695.534,
+    "filename": "IC63.jpg"
+  },
   "astrophotography/deep-sky/nebulas/M1 - The Crab Nebula.jpg": {
     "mtime": "2025-07-31T22:11:42.317Z",
     "mtimeMs": 1753999902317.1958,
@@ -237,6 +244,20 @@
     "ctimeMs": 1753949432955.8464,
     "filename": "Thor's Helmet.jpg"
   },
+  "astrophotography/deep-sky/nebulas/Veil Nebula Complex.jpg": {
+    "mtime": "2025-08-12T23:10:05.203Z",
+    "mtimeMs": 1755040205202.9807,
+    "ctime": "2025-08-13T04:13:12.696Z",
+    "ctimeMs": 1755058392695.696,
+    "filename": "Veil Nebula Complex.jpg"
+  },
+  "astrophotography/deep-sky/nebulas/Wizard-Lr-PI.jpg": {
+    "mtime": "2025-07-30T18:02:51.520Z",
+    "mtimeMs": 1753898571520.2646,
+    "ctime": "2025-08-04T01:53:46.787Z",
+    "ctimeMs": 1754272426786.7373,
+    "filename": "Wizard-Lr-PI.jpg"
+  },
   "astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg": {
     "mtime": "2025-07-31T21:55:25.271Z",
     "mtimeMs": 1753998925270.5557,
@@ -286,6 +307,13 @@
     "ctimeMs": 1754006415309.134,
     "filename": "IC1396-Elephant-Lr.jpg"
   },
+  "astrophotography/featured/IC63.jpg": {
+    "mtime": "2025-08-13T02:11:19.711Z",
+    "mtimeMs": 1755051079710.545,
+    "ctime": "2025-08-13T04:13:06.737Z",
+    "ctimeMs": 1755058386737.2622,
+    "filename": "IC63.jpg"
+  },
   "astrophotography/featured/M27-2-2.jpg": {
     "mtime": "2025-08-03T00:58:03.607Z",
     "mtimeMs": 1754182683607.1064,
@@ -321,11 +349,18 @@
     "ctimeMs": 1754164043872.2458,
     "filename": "Soul Nebula.jpg"
   },
+  "astrophotography/featured/Veil Nebula Complex.jpg": {
+    "mtime": "2025-08-12T23:10:05.203Z",
+    "mtimeMs": 1755040205202.9807,
+    "ctime": "2025-08-13T04:13:06.737Z",
+    "ctimeMs": 1755058386737.416,
+    "filename": "Veil Nebula Complex.jpg"
+  },
   "astrophotography/featured/Wizard-Lr-PI.jpg": {
-    "mtime": "2025-07-30T18:02:51.520Z",
-    "mtimeMs": 1753898571520.2646,
-    "ctime": "2025-08-01T00:00:20.571Z",
-    "ctimeMs": 1754006420571.0432,
+    "mtime": "2025-08-04T01:56:56.114Z",
+    "mtimeMs": 1754272616113.7053,
+    "ctime": "2025-08-04T01:56:56.114Z",
+    "ctimeMs": 1754272616113.8762,
     "filename": "Wizard-Lr-PI.jpg"
   },
   "astrophotography/solar-system/events/total-eclipse-2017/2017 Total Eclipse1.jpg": {
