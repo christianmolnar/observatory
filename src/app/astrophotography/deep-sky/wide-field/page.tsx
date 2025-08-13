@@ -1,5 +1,5 @@
-import GalleryTemplate from '@/components/GalleryTemplate';
-import { globalConfig } from '@/config/global';
+import GalleryTemplate from "@/components/GalleryTemplate";
+import { globalConfig } from "@/config/global";
 
 export default function WideFieldPage() {
   const { wideField } = globalConfig;

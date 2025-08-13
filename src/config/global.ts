@@ -71,7 +71,7 @@ export const deepSkyConfig = {
     {
       title: 'Galaxies',
       href: '/astrophotography/deep-sky/galaxies',
-      backgroundImage: '/images/astrophotography/featured/M33-Done.jpg',
+      backgroundImage: '/images/astrophotography/featured/M33.jpg',
       description: 'Distant island universes beyond our Milky Way',
       imageFolder: 'astrophotography/deep-sky/galaxies'
     },
@@ -85,7 +85,7 @@ export const deepSkyConfig = {
     {
       title: 'Star Clusters',
       href: '/astrophotography/deep-sky/star-clusters',
-      backgroundImage: '/images/astrophotography/featured/Wizard-Lr-PI.jpg',
+      backgroundImage: '/images/astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg',
       description: 'Gravitationally bound groups of stars',
       imageFolder: 'astrophotography/deep-sky/star-clusters'
     },
@@ -108,28 +108,28 @@ export const solarSystemConfig = {
     {
       title: 'Solar',
       href: '/astrophotography/solar-system/solar',
-      backgroundImage: '/images/astrophotography/featured/NGC7000-Pelican-1.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/solar/Sun.jpg',
       description: 'The Sun, solar eclipses, and solar phenomena',
       imageFolder: 'astrophotography/solar-system/solar'
     },
     {
       title: 'Lunar',
       href: '/astrophotography/solar-system/lunar',
-      backgroundImage: '/images/astrophotography/featured/IC445-The-Jellyfish.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/lunar/Full Moon.jpg',
       description: 'Moon phases and surface details',
       imageFolder: 'astrophotography/solar-system/lunar'
     },
     {
       title: 'Planets',
       href: '/astrophotography/solar-system/planets',
-      backgroundImage: '/images/astrophotography/featured/M33-Done.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/planets/Hubble and Me.jpg',
       description: 'Jupiter, Saturn, Mars, and other planetary bodies',
       imageFolder: 'astrophotography/solar-system/planets'
     },
     {
       title: 'Celestial Events',
       href: '/astrophotography/solar-system/events',
-      backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/events/total-eclipse-2017/2017 Total Eclipse1.jpg',
       description: 'Eclipses, conjunctions, transits, and rare astronomical events',
       imageFolder: 'astrophotography/solar-system/events'
     }
@@ -245,7 +245,8 @@ export const globalConfig = {
   terrestrial: terrestrialConfig,
   equipment: equipmentConfig,
   imageFolders: imageFoldersConfig,
-  style: styleConfig
+  style: styleConfig,
+  wideField: deepSkyConfig.categories[3] // Wide Field category
 };
 
 export default globalConfig;
