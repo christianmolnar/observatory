@@ -1105,5 +1105,25 @@
     "protected": false,
     "youtubeLink": "",
     "youtubeTitle": ""
+  },
+  "IC63.jpg": {
+    "catalogDesignation": "IC 63",
+    "objectName": "Ghost of Cassiopeia",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "youtubeLink": "",
+    "youtubeTitle": "",
+    "protected": false
+  },
+  "Veil Nebula Complex.jpg": {
+    "catalogDesignation": "NGC 6960/6992",
+    "objectName": "Veil Nebula Complex",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "youtubeLink": "",
+    "youtubeTitle": "",
+    "protected": false
   }
 }

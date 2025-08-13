@@ -85,7 +85,7 @@ export const deepSkyConfig = {
     {
       title: 'Star Clusters',
       href: '/astrophotography/deep-sky/star-clusters',
-      backgroundImage: '/images/astrophotography/featured/Wizard-Lr-PI.jpg',
+      backgroundImage: '/images/astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg',
       description: 'Gravitationally bound groups of stars',
       imageFolder: 'astrophotography/deep-sky/star-clusters'
     }
@@ -122,7 +122,7 @@ export const solarSystemConfig = {
     {
       title: 'Celestial Events',
       href: '/astrophotography/solar-system/events',
-      backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/events/total-eclipse-2017/2017 Total Eclipse1.jpg',
       description: 'Eclipses, conjunctions, transits, and rare astronomical events',
       imageFolder: 'astrophotography/solar-system/events'
     }
