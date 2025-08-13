@@ -118,6 +118,13 @@
     "ctimeMs": 1754022501080.7,
     "filename": "IC434.jpg"
   },
+  "astrophotography/deep-sky/nebulas/IC63.jpg": {
+    "mtime": "2025-08-13T02:11:19.711Z",
+    "mtimeMs": 1755051079710.545,
+    "ctime": "2025-08-13T02:22:32.721Z",
+    "ctimeMs": 1755051752720.697,
+    "filename": "IC63.jpg"
+  },
   "astrophotography/deep-sky/nebulas/M1 - The Crab Nebula.jpg": {
     "mtime": "2025-07-31T22:11:42.317Z",
     "mtimeMs": 1753999902317.1958,
@@ -237,6 +244,20 @@
     "ctimeMs": 1753949432955.8464,
     "filename": "Thor's Helmet.jpg"
   },
+  "astrophotography/deep-sky/nebulas/Veil Nebula Complex.jpg": {
+    "mtime": "2025-08-12T23:10:05.203Z",
+    "mtimeMs": 1755040205202.9807,
+    "ctime": "2025-08-13T02:22:16.546Z",
+    "ctimeMs": 1755051736546.158,
+    "filename": "Veil Nebula Complex.jpg"
+  },
+  "astrophotography/deep-sky/nebulas/Wizard-Lr-PI.jpg": {
+    "mtime": "2025-07-30T18:02:51.520Z",
+    "mtimeMs": 1753898571520.2646,
+    "ctime": "2025-08-04T01:53:46.787Z",
+    "ctimeMs": 1754272426786.7373,
+    "filename": "Wizard-Lr-PI.jpg"
+  },
   "astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg": {
     "mtime": "2025-07-31T21:55:25.271Z",
     "mtimeMs": 1753998925270.5557,
@@ -264,6 +285,13 @@
     "ctime": "2025-07-31T16:59:09.340Z",
     "ctimeMs": 1753981149339.6116,
     "filename": "Sadr Region.jpg"
+  },
+  "astrophotography/featured/Ghost of Cassiopeia-S50.jpg": {
+    "mtime": "2025-08-13T02:11:19.711Z",
+    "mtimeMs": 1755051079710.545,
+    "ctime": "2025-08-13T02:21:22.160Z",
+    "ctimeMs": 1755051682160.3398,
+    "filename": "Ghost of Cassiopeia-S50.jpg"
   },
   "astrophotography/featured/Heart Nebula.jpg": {
     "mtime": "2025-07-31T09:03:52.479Z",
@@ -321,11 +349,18 @@
     "ctimeMs": 1754164043872.2458,
     "filename": "Soul Nebula.jpg"
   },
+  "astrophotography/featured/Veil Nebula Complex.jpg": {
+    "mtime": "2025-08-12T23:10:05.203Z",
+    "mtimeMs": 1755040205202.9807,
+    "ctime": "2025-08-13T02:21:22.160Z",
+    "ctimeMs": 1755051682159.9578,
+    "filename": "Veil Nebula Complex.jpg"
+  },
   "astrophotography/featured/Wizard-Lr-PI.jpg": {
-    "mtime": "2025-07-30T18:02:51.520Z",
-    "mtimeMs": 1753898571520.2646,
-    "ctime": "2025-08-01T00:00:20.571Z",
-    "ctimeMs": 1754006420571.0432,
+    "mtime": "2025-08-04T01:56:56.114Z",
+    "mtimeMs": 1754272616113.7053,
+    "ctime": "2025-08-04T01:56:56.114Z",
+    "ctimeMs": 1754272616113.8762,
     "filename": "Wizard-Lr-PI.jpg"
   },
   "astrophotography/solar-system/events/total-eclipse-2017/2017 Total Eclipse1.jpg": {
