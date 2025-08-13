@@ -17,6 +17,7 @@ export const navigationConfig = {
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
+    { label: 'Resources', href: '/resources' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ]
@@ -39,6 +40,10 @@ export const subNavigationConfig = {
   '/terrestrial': [
     { label: 'Yellowstone', href: '/terrestrial/yellowstone' },
     { label: 'Grand Tetons', href: '/terrestrial/grand-tetons' }
+  ],
+  '/resources': [
+    { label: 'Astronomy & Astrophotography', href: '/resources/astronomy-astrophotography' },
+    { label: 'Mindfulness & Wellbeing', href: '/resources/mindfulness' }
   ]
 };
 
@@ -145,7 +150,7 @@ export const celestialEventsConfig = {
     {
       title: 'Total Eclipse 2017',
       href: '/astrophotography/solar-system/events/total-eclipse-2017',
-      backgroundImage: '/images/astrophotography/featured/SH2-132-The-LobsterClaw.jpg', // Will be replaced with eclipse image
+      backgroundImage: '/images/astrophotography/solar-system/events/total-eclipse-2017/2017 Total Eclipse1.jpg',
       description: 'The Great American Eclipse of August 21, 2017',
       imageFolder: 'astrophotography/solar-system/events/total-eclipse-2017'
     }
@@ -233,6 +238,29 @@ export const styleConfig = {
   }
 };
 
+// Resources Configuration
+export const resourcesConfig = {
+  title: 'Resources',
+  backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
+  description: 'Curated resources for astronomy, astrophotography, mindfulness, and wellbeing. Discover guides, articles, and tools to enhance your journey.',
+  categories: [
+    {
+      title: 'Astronomy & Astrophotography',
+      href: '/resources/astronomy-astrophotography',
+      backgroundImage: '/images/astrophotography/featured/NGC7000-Pelican-1.jpg',
+      description: 'Guides, tools, and communities for exploring the cosmos',
+      imageFolder: 'resources/astronomy-astrophotography'
+    },
+    {
+      title: 'Mindfulness & Wellbeing',
+      href: '/resources/mindfulness',
+      backgroundImage: '/images/astrophotography/featured/M33.jpg',
+      description: 'Resources for meditation, contemplation, and inner peace',
+      imageFolder: 'resources/mindfulness'
+    }
+  ]
+};
+
 // Default export combines all configurations
 export const globalConfig = {
   observatory: observatoryConfig,
@@ -244,6 +272,7 @@ export const globalConfig = {
   celestialEvents: celestialEventsConfig,
   terrestrial: terrestrialConfig,
   equipment: equipmentConfig,
+  resources: resourcesConfig,
   imageFolders: imageFoldersConfig,
   style: styleConfig,
   wideField: deepSkyConfig.categories[3] // Wide Field category
