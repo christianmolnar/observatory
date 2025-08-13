@@ -6,8 +6,6 @@ const path = require('path');
 // Paths
 const METADATA_FILE = '/Users/christian/Repos/MapleValleyObservatory/src/data/metadata.json';
 const IMAGES_BASE = '/Users/christian/Repos/MapleValleyObservatory/public/images';
-const CONTEMPLATION_LINKS_FILE = '/Users/christian/Repos/MapleValleyObservatory/docs/youtube-contemplation-links.md';
-const INVENTORY_FILE = '/Users/christian/Repos/MapleValleyObservatory/contemplation-inventory.json';
 
 // Image folders to scan (matches the global config structure)
 const SCAN_FOLDERS = [
@@ -15,12 +13,12 @@ const SCAN_FOLDERS = [
   'astrophotography/deep-sky/galaxies',
   'astrophotography/deep-sky/nebulas',
   'astrophotography/deep-sky/star-clusters',
+  'astrophotography/deep-sky/wide-field',
   'astrophotography/solar-system/solar',
   'astrophotography/solar-system/lunar',
   'astrophotography/solar-system/planets',
   'astrophotography/solar-system/events',
   'astrophotography/solar-system/events/total-eclipse-2017',
-  'astrophotography/deep-sky/wide-field',
   'terrestrial/yellowstone',
   'terrestrial/grand-tetons',
   'equipment'
@@ -64,776 +62,245 @@ function loadExistingMetadata() {
   }
 }
 
-// ===== CONTEMPLATION INVENTORY MANAGEMENT =====
-
-function loadInventory() {
-  try {
-    const content = fs.readFileSync(INVENTORY_FILE, 'utf8');
-    return JSON.parse(content);
-  } catch (error) {
-    console.log('Creating new inventory file');
-    return {
-      lastUpdated: new Date().toISOString(),
-      totalImages: 0,
-      imagesWithVideos: 0,
-      imagesWithoutVideos: 0,
-      contemplationSources: {
-        classical: 0,
-        progressive: 0,
-        gratitude: 0,
-        mindfulness: 0,
-        cosmic: 0,
-        jazz: 0,
-        poetry: 0,
-        experimental: 0
-      },
-      assignments: {},
-      availableImages: [],
-      usedVideos: [],
-      availableVideos: []
-    };
-  }
-}
-
-function parseContemplationLinks() {
-  try {
-    const content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
-    const availableVideos = [];
-    const assignedVideos = [];
-    
-    // Extract video links and their assignments - improved regex pattern
-    const lines = content.split('\n');
-    let currentVideo = null;
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      const trimmedLine = line.trim();
-      
-      // Look for video name/title but exclude assignment lines
-      if (trimmedLine.match(/^- \*\*([^*]+)\*\*\s*$/) && !trimmedLine.includes('🎯 Assigned to:')) {
-        if (currentVideo && currentVideo.link) {
-          // Save previous video
-          if (currentVideo.assignedTo) {
-            assignedVideos.push(currentVideo);
-          } else {
-            availableVideos.push(currentVideo);
-          }
-        }
-        
-        currentVideo = {
-          name: trimmedLine.match(/^- \*\*([^*]+)\*\*\s*$/)[1].trim(),
-          link: '',
-          title: '',
-          assignedTo: null
-        };
-      }
-      
-      // Look for link (handles any indentation)
-      if (trimmedLine.match(/^- Link: (https:\/\/[^\s]+)\s*$/) && currentVideo) {
-        currentVideo.link = trimmedLine.match(/^- Link: (https:\/\/[^\s]+)\s*$/)[1].trim();
-      }
-      
-      // Look for title (handles any indentation)
-      if (trimmedLine.match(/^- Title: "([^"]+)"\s*$/) && currentVideo) {
-        currentVideo.title = trimmedLine.match(/^- Title: "([^"]+)"\s*$/)[1].trim();
-      }
-      
-      // Look for assignment (handles indented format with 2 spaces)
-      if (trimmedLine.match(/^- \*\*🎯 Assigned to: ([^*]+)\*\*\s*$/) && currentVideo) {
-        currentVideo.assignedTo = trimmedLine.match(/^- \*\*🎯 Assigned to: ([^*]+)\*\*\s*$/)[1].trim();
-      }
-    }
-    
-    // Don't forget the last video
-    if (currentVideo && currentVideo.link) {
-      if (currentVideo.assignedTo) {
-        assignedVideos.push(currentVideo);
-      } else {
-        availableVideos.push(currentVideo);
-      }
-    }
-    
-    console.log(`📝 Parsed ${assignedVideos.length} assigned videos and ${availableVideos.length} available videos`);
-    
-    return { availableVideos, assignedVideos };
-  } catch (error) {
-    console.log(`Could not parse contemplation links file: ${error.message}`);
-    return { availableVideos: [], assignedVideos: [] };
-  }
-}
-
-function categorizeVideoByType(videoName, videoTitle) {
-  const name = videoName.toLowerCase();
-  const title = videoTitle.toLowerCase();
-  
-  if (name.includes('schindler') || name.includes('john williams')) return 'classical';
-  if (name.includes('yes') || name.includes('wondrous')) return 'progressive';
-  if (name.includes('grateful') || name.includes('gratitude')) return 'gratitude';
-  if (name.includes('mindful') || name.includes('breathing') || name.includes('thich')) return 'mindfulness';
-  if (name.includes('sagan') || name.includes('cosmos')) return 'cosmic';
-  if (name.includes('lito') || name.includes('vitale')) return 'jazz';
-  if (name.includes('whyte') || name.includes('poetry')) return 'poetry';
-  if (name.includes('dreaming') || name.includes('experimental')) return 'experimental';
-  
-  return 'other';
-}
-
-function updateInventory(metadata) {
-  console.log('\n🔄 Updating contemplation inventory...');
-  
-  const inventory = loadInventory();
-  const { availableVideos, assignedVideos } = parseContemplationLinks();
-  
-  // Reset inventory data
-  inventory.lastUpdated = new Date().toISOString();
-  inventory.totalImages = Object.keys(metadata).length;
-  inventory.imagesWithVideos = 0;
-  inventory.imagesWithoutVideos = 0;
-  inventory.assignments = {};
-  inventory.availableImages = [];
-  inventory.usedVideos = [];
-  inventory.availableVideos = availableVideos;
-  
-  // Reset contemplation source counters
-  Object.keys(inventory.contemplationSources).forEach(key => {
-    inventory.contemplationSources[key] = 0;
-  });
-  
-  // Analyze current assignments
-  Object.entries(metadata).forEach(([filename, data]) => {
-    if (data.youtubeLink && data.youtubeLink.startsWith('https://')) {
-      inventory.imagesWithVideos++;
-      inventory.assignments[filename] = {
-        youtubeLink: data.youtubeLink,
-        youtubeTitle: data.youtubeTitle,
-        objectName: data.objectName,
-        catalogDesignation: data.catalogDesignation
-      };
-      
-      // Track used videos
-      inventory.usedVideos.push({
-        filename: filename,
-        link: data.youtubeLink,
-        title: data.youtubeTitle
-      });
-      
-      // Categorize and count
-      const category = categorizeVideoByType(data.youtubeTitle, data.youtubeTitle);
-      if (inventory.contemplationSources[category] !== undefined) {
-        inventory.contemplationSources[category]++;
-      }
-    } else {
-      inventory.imagesWithoutVideos++;
-      inventory.availableImages.push({
-        filename: filename,
-        objectName: data.objectName,
-        catalogDesignation: data.catalogDesignation,
-        location: data.location
-      });
-    }
-  });
-  
-  // Save updated inventory
-  fs.writeFileSync(INVENTORY_FILE, JSON.stringify(inventory, null, 2));
-  
-  console.log(`✅ Inventory updated:`);
-  console.log(`   📊 Total images: ${inventory.totalImages}`);
-  console.log(`   🎥 Images with videos: ${inventory.imagesWithVideos}`);
-  console.log(`   📷 Images without videos: ${inventory.imagesWithoutVideos}`);
-  console.log(`   🎵 Available videos: ${inventory.availableVideos.length}`);
-  
-  return inventory;
-}
-
-function addVideoToImage(filename, videoLink, videoTitle) {
-  const metadata = loadExistingMetadata();
-  
-  // Find the actual filename with case-insensitive matching
-  const actualFilename = Object.keys(metadata).find(key => 
-    key.toLowerCase() === filename.toLowerCase()
-  );
-  
-  if (!actualFilename) {
-    console.log(`❌ Image ${filename} not found in metadata`);
-    return false;
-  }
-  
-  // Use the actual filename for the rest of the function
-  filename = actualFilename;
-  
-  // Check for exclusions - permanently exclude Terrestrial and Gear images
-  const excludedFolders = ['terrestrial', 'equipment'];
-  const imageInfo = findImages().find(img => img.filename === filename);
-  
-  if (imageInfo && excludedFolders.some(folder => imageInfo.folder.includes(folder))) {
-    console.log(`❌ Cannot assign videos to ${filename} - Terrestrial and Equipment images are excluded from video assignments`);
-    return false;
-  }
-  
-  if (metadata[filename].youtubeLink && metadata[filename].youtubeLink.startsWith('https://')) {
-    console.log(`⚠️  Image ${filename} already has a video assigned`);
-    return false;
-  }
-  
-  // Update metadata
-  metadata[filename].youtubeLink = videoLink;
-  metadata[filename].youtubeTitle = videoTitle;
-  
-  // Save metadata
-  const sortedMetadata = {};
-  Object.keys(metadata).sort().forEach(key => {
-    sortedMetadata[key] = metadata[key];
-  });
-  
-  fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
-  
-  // Update inventory
-  updateInventory(metadata);
-  
-  // Update contemplation links file with assignment annotation
-  updateContemplationLinksFile(videoLink, filename, metadata[filename].objectName);
-  
-  console.log(`✅ Added video "${videoTitle}" to ${filename}`);
-  return true;
-}
-
-function updateContemplationLinksFile(videoLink, filename, objectName) {
-  try {
-    let content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
-    
-    // Find the video entry and add assignment annotation
-    const linkPattern = new RegExp(`(- Link: ${videoLink.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n\\s*- Title: "[^"]+")`, 'g');
-    
-    content = content.replace(linkPattern, (match) => {
-      // Check if assignment already exists
-      if (match.includes('🎯 Assigned to:')) {
-        return match;
-      }
-      
-      return `${match}\n  - **🎯 Assigned to: ${filename} (${objectName})**`;
-    });
-    
-    fs.writeFileSync(CONTEMPLATION_LINKS_FILE, content);
-    console.log(`✅ Updated contemplation links file with assignment`);
-  } catch (error) {
-    console.log(`⚠️  Could not update contemplation links file: ${error.message}`);
-  }
-}
-
-function removeVideoFromImage(filename) {
-  const metadata = loadExistingMetadata();
-  
-  // Find the actual filename with case-insensitive matching
-  const actualFilename = Object.keys(metadata).find(key => 
-    key.toLowerCase() === filename.toLowerCase()
-  );
-  
-  if (!actualFilename) {
-    console.log(`❌ Image ${filename} not found in metadata`);
-    return false;
-  }
-  
-  // Use the actual filename for the rest of the function
-  filename = actualFilename;
-  
-  const videoLink = metadata[filename].youtubeLink;
-  
-  // Remove video assignment
-  metadata[filename].youtubeLink = '';
-  metadata[filename].youtubeTitle = '';
-  
-  // Save metadata
-  const sortedMetadata = {};
-  Object.keys(metadata).sort().forEach(key => {
-    sortedMetadata[key] = metadata[key];
-  });
-  
-  fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
-  
-  // Update inventory
-  updateInventory(metadata);
-  
-  // Remove assignment annotation from contemplation links file
-  if (videoLink) {
-    removeAssignmentFromContemplationLinks(videoLink);
-  }
-  
-  console.log(`✅ Removed video from ${filename}`);
-  return true;
-}
-
-function moveVideoFromImageToImage(fromFilename, toFilename) {
-  const metadata = loadExistingMetadata();
-  
-  // Find the actual filenames with case-insensitive matching
-  const actualFromFilename = Object.keys(metadata).find(key => 
-    key.toLowerCase() === fromFilename.toLowerCase()
-  );
-  
-  const actualToFilename = Object.keys(metadata).find(key => 
-    key.toLowerCase() === toFilename.toLowerCase()
-  );
-  
-  if (!actualFromFilename) {
-    console.log(`❌ Source image ${fromFilename} not found in metadata`);
-    return false;
-  }
-  
-  if (!actualToFilename) {
-    console.log(`❌ Target image ${toFilename} not found in metadata`);
-    return false;
-  }
-  
-  // Use the actual filenames for the rest of the function
-  fromFilename = actualFromFilename;
-  toFilename = actualToFilename;
-  
-  // Check if source image has a video
-  if (!metadata[fromFilename].youtubeLink || !metadata[fromFilename].youtubeLink.startsWith('https://')) {
-    console.log(`❌ Source image ${fromFilename} doesn't have a video to move`);
-    return false;
-  }
-  
-  // Check if target image already has a video
-  if (metadata[toFilename].youtubeLink && metadata[toFilename].youtubeLink.startsWith('https://')) {
-    console.log(`⚠️  Target image ${toFilename} already has a video assigned`);
-    console.log(`    Current: "${metadata[toFilename].youtubeTitle}"`);
-    console.log(`    Would replace with: "${metadata[fromFilename].youtubeTitle}"`);
-    return false;
-  }
-  
-  // Check for exclusions - permanently exclude Terrestrial and Gear images
-  const excludedFolders = ['terrestrial', 'equipment'];
-  const imageInfo = findImages().find(img => img.filename === toFilename);
-  
-  if (imageInfo && excludedFolders.some(folder => imageInfo.folder.includes(folder))) {
-    console.log(`❌ Cannot move video to ${toFilename} - Terrestrial and Equipment images are excluded from video assignments`);
-    return false;
-  }
-  
-  // Store video info before removing
-  const videoLink = metadata[fromFilename].youtubeLink;
-  const videoTitle = metadata[fromFilename].youtubeTitle;
-  
-  // Remove video from source image
-  metadata[fromFilename].youtubeLink = '';
-  metadata[fromFilename].youtubeTitle = '';
-  
-  // Add video to target image
-  metadata[toFilename].youtubeLink = videoLink;
-  metadata[toFilename].youtubeTitle = videoTitle;
-  
-  // Save metadata
-  const sortedMetadata = {};
-  Object.keys(metadata).sort().forEach(key => {
-    sortedMetadata[key] = metadata[key];
-  });
-  
-  fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
-  
-  // Update inventory
-  updateInventory(metadata);
-  
-  // Update contemplation links file with new assignment
-  updateContemplationLinksFile(videoLink, toFilename, metadata[toFilename].objectName);
-  
-  console.log(`✅ Moved video "${videoTitle}" from ${fromFilename} to ${toFilename}`);
-  return true;
-}
-
-function cleanupInappropriateVideoAssignments() {
-  const metadata = loadExistingMetadata();
-  const excludedFolders = ['terrestrial', 'equipment'];
-  const allImages = findImages();
-  let removedCount = 0;
-  
-  console.log('🧹 Cleaning up inappropriate YouTube video assignments...');
-  
-  Object.keys(metadata).forEach(filename => {
-    const imageInfo = allImages.find(img => img.filename === filename);
-    
-    // Check if this image has a YouTube link
-    if (metadata[filename].youtubeLink && metadata[filename].youtubeLink.startsWith('https://')) {
-      // Check if it's in an excluded folder (terrestrial or equipment)
-      if (imageInfo && excludedFolders.some(folder => imageInfo.folder.includes(folder))) {
-        console.log(`❌ Removing YouTube video from ${filename} - ${imageInfo.folder} images should not have contemplative videos`);
-        
-        // Remove the YouTube assignment
-        metadata[filename].youtubeLink = '';
-        metadata[filename].youtubeTitle = '';
-        removedCount++;
-      } else if (!imageInfo) {
-        // File exists in metadata but not in filesystem - also clean up
-        console.log(`🗑️  Removing YouTube video from ${filename} - file not found in filesystem`);
-        metadata[filename].youtubeLink = '';
-        metadata[filename].youtubeTitle = '';
-        removedCount++;
-      } else if (!imageInfo.folder.includes('astrophotography')) {
-        // Not in astrophotography folder - should not have videos
-        console.log(`❌ Removing YouTube video from ${filename} - only astrophotography images should have contemplative videos`);
-        metadata[filename].youtubeLink = '';
-        metadata[filename].youtubeTitle = '';
-        removedCount++;
-      }
-    }
-  });
-  
-  if (removedCount > 0) {
-    // Save updated metadata
-    const sortedMetadata = {};
-    Object.keys(metadata).sort().forEach(key => {
-      sortedMetadata[key] = metadata[key];
-    });
-    
-    fs.writeFileSync(METADATA_FILE, JSON.stringify(sortedMetadata, null, 2));
-    
-    // Update inventory
-    updateInventory(metadata);
-    
-    console.log(`✅ Cleaned up ${removedCount} inappropriate video assignments`);
-  } else {
-    console.log('✅ No inappropriate video assignments found');
-  }
-  
-  return removedCount;
-}
-
-function removeAssignmentFromContemplationLinks(videoLink) {
-  try {
-    let content = fs.readFileSync(CONTEMPLATION_LINKS_FILE, 'utf8');
-    
-    // Remove assignment annotation
-    const assignmentPattern = new RegExp(`\\s*- \\*\\*🎯 Assigned to: [^*]+\\*\\*`, 'g');
-    const linkPattern = new RegExp(`(- Link: ${videoLink.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?)\\n\\s*- \\*\\*🎯 Assigned to: [^*]+\\*\\*`, 'g');
-    
-    content = content.replace(linkPattern, '$1');
-    
-    fs.writeFileSync(CONTEMPLATION_LINKS_FILE, content);
-    console.log(`✅ Removed assignment annotation from contemplation links file`);
-  } catch (error) {
-    console.log(`⚠️  Could not update contemplation links file: ${error.message}`);
-  }
-}
-
-// Command line interface for video management
-function handleCliCommand() {
-  const args = process.argv.slice(2);
-  
-  if (args.length === 0) {
-    return false; // Continue with normal metadata update
-  }
-  
-  const command = args[0];
-  
-  if (command === 'add-video' && args.length === 4) {
-    const [, filename, videoLink, videoTitle] = args;
-    addVideoToImage(filename, videoLink, videoTitle);
-    return true;
-  }
-  
-  if (command === 'remove-video' && args.length === 2) {
-    const [, filename] = args;
-    removeVideoFromImage(filename);
-    return true;
-  }
-  
-  if (command === 'move-video' && args.length === 3) {
-    const [, fromFilename, toFilename] = args;
-    moveVideoFromImageToImage(fromFilename, toFilename);
-    return true;
-  }
-  
-  if (command === 'inventory') {
-    const metadata = loadExistingMetadata();
-    const inventory = updateInventory(metadata);
-    
-    console.log('\n📋 CONTEMPLATION INVENTORY REPORT');
-    console.log('================================');
-    console.log(`📊 Total Images: ${inventory.totalImages}`);
-    console.log(`🎥 Images with Videos: ${inventory.imagesWithVideos}`);
-    console.log(`📷 Images without Videos: ${inventory.imagesWithoutVideos}`);
-    console.log(`🎵 Available Videos: ${inventory.availableVideos.length}`);
-    
-    console.log('\n🎨 Content Categories:');
-    Object.entries(inventory.contemplationSources).forEach(([category, count]) => {
-      console.log(`   ${category}: ${count}`);
-    });
-    
-    console.log('\n📷 Available Images (first 10):');
-    inventory.availableImages.slice(0, 10).forEach(img => {
-      console.log(`   ${img.filename} - ${img.objectName} (${img.catalogDesignation})`);
-    });
-    
-    if (inventory.availableImages.length > 10) {
-      console.log(`   ... and ${inventory.availableImages.length - 10} more`);
-    }
-    
-    console.log('\n🎵 Available Videos (first 5):');
-    inventory.availableVideos.slice(0, 5).forEach(video => {
-      console.log(`   ${video.name} - ${video.title}`);
-    });
-    
-    if (inventory.availableVideos.length > 5) {
-      console.log(`   ... and ${inventory.availableVideos.length - 5} more`);
-    }
-    
-    return true;
-  }
-
-  if (command === 'cleanup-videos') {
-    cleanupInappropriateVideoAssignments();
-    return true;
-  }
-  
-  console.log(`
-Usage:
-  node update-metadata.js                              # Update metadata and inventory
-  node update-metadata.js add-video <filename> <link> <title>  # Add video to image
-  node update-metadata.js remove-video <filename>     # Remove video from image
-  node update-metadata.js move-video <from> <to>      # Move video from one image to another
-  node update-metadata.js cleanup-videos              # Remove videos from non-astrophotography images
-  node update-metadata.js inventory                   # Show inventory report
-`);
-  
-  return true;
-}
-
 // Comprehensive Astronomical Object Catalog Database
+// Includes major catalogs: Messier, NGC, IC, Caldwell, Sharpless, Barnard, Abell, vdB
 const ASTRONOMICAL_OBJECTS = {
-  // ===== MESSIER CATALOG (Complete) =====
+  // ===== MESSIER CATALOG (M) - Most Popular Objects =====
   'M1': { catalog: 'M1', name: 'Crab Nebula', type: 'nebula' },
-  'M2': { catalog: 'M2', name: 'Globular Cluster in Aquarius', type: 'star cluster' },
-  'M3': { catalog: 'M3', name: 'Globular Cluster in Canes Venatici', type: 'star cluster' },
-  'M4': { catalog: 'M4', name: 'Globular Cluster in Scorpius', type: 'star cluster' },
-  'M5': { catalog: 'M5', name: 'Globular Cluster in Serpens', type: 'star cluster' },
+  'M2': { catalog: 'M2', name: 'Globular Cluster M2', type: 'star cluster' },
+  'M3': { catalog: 'M3', name: 'Globular Cluster M3', type: 'star cluster' },
+  'M4': { catalog: 'M4', name: 'Globular Cluster M4', type: 'star cluster' },
+  'M5': { catalog: 'M5', name: 'Globular Cluster M5', type: 'star cluster' },
   'M6': { catalog: 'M6', name: 'Butterfly Cluster', type: 'star cluster' },
   'M7': { catalog: 'M7', name: 'Ptolemy Cluster', type: 'star cluster' },
   'M8': { catalog: 'M8', name: 'Lagoon Nebula', type: 'nebula' },
-  'M9': { catalog: 'M9', name: 'Globular Cluster in Ophiuchus', type: 'star cluster' },
-  'M10': { catalog: 'M10', name: 'Globular Cluster in Ophiuchus', type: 'star cluster' },
   'M11': { catalog: 'M11', name: 'Wild Duck Cluster', type: 'star cluster' },
-  'M12': { catalog: 'M12', name: 'Globular Cluster in Ophiuchus', type: 'star cluster' },
   'M13': { catalog: 'M13', name: 'Great Globular Cluster in Hercules', type: 'star cluster' },
-  'M14': { catalog: 'M14', name: 'Globular Cluster in Ophiuchus', type: 'star cluster' },
-  'M15': { catalog: 'M15', name: 'Globular Cluster in Pegasus', type: 'star cluster' },
+  'M15': { catalog: 'M15', name: 'Globular Cluster M15', type: 'star cluster' },
   'M16': { catalog: 'M16', name: 'Eagle Nebula', type: 'nebula' },
   'M17': { catalog: 'M17', name: 'Omega Nebula', type: 'nebula' },
-  'M18': { catalog: 'M18', name: 'Open Cluster in Sagittarius', type: 'star cluster' },
-  'M19': { catalog: 'M19', name: 'Globular Cluster in Ophiuchus', type: 'star cluster' },
   'M20': { catalog: 'M20', name: 'Trifid Nebula', type: 'nebula' },
-  'M21': { catalog: 'M21', name: 'Open Cluster in Sagittarius', type: 'star cluster' },
   'M22': { catalog: 'M22', name: 'Sagittarius Cluster', type: 'star cluster' },
-  'M23': { catalog: 'M23', name: 'Open Cluster in Sagittarius', type: 'star cluster' },
-  'M24': { catalog: 'M24', name: 'Sagittarius Star Cloud', type: 'star cloud' },
-  'M25': { catalog: 'M25', name: 'Open Cluster in Sagittarius', type: 'star cluster' },
-  'M26': { catalog: 'M26', name: 'Open Cluster in Scutum', type: 'star cluster' },
   'M27': { catalog: 'M27', name: 'Dumbbell Nebula', type: 'nebula' },
-  'M28': { catalog: 'M28', name: 'Globular Cluster in Sagittarius', type: 'star cluster' },
-  'M29': { catalog: 'M29', name: 'Open Cluster in Cygnus', type: 'star cluster' },
-  'M30': { catalog: 'M30', name: 'Globular Cluster in Capricornus', type: 'star cluster' },
   'M31': { catalog: 'M31', name: 'Andromeda Galaxy', type: 'galaxy' },
-  'M32': { catalog: 'M32', name: 'Elliptical Galaxy in Andromeda', type: 'galaxy' },
+  'M32': { catalog: 'M32', name: 'Elliptical Galaxy M32', type: 'galaxy' },
   'M33': { catalog: 'M33', name: 'Triangulum Galaxy', type: 'galaxy' },
-  'M34': { catalog: 'M34', name: 'Open Cluster in Perseus', type: 'star cluster' },
-  'M35': { catalog: 'M35', name: 'Open Cluster in Gemini', type: 'star cluster' },
-  'M36': { catalog: 'M36', name: 'Open Cluster in Auriga', type: 'star cluster' },
-  'M37': { catalog: 'M37', name: 'Open Cluster in Auriga', type: 'star cluster' },
-  'M38': { catalog: 'M38', name: 'Open Cluster in Auriga', type: 'star cluster' },
-  'M39': { catalog: 'M39', name: 'Open Cluster in Cygnus', type: 'star cluster' },
-  'M40': { catalog: 'M40', name: 'Winnecke 4', type: 'double star' },
-  'M41': { catalog: 'M41', name: 'Open Cluster in Canis Major', type: 'star cluster' },
+  'M35': { catalog: 'M35', name: 'Open Cluster M35', type: 'star cluster' },
+  'M36': { catalog: 'M36', name: 'Pinwheel Cluster', type: 'star cluster' },
+  'M37': { catalog: 'M37', name: 'Open Cluster M37', type: 'star cluster' },
+  'M38': { catalog: 'M38', name: 'Starfish Cluster', type: 'star cluster' },
   'M42': { catalog: 'M42', name: 'Orion Nebula', type: 'nebula' },
   'M43': { catalog: 'M43', name: 'De Mairan\'s Nebula', type: 'nebula' },
   'M44': { catalog: 'M44', name: 'Beehive Cluster', type: 'star cluster' },
   'M45': { catalog: 'M45', name: 'Pleiades', type: 'star cluster' },
-  'M46': { catalog: 'M46', name: 'Open Cluster in Puppis', type: 'star cluster' },
-  'M47': { catalog: 'M47', name: 'Open Cluster in Puppis', type: 'star cluster' },
-  'M48': { catalog: 'M48', name: 'Open Cluster in Hydra', type: 'star cluster' },
-  'M49': { catalog: 'M49', name: 'Elliptical Galaxy in Virgo', type: 'galaxy' },
-  'M50': { catalog: 'M50', name: 'Open Cluster in Monoceros', type: 'star cluster' },
+  'M46': { catalog: 'M46', name: 'Open Cluster M46', type: 'star cluster' },
+  'M47': { catalog: 'M47', name: 'Open Cluster M47', type: 'star cluster' },
+  'M50': { catalog: 'M50', name: 'Open Cluster M50', type: 'star cluster' },
   'M51': { catalog: 'M51', name: 'Whirlpool Galaxy', type: 'galaxy' },
-  'M52': { catalog: 'M52', name: 'Open Cluster in Cassiopeia', type: 'star cluster' },
-  'M53': { catalog: 'M53', name: 'Globular Cluster in Coma Berenices', type: 'star cluster' },
-  'M54': { catalog: 'M54', name: 'Globular Cluster in Sagittarius', type: 'star cluster' },
-  'M55': { catalog: 'M55', name: 'Globular Cluster in Sagittarius', type: 'star cluster' },
-  'M56': { catalog: 'M56', name: 'Globular Cluster in Lyra', type: 'star cluster' },
+  'M52': { catalog: 'M52', name: 'Open Cluster M52', type: 'star cluster' },
   'M57': { catalog: 'M57', name: 'Ring Nebula', type: 'nebula' },
-  'M58': { catalog: 'M58', name: 'Spiral Galaxy in Virgo', type: 'galaxy' },
-  'M59': { catalog: 'M59', name: 'Elliptical Galaxy in Virgo', type: 'galaxy' },
-  'M60': { catalog: 'M60', name: 'Elliptical Galaxy in Virgo', type: 'galaxy' },
-  'M61': { catalog: 'M61', name: 'Spiral Galaxy in Virgo', type: 'galaxy' },
-  'M62': { catalog: 'M62', name: 'Globular Cluster in Scorpius', type: 'star cluster' },
   'M63': { catalog: 'M63', name: 'Sunflower Galaxy', type: 'galaxy' },
   'M64': { catalog: 'M64', name: 'Black Eye Galaxy', type: 'galaxy' },
   'M65': { catalog: 'M65', name: 'Leo Triplet Galaxy', type: 'galaxy' },
   'M66': { catalog: 'M66', name: 'Leo Triplet Galaxy', type: 'galaxy' },
-  'M67': { catalog: 'M67', name: 'Open Cluster in Cancer', type: 'star cluster' },
-  'M68': { catalog: 'M68', name: 'Globular Cluster in Hydra', type: 'star cluster' },
-  'M69': { catalog: 'M69', name: 'Globular Cluster in Sagittarius', type: 'star cluster' },
-  'M70': { catalog: 'M70', name: 'Globular Cluster in Sagittarius', type: 'star cluster' },
-  'M71': { catalog: 'M71', name: 'Globular Cluster in Sagitta', type: 'star cluster' },
-  'M72': { catalog: 'M72', name: 'Globular Cluster in Aquarius', type: 'star cluster' },
-  'M73': { catalog: 'M73', name: 'Asterism in Aquarius', type: 'asterism' },
-  'M74': { catalog: 'M74', name: 'Spiral Galaxy in Pisces', type: 'galaxy' },
-  'M75': { catalog: 'M75', name: 'Globular Cluster in Sagittarius', type: 'star cluster' },
-  'M76': { catalog: 'M76', name: 'Little Dumbbell Nebula', type: 'nebula' },
-  'M77': { catalog: 'M77', name: 'Spiral Galaxy in Cetus', type: 'galaxy' },
-  'M78': { catalog: 'M78', name: 'Reflection Nebula in Orion', type: 'nebula' },
-  'M79': { catalog: 'M79', name: 'Globular Cluster in Lepus', type: 'star cluster' },
-  'M80': { catalog: 'M80', name: 'Globular Cluster in Scorpius', type: 'star cluster' },
+  'M67': { catalog: 'M67', name: 'King Cobra Cluster', type: 'star cluster' },
+  'M78': { catalog: 'M78', name: 'Reflection Nebula M78', type: 'nebula' },
   'M81': { catalog: 'M81', name: 'Bode\'s Galaxy', type: 'galaxy' },
   'M82': { catalog: 'M82', name: 'Cigar Galaxy', type: 'galaxy' },
-  'M83': { catalog: 'M83', name: 'Southern Pinwheel Galaxy', type: 'galaxy' },
-  'M84': { catalog: 'M84', name: 'Elliptical Galaxy in Virgo', type: 'galaxy' },
-  'M85': { catalog: 'M85', name: 'Lenticular Galaxy in Coma Berenices', type: 'galaxy' },
-  'M86': { catalog: 'M86', name: 'Elliptical Galaxy in Virgo', type: 'galaxy' },
-  'M87': { catalog: 'M87', name: 'Virgo A Galaxy', type: 'galaxy' },
-  'M88': { catalog: 'M88', name: 'Spiral Galaxy in Coma Berenices', type: 'galaxy' },
-  'M89': { catalog: 'M89', name: 'Elliptical Galaxy in Virgo', type: 'galaxy' },
-  'M90': { catalog: 'M90', name: 'Spiral Galaxy in Virgo', type: 'galaxy' },
-  'M91': { catalog: 'M91', name: 'Spiral Galaxy in Coma Berenices', type: 'galaxy' },
-  'M92': { catalog: 'M92', name: 'Globular Cluster in Hercules', type: 'star cluster' },
-  'M93': { catalog: 'M93', name: 'Open Cluster in Puppis', type: 'star cluster' },
+  'M92': { catalog: 'M92', name: 'Globular Cluster M92', type: 'star cluster' },
   'M94': { catalog: 'M94', name: 'Cat\'s Eye Galaxy', type: 'galaxy' },
-  'M95': { catalog: 'M95', name: 'Spiral Galaxy in Leo', type: 'galaxy' },
-  'M96': { catalog: 'M96', name: 'Spiral Galaxy in Leo', type: 'galaxy' },
+  'M95': { catalog: 'M95', name: 'Barred Spiral Galaxy M95', type: 'galaxy' },
+  'M96': { catalog: 'M96', name: 'Elliptical Galaxy M96', type: 'galaxy' },
   'M97': { catalog: 'M97', name: 'Owl Nebula', type: 'nebula' },
-  'M98': { catalog: 'M98', name: 'Spiral Galaxy in Coma Berenices', type: 'galaxy' },
-  'M99': { catalog: 'M99', name: 'Spiral Galaxy in Coma Berenices', type: 'galaxy' },
-  'M100': { catalog: 'M100', name: 'Spiral Galaxy in Coma Berenices', type: 'galaxy' },
   'M101': { catalog: 'M101', name: 'Pinwheel Galaxy', type: 'galaxy' },
-  'M102': { catalog: 'M102', name: 'Spindle Galaxy', type: 'galaxy' },
-  'M103': { catalog: 'M103', name: 'Open Cluster in Cassiopeia', type: 'star cluster' },
+  'M103': { catalog: 'M103', name: 'Open Cluster M103', type: 'star cluster' },
   'M104': { catalog: 'M104', name: 'Sombrero Galaxy', type: 'galaxy' },
-  'M105': { catalog: 'M105', name: 'Elliptical Galaxy in Leo', type: 'galaxy' },
-  'M106': { catalog: 'M106', name: 'Spiral Galaxy in Canes Venatici', type: 'galaxy' },
-  'M107': { catalog: 'M107', name: 'Globular Cluster in Ophiuchus', type: 'star cluster' },
+  'M106': { catalog: 'M106', name: 'Spiral Galaxy M106', type: 'galaxy' },
   'M108': { catalog: 'M108', name: 'Surfboard Galaxy', type: 'galaxy' },
-  'M109': { catalog: 'M109', name: 'Spiral Galaxy in Ursa Major', type: 'galaxy' },
-  'M110': { catalog: 'M110', name: 'Dwarf Elliptical Galaxy', type: 'galaxy' },
+  'M109': { catalog: 'M109', name: 'Barred Spiral Galaxy M109', type: 'galaxy' },
+  'M110': { catalog: 'M110', name: 'Elliptical Galaxy M110', type: 'galaxy' },
 
-  // ===== NGC CATALOG (Popular Objects) =====
+  // ===== NGC CATALOG - Popular Objects =====
   'NGC224': { catalog: 'NGC224', name: 'Andromeda Galaxy', type: 'galaxy' },
   'NGC253': { catalog: 'NGC253', name: 'Sculptor Galaxy', type: 'galaxy' },
   'NGC281': { catalog: 'NGC281', name: 'Pacman Nebula', type: 'nebula' },
   'NGC598': { catalog: 'NGC598', name: 'Triangulum Galaxy', type: 'galaxy' },
-  'NGC869': { catalog: 'NGC869', name: 'Double Cluster in Persei', type: 'star cluster' },
-  'NGC884': { catalog: 'NGC884', name: 'Double Cluster in Persei', type: 'star cluster' },
+  'NGC869': { catalog: 'NGC869', name: 'Double Cluster', type: 'star cluster' },
+  'NGC884': { catalog: 'NGC884', name: 'Double Cluster', type: 'star cluster' },
+  'NGC891': { catalog: 'NGC891', name: 'Silver Sliver Galaxy', type: 'galaxy' },
+  'NGC1316': { catalog: 'NGC1316', name: 'Fornax A Galaxy', type: 'galaxy' },
   'NGC1499': { catalog: 'NGC1499', name: 'California Nebula', type: 'nebula' },
   'NGC1952': { catalog: 'NGC1952', name: 'Crab Nebula', type: 'nebula' },
   'NGC1976': { catalog: 'NGC1976', name: 'Orion Nebula', type: 'nebula' },
   'NGC1977': { catalog: 'NGC1977', name: 'Running Man Nebula', type: 'nebula' },
+  'NGC2024': { catalog: 'NGC2024', name: 'Flame Nebula', type: 'nebula' },
   'NGC2070': { catalog: 'NGC2070', name: 'Tarantula Nebula', type: 'nebula' },
-  'NGC2244': { catalog: 'NGC2244', name: 'Rosette Nebula', type: 'nebula' },
+  'NGC2175': { catalog: 'NGC2175', name: 'Monkey Head Nebula', type: 'nebula' },
   'NGC2237': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
-  'NGC2264': { catalog: 'NGC2264', name: 'Cone Nebula', type: 'star cluster' },
+  'NGC2175': { catalog: 'NGC2175', name: 'Monkey Head Nebula', type: 'nebula' },
+  'NGC2237': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
+  'NGC2244': { catalog: 'NGC2244', name: 'Rosette Nebula Open Cluster', type: 'star cluster' },
+  'NGC2264': { catalog: 'NGC2264', name: 'Cone Nebula', type: 'nebula' },
   'NGC2359': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
-  'NGC2392': { catalog: 'NGC2392', name: 'Eskimo Nebula', type: 'nebula' },
-  'NGC3031': { catalog: 'NGC3031', name: 'Bode\'s Galaxy', type: 'galaxy' },
-  'NGC3034': { catalog: 'NGC3034', name: 'Cigar Galaxy', type: 'galaxy' },
   'NGC3372': { catalog: 'NGC3372', name: 'Carina Nebula', type: 'nebula' },
-  'NGC4594': { catalog: 'NGC4594', name: 'Sombrero Galaxy', type: 'galaxy' },
+  'NGC4565': { catalog: 'NGC4565', name: 'Needle Galaxy', type: 'galaxy' },
   'NGC5128': { catalog: 'NGC5128', name: 'Centaurus A', type: 'galaxy' },
   'NGC5194': { catalog: 'NGC5194', name: 'Whirlpool Galaxy', type: 'galaxy' },
-  'NGC5236': { catalog: 'NGC5236', name: 'Southern Pinwheel Galaxy', type: 'galaxy' },
   'NGC6302': { catalog: 'NGC6302', name: 'Bug Nebula', type: 'nebula' },
-  'NGC6514': { catalog: 'NGC6514', name: 'Trifid Nebula', type: 'nebula' },
-  'NGC6523': { catalog: 'NGC6523', name: 'Lagoon Nebula', type: 'nebula' },
+  'NGC6334': { catalog: 'NGC6334', name: 'Cat\'s Paw Nebula', type: 'nebula' },
   'NGC6543': { catalog: 'NGC6543', name: 'Cat\'s Eye Nebula', type: 'nebula' },
-  'NGC6611': { catalog: 'NGC6611', name: 'Eagle Nebula', type: 'nebula' },
-  'NGC6618': { catalog: 'NGC6618', name: 'Omega Nebula', type: 'nebula' },
   'NGC6720': { catalog: 'NGC6720', name: 'Ring Nebula', type: 'nebula' },
-  'NGC6826': { catalog: 'NGC6826', name: 'Blinking Nebula', type: 'nebula' },
-  'NGC6853': { catalog: 'NGC6853', name: 'Dumbbell Nebula', type: 'nebula' },
   'NGC6888': { catalog: 'NGC6888', name: 'Crescent Nebula', type: 'nebula' },
+  'NGC6939': { catalog: 'NGC6939', name: 'NGC6939 Cluster', type: 'star cluster' },
   'NGC6960': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
   'NGC6992': { catalog: 'NGC6992', name: 'Eastern Veil Nebula', type: 'nebula' },
   'NGC7000': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
   'NGC7293': { catalog: 'NGC7293', name: 'Helix Nebula', type: 'nebula' },
-  'NGC7317': { catalog: 'NGC7317', name: 'Stephan\'s Quintet', type: 'galaxy group' },
-  'NGC7331': { catalog: 'NGC7331', name: 'Caldwell 30', type: 'galaxy' },
+  'NGC7380': { catalog: 'NGC7380', name: 'Wizard Nebula', type: 'nebula' },
   'NGC7635': { catalog: 'NGC7635', name: 'Bubble Nebula', type: 'nebula' },
-  'NGC7654': { catalog: 'NGC7654', name: 'Salt and Pepper Cluster', type: 'star cluster' },
+  'NGC7822': { catalog: 'NGC7822', name: 'NGC7822 Nebula', type: 'nebula' },
 
-  // ===== IC CATALOG (Index Catalogue) =====
-  'IC59': { catalog: 'IC59', name: 'Gamma Cassiopeiae Nebula', type: 'nebula' },
+  // ===== IC CATALOG - Popular Objects =====
   'IC63': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' },
-  'IC342': { catalog: 'IC342', name: 'Hidden Galaxy', type: 'galaxy' },
-  'IC405': { catalog: 'IC405', name: 'Flaming Star Nebula', type: 'nebula' },
   'IC410': { catalog: 'IC410', name: 'Tadpoles Nebula', type: 'nebula' },
   'IC417': { catalog: 'IC417', name: 'Spider Nebula', type: 'nebula' },
   'IC434': { catalog: 'IC434', name: 'Horsehead Nebula', type: 'nebula' },
   'IC443': { catalog: 'IC443', name: 'Jellyfish Nebula', type: 'nebula' },
+  'IC1284': { catalog: 'IC1284', name: 'IC1284 Nebula', type: 'nebula' },
+  'IC1295': { catalog: 'IC1295', name: 'IC1295 Nebula', type: 'nebula' },
+  'IC1318': { catalog: 'IC1318', name: 'Butterfly Nebula', type: 'nebula' },
   'IC1396': { catalog: 'IC1396', name: 'Elephant\'s Trunk Nebula', type: 'nebula' },
   'IC1805': { catalog: 'IC1805', name: 'Heart Nebula', type: 'nebula' },
   'IC1848': { catalog: 'IC1848', name: 'Soul Nebula', type: 'nebula' },
   'IC2118': { catalog: 'IC2118', name: 'Witch Head Nebula', type: 'nebula' },
   'IC2177': { catalog: 'IC2177', name: 'Seagull Nebula', type: 'nebula' },
-  'IC5067': { catalog: 'IC5067', name: 'Pelican Nebula', type: 'nebula' },
+  'IC4628': { catalog: 'IC4628', name: 'Prawn Nebula', type: 'nebula' },
   'IC5070': { catalog: 'IC5070', name: 'Pelican Nebula', type: 'nebula' },
   'IC5146': { catalog: 'IC5146', name: 'Cocoon Nebula', type: 'nebula' },
 
-  // ===== SHARPLESS CATALOG (Sh2) =====
+  // ===== CALDWELL CATALOG - Popular Objects =====
+  'C1': { catalog: 'C1', name: 'NGC188', type: 'star cluster' },
+  'C2': { catalog: 'C2', name: 'NGC40', type: 'nebula' },
+  'C4': { catalog: 'C4', name: 'Iris Nebula', type: 'nebula' },
+  'C14': { catalog: 'C14', name: 'Double Cluster', type: 'star cluster' },
+  'C20': { catalog: 'C20', name: 'North America Nebula', type: 'nebula' },
+  'C27': { catalog: 'C27', name: 'Crescent Nebula', type: 'nebula' },
+  'C33': { catalog: 'C33', name: 'Eastern Veil Nebula', type: 'nebula' },
+  'C34': { catalog: 'C34', name: 'Western Veil Nebula', type: 'nebula' },
+  'C49': { catalog: 'C49', name: 'Rosette Nebula', type: 'nebula' },
+  'C50': { catalog: 'C50', name: 'Cone Nebula', type: 'nebula' },
+
+  // ===== SHARPLESS CATALOG - Popular Emission Nebulae =====
   'SH2-101': { catalog: 'Sh2-101', name: 'Tulip Nebula', type: 'nebula' },
   'SH2-115': { catalog: 'Sh2-115', name: 'Abell 71', type: 'nebula' },
-  'SH2-119': { catalog: 'Sh2-119', name: 'Abell 85', type: 'nebula' },
   'SH2-129': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
   'SH2-132': { catalog: 'Sh2-132', name: 'Lion Nebula', type: 'nebula' },
-  'SH2-136': { catalog: 'Sh2-136', name: 'Ghost Nebula', type: 'nebula' },
   'SH2-140': { catalog: 'Sh2-140', name: 'Wizard Nebula', type: 'nebula' },
   'SH2-155': { catalog: 'Sh2-155', name: 'Cave Nebula', type: 'nebula' },
-  'SH2-171': { catalog: 'Sh2-171', name: 'NGC7822', type: 'nebula' },
-  'SH2-185': { catalog: 'Sh2-185', name: 'Ghost of Cassiopeia', type: 'nebula' },
+  'SH2-185': { catalog: 'Sh2-185', name: 'Sh2-185 Nebula', type: 'nebula' },
+  'SH2-212': { catalog: 'Sh2-212', name: 'Sh2-212 Nebula', type: 'nebula' },
+  'SH2-216': { catalog: 'Sh2-216', name: 'Lower\'s Nebula', type: 'nebula' },
   'SH2-240': { catalog: 'Sh2-240', name: 'Simeis 147', type: 'nebula' },
-  'SH2-276': { catalog: 'Sh2-276', name: 'Barnard\'s Loop', type: 'nebula' },
+  'SH2-254': { catalog: 'Sh2-254', name: 'Sh2-254 Nebula', type: 'nebula' },
+  'SH2-308': { catalog: 'Sh2-308', name: 'Dolphin Head Nebula', type: 'nebula' },
 
-  // ===== COMMON ALTERNATIVE NAMES =====
+  // ===== BARNARD CATALOG - Dark Nebulae =====
+  'B33': { catalog: 'B33', name: 'Horsehead Nebula', type: 'dark nebula' },
+  'B72': { catalog: 'B72', name: 'Snake Nebula', type: 'dark nebula' },
+  'B86': { catalog: 'B86', name: 'Ink Spot Nebula', type: 'dark nebula' },
+  'B142': { catalog: 'B142', name: 'E Nebula', type: 'dark nebula' },
+  'B143': { catalog: 'B143', name: 'E Nebula', type: 'dark nebula' },
+  'B150': { catalog: 'B150', name: 'Seahorse Nebula', type: 'dark nebula' },
+
+  // ===== ABELL CATALOG - Planetary Nebulae =====
+  'A21': { catalog: 'Abell 21', name: 'Medusa Nebula', type: 'nebula' },
+  'A39': { catalog: 'Abell 39', name: 'Abell 39', type: 'nebula' },
+  'A426': { catalog: 'Abell 426', name: 'Perseus Cluster', type: 'galaxy cluster' },
+
+  // ===== VAN DEN BERGH CATALOG - Reflection Nebulae =====
+  'VDB14': { catalog: 'vdB 14', name: 'vdB 14', type: 'nebula' },
+  'VDB15': { catalog: 'vdB 15', name: 'vdB 15', type: 'nebula' },
+  'VDB149': { catalog: 'vdB 149', name: 'Reflection Nebula vdB 149', type: 'nebula' },
+  'VDB152': { catalog: 'vdB 152', name: 'Reflection Nebula vdB 152', type: 'nebula' },
+
+  // ===== COMMON NAME MAPPINGS =====
   'ANDROMEDA': { catalog: 'M31', name: 'Andromeda Galaxy', type: 'galaxy' },
   'ORION': { catalog: 'M42', name: 'Orion Nebula', type: 'nebula' },
   'PLEIADES': { catalog: 'M45', name: 'Pleiades', type: 'star cluster' },
   'WHIRLPOOL': { catalog: 'M51', name: 'Whirlpool Galaxy', type: 'galaxy' },
-  'RING': { catalog: 'M57', name: 'Ring Nebula', type: 'nebula' },
-  'DUMBBELL': { catalog: 'M27', name: 'Dumbbell Nebula', type: 'nebula' },
-  'EAGLE': { catalog: 'M16', name: 'Eagle Nebula', type: 'nebula' },
-  'OMEGA': { catalog: 'M17', name: 'Omega Nebula', type: 'nebula' },
-  'TRIFID': { catalog: 'M20', name: 'Trifid Nebula', type: 'nebula' },
-  'LAGOON': { catalog: 'M8', name: 'Lagoon Nebula', type: 'nebula' },
   'CRAB': { catalog: 'M1', name: 'Crab Nebula', type: 'nebula' },
-  'OWL': { catalog: 'M97', name: 'Owl Nebula', type: 'nebula' },
-  'SOMBRERO': { catalog: 'M104', name: 'Sombrero Galaxy', type: 'galaxy' },
-  'PINWHEEL': { catalog: 'M101', name: 'Pinwheel Galaxy', type: 'galaxy' },
-  'SUNFLOWER': { catalog: 'M63', name: 'Sunflower Galaxy', type: 'galaxy' },
+  'RING': { catalog: 'M57', name: 'Ring Nebula', type: 'nebula' },
+  'EAGLE': { catalog: 'M16', name: 'Eagle Nebula', type: 'nebula' },
+  'LAGOON': { catalog: 'M8', name: 'Lagoon Nebula', type: 'nebula' },
+  'TRIFID': { catalog: 'M20', name: 'Trifid Nebula', type: 'nebula' },
+  'DUMBBELL': { catalog: 'M27', name: 'Dumbbell Nebula', type: 'nebula' },
   'TRIANGULUM': { catalog: 'M33', name: 'Triangulum Galaxy', type: 'galaxy' },
+  'PINWHEEL': { catalog: 'M101', name: 'Pinwheel Galaxy', type: 'galaxy' },
+  'SOMBRERO': { catalog: 'M104', name: 'Sombrero Galaxy', type: 'galaxy' },
+  'BODES': { catalog: 'M81', name: 'Bode\'s Galaxy', type: 'galaxy' },
+  'CIGAR': { catalog: 'M82', name: 'Cigar Galaxy', type: 'galaxy' },
+  'OWL': { catalog: 'M97', name: 'Owl Nebula', type: 'nebula' },
+  'SUNFLOWER': { catalog: 'M63', name: 'Sunflower Galaxy', type: 'galaxy' },
+  'BLACKEYE': { catalog: 'M64', name: 'Black Eye Galaxy', type: 'galaxy' },
   'BEEHIVE': { catalog: 'M44', name: 'Beehive Cluster', type: 'star cluster' },
   'HERCULES': { catalog: 'M13', name: 'Great Globular Cluster in Hercules', type: 'star cluster' },
+  
+  'HORSEHEAD': { catalog: 'B33', name: 'Horsehead Nebula', type: 'dark nebula' },
+  'FLAME': { catalog: 'NGC2024', name: 'Flame Nebula', type: 'nebula' },
+  'ROSETTE': { catalog: 'NGC2237', name: 'Rosette Nebula', type: 'nebula' },
+  'CONE': { catalog: 'NGC2264', name: 'Cone Nebula', type: 'nebula' },
   'CALIFORNIA': { catalog: 'NGC1499', name: 'California Nebula', type: 'nebula' },
-  'ROSETTE': { catalog: 'NGC2244', name: 'Rosette Nebula', type: 'nebula' },
-  'HORSEHEAD': { catalog: 'IC434', name: 'Horsehead Nebula', type: 'nebula' },
-  'HORSE': { catalog: 'IC434', name: 'Horsehead Nebula', type: 'nebula' },
-  'FLAMING': { catalog: 'IC405', name: 'Flaming Star Nebula', type: 'nebula' },
-  'TADPOLES': { catalog: 'IC410', name: 'Tadpoles Nebula', type: 'nebula' },
+  'RUNNING': { catalog: 'NGC1977', name: 'Running Man Nebula', type: 'nebula' },
   'HEART': { catalog: 'IC1805', name: 'Heart Nebula', type: 'nebula' },
   'SOUL': { catalog: 'IC1848', name: 'Soul Nebula', type: 'nebula' },
-  'ELEPHANT': { catalog: 'IC1396', name: 'Elephant\'s Trunk Nebula', type: 'nebula' },
-  'COCOON': { catalog: 'IC5146', name: 'Cocoon Nebula', type: 'nebula' },
-  'PELICAN': { catalog: 'IC5070', name: 'Pelican Nebula', type: 'nebula' },
-  'WIZARD': { catalog: 'Sh2-140', name: 'Wizard Nebula', type: 'nebula' },
-  'CAVE': { catalog: 'Sh2-155', name: 'Cave Nebula', type: 'nebula' },
-  'TULIP': { catalog: 'Sh2-101', name: 'Tulip Nebula', type: 'nebula' },
-  'JELLYFISH': { catalog: 'IC443', name: 'Jellyfish Nebula', type: 'nebula' },
-  'VEIL': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
-  'NORTH': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
-  'AMERICA': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
-  'BUBBLE': { catalog: 'NGC7635', name: 'Bubble Nebula', type: 'nebula' },
-  'HELIX': { catalog: 'NGC7293', name: 'Helix Nebula', type: 'nebula' },
-  'CRESCENT': { catalog: 'NGC6888', name: 'Crescent Nebula', type: 'nebula' },
-  'PACMAN': { catalog: 'NGC281', name: 'Pacman Nebula', type: 'nebula' },
-  'CATS': { catalog: 'NGC6543', name: 'Cat\'s Eye Nebula', type: 'nebula' },
   'WITCH': { catalog: 'IC2118', name: 'Witch Head Nebula', type: 'nebula' },
   'SEAGULL': { catalog: 'IC2177', name: 'Seagull Nebula', type: 'nebula' },
-  'GHOST': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' },
+  'COCOON': { catalog: 'IC5146', name: 'Cocoon Nebula', type: 'nebula' },
+  'PELICAN': { catalog: 'IC5070', name: 'Pelican Nebula', type: 'nebula' },
+  'ELEPHANT': { catalog: 'IC1396', name: 'Elephant\'s Trunk Nebula', type: 'nebula' },
+  'TADPOLES': { catalog: 'IC410', name: 'Tadpoles Nebula', type: 'nebula' },
+  'BUTTERFLY': { catalog: 'IC1318', name: 'Butterfly Nebula', type: 'nebula' },
+  'JELLYFISH': { catalog: 'IC443', name: 'Jellyfish Nebula', type: 'nebula' },
+  'SPIDER': { catalog: 'IC417', name: 'Spider Nebula', type: 'nebula' },
+  
+  'CRESCENT': { catalog: 'NGC6888', name: 'Crescent Nebula', type: 'nebula' },
+  'BUBBLE': { catalog: 'NGC7635', name: 'Bubble Nebula', type: 'nebula' },
+  'VEIL': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
+  'EASTERN': { catalog: 'NGC6992', name: 'Eastern Veil Nebula', type: 'nebula' },
+  'WESTERN': { catalog: 'NGC6960', name: 'Western Veil Nebula', type: 'nebula' },
+  'NORTH': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
+  'AMERICA': { catalog: 'NGC7000', name: 'North America Nebula', type: 'nebula' },
+  'HELIX': { catalog: 'NGC7293', name: 'Helix Nebula', type: 'nebula' },
+  'PACMAN': { catalog: 'NGC281', name: 'Pacman Nebula', type: 'nebula' },
+  'WIZARD': { catalog: 'NGC7380', name: 'Wizard Nebula', type: 'nebula' },
+  'CARINA': { catalog: 'NGC3372', name: 'Carina Nebula', type: 'nebula' },
+  'NEEDLE': { catalog: 'NGC4565', name: 'Needle Galaxy', type: 'galaxy' },
+  'CENTAURUS': { catalog: 'NGC5128', name: 'Centaurus A', type: 'galaxy' },
   'THOR': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
-  'HELMET': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' }
+  'HELMET': { catalog: 'NGC2359', name: 'Thor\'s Helmet', type: 'nebula' },
+  'MONKEY': { catalog: 'NGC2175', name: 'Monkey Head Nebula', type: 'nebula' },
+  'TARANTULA': { catalog: 'NGC2070', name: 'Tarantula Nebula', type: 'nebula' },
+  'CATS': { catalog: 'NGC6543', name: 'Cat\'s Eye Nebula', type: 'nebula' },
+  'CATS': { catalog: 'NGC6334', name: 'Cat\'s Paw Nebula', type: 'nebula' },
+  'BUG': { catalog: 'NGC6302', name: 'Bug Nebula', type: 'nebula' },
+  'MEDUSA': { catalog: 'Abell 21', name: 'Medusa Nebula', type: 'nebula' },
+  
+  'TULIP': { catalog: 'Sh2-101', name: 'Tulip Nebula', type: 'nebula' },
+  'CAVE': { catalog: 'Sh2-155', name: 'Cave Nebula', type: 'nebula' },
+  'FLYING': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
+  'BAT': { catalog: 'Sh2-129', name: 'Flying Bat Nebula', type: 'nebula' },
+  'LION': { catalog: 'Sh2-132', name: 'Lion Nebula', type: 'nebula' },
+  'DOLPHIN': { catalog: 'Sh2-308', name: 'Dolphin Head Nebula', type: 'nebula' },
+  
+  'DOUBLE': { catalog: 'NGC869', name: 'Double Cluster', type: 'star cluster' },
+  'IRIS': { catalog: 'C4', name: 'Iris Nebula', type: 'nebula' },
+  'SCULPTOR': { catalog: 'NGC253', name: 'Sculptor Galaxy', type: 'galaxy' },
+  'SILVER': { catalog: 'NGC891', name: 'Silver Sliver Galaxy', type: 'galaxy' },
+  'SLIVER': { catalog: 'NGC891', name: 'Silver Sliver Galaxy', type: 'galaxy' },
+  'FORNAX': { catalog: 'NGC1316', name: 'Fornax A Galaxy', type: 'galaxy' },
+  'PRAWN': { catalog: 'IC4628', name: 'Prawn Nebula', type: 'nebula' },
+  'GHOST': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' },
+  'CASSIOPEIA': { catalog: 'IC63', name: 'Ghost of Cassiopeia', type: 'nebula' }
 };
 
 // Parse astronomical object from filename
@@ -875,12 +342,12 @@ function parseAstronomicalObject(filename) {
         break;
       } else {
         catalogDesignation = upperPart;
-        objectName = upperPart; // Just use catalog designation, not "Messier XX"
+        objectName = `Messier ${upperPart.substring(1)}`;
         break;
       }
     }
     
-    // NGC: NGC + number
+    // NGC: NGC + number (handle both NGC1234 and NGC 1234 formats)
     if (/^NGC\d+$/.test(upperPart)) {
       if (ASTRONOMICAL_OBJECTS[upperPart]) {
         const obj = ASTRONOMICAL_OBJECTS[upperPart];
@@ -894,7 +361,23 @@ function parseAstronomicalObject(filename) {
       }
     }
     
-    // IC: IC + number
+    // NGC with space: NGC + number in next part
+    if (upperPart === 'NGC' && i + 1 < parts.length && /^\d+$/.test(parts[i + 1])) {
+      const number = parts[i + 1];
+      const normalizedNgc = `NGC${number}`;
+      if (ASTRONOMICAL_OBJECTS[normalizedNgc]) {
+        const obj = ASTRONOMICAL_OBJECTS[normalizedNgc];
+        catalogDesignation = obj.catalog;
+        objectName = obj.name;
+        break;
+      } else {
+        catalogDesignation = `NGC${number}`;
+        objectName = `NGC${number}`;
+        break;
+      }
+    }
+    
+    // IC: IC + number (handle both IC1234 and IC 1234 formats)
     if (/^IC\d+$/.test(upperPart)) {
       if (ASTRONOMICAL_OBJECTS[upperPart]) {
         const obj = ASTRONOMICAL_OBJECTS[upperPart];
@@ -904,6 +387,22 @@ function parseAstronomicalObject(filename) {
       } else {
         catalogDesignation = upperPart;
         objectName = `${upperPart}`;
+        break;
+      }
+    }
+    
+    // IC with space: IC + number in next part
+    if (upperPart === 'IC' && i + 1 < parts.length && /^\d+$/.test(parts[i + 1])) {
+      const number = parts[i + 1];
+      const normalizedIc = `IC${number}`;
+      if (ASTRONOMICAL_OBJECTS[normalizedIc]) {
+        const obj = ASTRONOMICAL_OBJECTS[normalizedIc];
+        catalogDesignation = obj.catalog;
+        objectName = obj.name;
+        break;
+      } else {
+        catalogDesignation = `IC${number}`;
+        objectName = `IC${number}`;
         break;
       }
     }
@@ -951,6 +450,66 @@ function parseAstronomicalObject(filename) {
       } else {
         catalogDesignation = `Sh2-${number}`;
         objectName = catalogDesignation;
+        break;
+      }
+    }
+    
+    // Caldwell: C + number
+    if (/^C\d+$/.test(upperPart)) {
+      if (ASTRONOMICAL_OBJECTS[upperPart]) {
+        const obj = ASTRONOMICAL_OBJECTS[upperPart];
+        catalogDesignation = obj.catalog;
+        objectName = obj.name;
+        break;
+      } else {
+        catalogDesignation = upperPart;
+        objectName = `Caldwell ${upperPart.substring(1)}`;
+        break;
+      }
+    }
+    
+    // Barnard: B + number
+    if (/^B\d+$/.test(upperPart)) {
+      if (ASTRONOMICAL_OBJECTS[upperPart]) {
+        const obj = ASTRONOMICAL_OBJECTS[upperPart];
+        catalogDesignation = obj.catalog;
+        objectName = obj.name;
+        break;
+      } else {
+        catalogDesignation = upperPart;
+        objectName = `Barnard ${upperPart.substring(1)}`;
+        break;
+      }
+    }
+    
+    // Abell: A + number or ABELL + number
+    if (/^A\d+$/.test(upperPart) || /^ABELL\d+$/.test(upperPart)) {
+      const number = upperPart.startsWith('ABELL') ? upperPart.substring(5) : upperPart.substring(1);
+      const normalizedA = `A${number}`;
+      if (ASTRONOMICAL_OBJECTS[normalizedA]) {
+        const obj = ASTRONOMICAL_OBJECTS[normalizedA];
+        catalogDesignation = obj.catalog;
+        objectName = obj.name;
+        break;
+      } else {
+        catalogDesignation = `Abell ${number}`;
+        objectName = `Abell ${number}`;
+        break;
+      }
+    }
+    
+    // van den Bergh: VDB + number, VdB + number, or VDB + number
+    if (/^VDB\d+$/.test(upperPart) || /^VdB\d+$/.test(upperPart)) {
+      const number = upperPart.substring(3);
+      const normalizedVdb = `VDB${number}`;
+      if (ASTRONOMICAL_OBJECTS[normalizedVdb]) {
+        const obj = ASTRONOMICAL_OBJECTS[normalizedVdb];
+        catalogDesignation = obj.catalog;
+        objectName = obj.name;
+        break;
+      } else {
+        catalogDesignation = `vdB ${number}`;
+        objectName = `vdB ${number}`;
         break;
       }
     }
@@ -1082,6 +641,8 @@ function getImageType(folder) {
     return 'terrestrial';
   } else if (folder === 'equipment') {
     return 'equipment';
+  } else if (folder.includes('events')) {
+    return 'celestial-events';
   } else {
     return 'astrophotography';
   }
@@ -1094,19 +655,22 @@ function createMetadataEntry(image) {
     case 'terrestrial':
       return {
         "location": generateLocationFromFolder(image.folder), // e.g., "Yellowstone National Park"
-        "name": generateCleanName(image.filename),      // e.g., "Mammoth Springs"
-        "protected": false,   // Set to true to prevent automatic updates
-        "youtubeLink": "",    // Terrestrial images excluded from video assignments
-        "youtubeTitle": ""
+        "name": generateCleanName(image.filename)      // e.g., "Mammoth Springs"
       };
       
     case 'equipment':
       return {
         "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
-        "equipmentInfo": "",  // e.g., "Smart Telescope by ZWO"
-        "protected": false,   // Set to true to prevent automatic updates
-        "youtubeLink": "",    // Equipment images excluded from video assignments
-        "youtubeTitle": ""
+        "equipmentInfo": ""  // e.g., "Smart Telescope by ZWO"
+      };
+      
+    case 'celestial-events':
+      return {
+        "catalogDesignation": "",
+        "objectName": generateCleanName(image.filename), // e.g., "Total Eclipse" instead of "2017 Total Eclipse1"
+        "location": "Maple Valley, WA",
+        "equipment": "",
+        "exposure": ""
       };
       
     default: // astrophotography
@@ -1116,10 +680,7 @@ function createMetadataEntry(image) {
         "objectName": parsed.objectName,
         "location": "Maple Valley, WA",
         "equipment": "",
-        "exposure": "",
-        "protected": false,   // Set to true to prevent automatic updates
-        "youtubeLink": "",
-        "youtubeTitle": ""
+        "exposure": ""
       };
   }
 }
@@ -1136,13 +697,6 @@ function updateMetadata() {
   let totalImages = allImages.length;
   
   console.log(`📁 Found ${totalImages} images across all folders`);
-  
-  // Ensure all existing entries have a protected field
-  Object.keys(existingMetadata).forEach(filename => {
-    if (typeof existingMetadata[filename].protected === 'undefined') {
-      existingMetadata[filename].protected = false;
-    }
-  });
   
   // First, check for entries that no longer have corresponding files (cleanup)
   const currentImageFilenames = new Set(allImages.map(img => img.filename));
@@ -1173,69 +727,41 @@ function updateMetadata() {
       // Create new entry with appropriate fields for image type
       existingMetadata[image.filename] = createMetadataEntry(image);
     } else {
-      // For terrestrial and equipment images, update if not protected
+      // For terrestrial and equipment images, update if fields are empty
       if (imageType === 'terrestrial') {
         const entry = existingMetadata[image.filename];
-        // PROTECTION: Check protected flag first
-        if (entry.protected) {
-          console.log(`🔒 PROTECTED: Manual entry preserved for: ${image.filename} - "${entry.name}"`);
+        const needsUpdate = !entry.location || !entry.name || entry.location === '' || entry.name === '';
+        
+        if (needsUpdate) {
+          console.log(`🔄 Updating terrestrial metadata for: ${image.filename} (${imageType} in ${image.folder})`);
+          entry.location = generateLocationFromFolder(image.folder);
+          entry.name = generateCleanName(image.filename);
+          updatedEntries++;
         } else {
-          const needsUpdate = !entry.location || !entry.name || entry.location === '' || entry.name === '';
-          
-          if (needsUpdate) {
-            console.log(`🔄 Updating terrestrial metadata for: ${image.filename} (${imageType} in ${image.folder})`);
-            entry.location = generateLocationFromFolder(image.folder);
-            entry.name = generateCleanName(image.filename);
-            updatedEntries++;
-          } else {
-            console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
-          }
+          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
         }
       } else if (imageType === 'equipment') {
         const entry = existingMetadata[image.filename];
-        // PROTECTION: Check protected flag first
-        if (entry.protected) {
-          console.log(`🔒 PROTECTED: Manual entry preserved for: ${image.filename} - "${entry.equipmentName}"`);
-        } else {
-          // FALLBACK: Don't override manual entries - only update if completely empty or generic
-          const genericNames = ['My Gear', 'Equipment', generateCleanName(image.filename)];
-          const isGenericOrEmpty = !entry.equipmentName || entry.equipmentName === '' || genericNames.includes(entry.equipmentName);
-          
-          if (isGenericOrEmpty) {
-            console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
-            entry.equipmentName = generateCleanName(image.filename);
-            updatedEntries++;
-          } else {
-            console.log(`🔒 PROTECTED: Manual equipment entry preserved for: ${image.filename} - "${entry.equipmentName}"`);
+        // Only update if both equipmentName and equipmentInfo are empty/missing
+        // This preserves any manual edits to equipment descriptions
+        const needsUpdate = (!entry.equipmentName || entry.equipmentName === '') && 
+                           (!entry.equipmentInfo || entry.equipmentInfo === '');
+        
+        if (needsUpdate) {
+          console.log(`🔄 Updating equipment metadata for: ${image.filename} (${imageType} in ${image.folder})`);
+          entry.equipmentName = generateCleanName(image.filename);
+          // Don't overwrite equipmentInfo if it already has content
+          if (!entry.equipmentInfo) {
+            entry.equipmentInfo = '';
           }
+          updatedEntries++;
+        } else {
+          console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder}) - preserving manual edits`);
         }
       } else {
-        const entry = existingMetadata[image.filename];
-        // PROTECTION: Check protected flag for astrophotography entries
-        if (entry.protected) {
-          console.log(`� PROTECTED: Manual astrophotography entry preserved for: ${image.filename}`);
-        } else {
-          // Check if the entry needs updating (missing catalog/object info)
-          const needsAstronomicalUpdate = (!entry.catalogDesignation || entry.catalogDesignation === '') ||
-            (entry.objectName === entry.catalogDesignation) ||
-            (entry.objectName && entry.objectName.includes('Messier')) ||
-            (entry.objectName === generateObjectName(image.filename));
-          
-          if (needsAstronomicalUpdate) {
-            // Parse astronomical object info and update if we have better data
-            const astronomical = parseAstronomicalObject(image.filename);
-            if (astronomical.catalogDesignation || (astronomical.objectName && astronomical.objectName !== generateObjectName(image.filename))) {
-              console.log(`🔄 Updating astronomical data for: ${image.filename} (${entry.catalogDesignation || 'no catalog'} → ${astronomical.catalogDesignation || 'no catalog'})`);
-              entry.catalogDesignation = astronomical.catalogDesignation || entry.catalogDesignation;
-              entry.objectName = astronomical.objectName || entry.objectName;
-              updatedEntries++;
-            } else {
-              console.log(`✅ Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
-            }
-          } else {
-            console.log(`✅ Complete entry found for: ${image.filename} (${imageType} in ${image.folder})`);
-          }
-        }
+        console.log(`🔄 Existing entry found for: ${image.filename} (${imageType} in ${image.folder})`);
+        updatedEntries++;
+        // Keep existing astrophotography entry as-is since user may have manually edited it
       }
     }
   });
@@ -1259,12 +785,7 @@ function updateMetadata() {
   console.log(`   New entries added: ${newEntries}`);
   console.log(`   Existing entries updated: ${updatedEntries}`);
   console.log(`   Obsolete entries removed: ${deletedEntries}`);
-  
-  // Update contemplation inventory
-  updateInventory(existingMetadata);
 }
 
 // Run the script
-if (!handleCliCommand()) {
-  updateMetadata();
-}
+updateMetadata();

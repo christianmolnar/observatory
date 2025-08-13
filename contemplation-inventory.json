@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2025-08-04T02:08:59.506Z",
-  "totalImages": 135,
-  "imagesWithVideos": 20,
-  "imagesWithoutVideos": 115,
+  "lastUpdated": "2025-08-13T02:28:39.110Z",
+  "totalImages": 138,
+  "imagesWithVideos": 24,
+  "imagesWithoutVideos": 114,
   "contemplationSources": {
     "classical": 1,
     "progressive": 1,
-    "gratitude": 3,
+    "gratitude": 2,
     "mindfulness": 0,
     "cosmic": 1,
     "jazz": 7,
@@ -14,6 +14,36 @@
     "experimental": 1
   },
   "assignments": {
+    "Cocoon Nebula Tight.jpg": {
+      "youtubeLink": "https://www.youtube.com/watch?v=GWggDMDhwIA",
+      "youtubeTitle": "Contemplative Sounds",
+      "objectName": "Cocoon Nebula",
+      "catalogDesignation": "IC5146"
+    },
+    "Cocoon Nebula Wide.jpg": {
+      "youtubeLink": "https://youtu.be/vWZ6hmHj2MA",
+      "youtubeTitle": "Contemplative Sounds",
+      "objectName": "Cocoon Nebula",
+      "catalogDesignation": "IC5146"
+    },
+    "Crescent Moon.jpg": {
+      "youtubeLink": "https://youtu.be/7kWl-ZGMwkQ",
+      "youtubeTitle": "Contemplative Sounds",
+      "objectName": "Crescent Nebula",
+      "catalogDesignation": "NGC6888"
+    },
+    "Crescent Nebula.jpg": {
+      "youtubeLink": "https://youtu.be/yeohTfT5fcU",
+      "youtubeTitle": "Contemplative Sounds",
+      "objectName": "Crescent Nebula",
+      "catalogDesignation": "NGC6888"
+    },
+    "Full Moon.jpg": {
+      "youtubeLink": "https://youtu.be/4oK1Jco6JFM",
+      "youtubeTitle": "Contemplative Sounds",
+      "objectName": "Full Moon",
+      "catalogDesignation": ""
+    },
     "Heart Nebula.jpg": {
       "youtubeLink": "https://www.youtube.com/watch?v=Y1uZmnh6LwM",
       "youtubeTitle": "Lito Vitale Cuarteto - Recuerdos en mi bemol",
@@ -73,12 +103,6 @@
       "youtubeTitle": "Prayer and Gratitude - Spiritual Dialogue",
       "objectName": "Pleiades",
       "catalogDesignation": "M45"
-    },
-    "NGC2264.jpg": {
-      "youtubeLink": "https://www.youtube.com/watch?v=e0FhKeexO8Y",
-      "youtubeTitle": "30-Minute Gratitude Contemplation",
-      "objectName": "Cone Nebula",
-      "catalogDesignation": "NGC2264"
     },
     "NGC7000-Pelican-1.jpg": {
       "youtubeLink": "https://www.youtube.com/watch?v=9-BMlq_zyko",
@@ -185,33 +209,9 @@
       "location": "Portland, OR"
     },
     {
-      "filename": "Cocoon Nebula Tight.jpg",
-      "objectName": "Cocoon Nebula",
-      "catalogDesignation": "IC5146",
-      "location": "Maple Valley, WA"
-    },
-    {
-      "filename": "Cocoon Nebula Wide.jpg",
-      "objectName": "Cocoon Nebula",
-      "catalogDesignation": "IC5146",
-      "location": "Maple Valley, WA"
-    },
-    {
-      "filename": "Crescent Moon.jpg",
-      "objectName": "Crescent Nebula",
-      "catalogDesignation": "NGC6888",
-      "location": "Ravensdale, WA"
-    },
-    {
-      "filename": "Crescent Nebula.jpg",
-      "objectName": "Crescent Nebula",
-      "catalogDesignation": "NGC6888",
-      "location": "Ravensdale, WA"
-    },
-    {
-      "filename": "Full Moon.jpg",
-      "objectName": "Full Moon",
-      "catalogDesignation": "",
+      "filename": "Ghost of Cassiopeia-S50.jpg",
+      "objectName": "Ghost of Cassiopeia",
+      "catalogDesignation": "IC63",
       "location": "Maple Valley, WA"
     },
     {
@@ -247,6 +247,12 @@
       "objectName": "Horsehead Nebula",
       "catalogDesignation": "IC434",
       "location": "Ravensdale, WA"
+    },
+    {
+      "filename": "IC63.jpg",
+      "objectName": "Ghost of Cassiopeia",
+      "catalogDesignation": "IC63",
+      "location": "Maple Valley, WA"
     },
     {
       "filename": "M1 - The Crab Nebula.jpg",
@@ -437,6 +443,12 @@
       "location": "Maple Valley, WA"
     },
     {
+      "filename": "NGC2264.jpg",
+      "objectName": "Cone Nebula",
+      "catalogDesignation": "NGC2264",
+      "location": "Ravensdale, WA"
+    },
+    {
       "filename": "NGC281.jpg",
       "objectName": "Pacman Nebula",
       "catalogDesignation": "NGC281",
@@ -577,6 +589,12 @@
       "location": "Yellowstone National Park"
     },
     {
+      "filename": "Veil Nebula Complex.jpg",
+      "objectName": "Western Veil Nebula",
+      "catalogDesignation": "NGC6960",
+      "location": "Maple Valley, WA"
+    },
+    {
       "filename": "Wizard-Lr-PI.jpg",
       "objectName": "Wizard Nebula",
       "catalogDesignation": "Sh2-140",
@@ -661,6 +679,31 @@
   ],
   "usedVideos": [
     {
+      "filename": "Cocoon Nebula Tight.jpg",
+      "link": "https://www.youtube.com/watch?v=GWggDMDhwIA",
+      "title": "Contemplative Sounds"
+    },
+    {
+      "filename": "Cocoon Nebula Wide.jpg",
+      "link": "https://youtu.be/vWZ6hmHj2MA",
+      "title": "Contemplative Sounds"
+    },
+    {
+      "filename": "Crescent Moon.jpg",
+      "link": "https://youtu.be/7kWl-ZGMwkQ",
+      "title": "Contemplative Sounds"
+    },
+    {
+      "filename": "Crescent Nebula.jpg",
+      "link": "https://youtu.be/yeohTfT5fcU",
+      "title": "Contemplative Sounds"
+    },
+    {
+      "filename": "Full Moon.jpg",
+      "link": "https://youtu.be/4oK1Jco6JFM",
+      "title": "Contemplative Sounds"
+    },
+    {
       "filename": "Heart Nebula.jpg",
       "link": "https://www.youtube.com/watch?v=Y1uZmnh6LwM",
       "title": "Lito Vitale Cuarteto - Recuerdos en mi bemol"
@@ -709,11 +752,6 @@
       "filename": "M45 - Pleiades.jpg",
       "link": "https://www.youtube.com/watch?v=nrKKxVpSnbI",
       "title": "Prayer and Gratitude - Spiritual Dialogue"
-    },
-    {
-      "filename": "NGC2264.jpg",
-      "link": "https://www.youtube.com/watch?v=e0FhKeexO8Y",
-      "title": "30-Minute Gratitude Contemplation"
     },
     {
       "filename": "NGC7000-Pelican-1.jpg",

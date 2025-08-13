@@ -14,11 +14,10 @@ export const navigationConfig = {
   items: [
     { label: 'Home', href: '/' },
     { label: 'Deep Sky', href: '/astrophotography/deep-sky' },
-    { label: 'Wide Field', href: '/wide-field' },
     { label: 'Solar System', href: '/astrophotography/solar-system' },
     { label: 'Terrestrial', href: '/terrestrial' },
     { label: 'Gear', href: '/equipment' },
-    { label: 'Resources', href: '/resources' },
+    { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ]
 };
@@ -28,7 +27,8 @@ export const subNavigationConfig = {
   '/astrophotography/deep-sky': [
     { label: 'Galaxies', href: '/astrophotography/deep-sky/galaxies' },
     { label: 'Nebulas', href: '/astrophotography/deep-sky/nebulas' },
-    { label: 'Star Clusters', href: '/astrophotography/deep-sky/star-clusters' }
+    { label: 'Star Clusters', href: '/astrophotography/deep-sky/star-clusters' },
+    { label: 'Wide Field', href: '/astrophotography/deep-sky/wide-field' }
   ],
   '/astrophotography/solar-system': [
     { label: 'Solar', href: '/astrophotography/solar-system/solar' },
@@ -66,12 +66,12 @@ export const homepageConfig = {
 export const deepSkyConfig = {
   title: 'Deep Sky Objects',
   backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
-  description: 'Explore the distant reaches of space with detailed captures of galaxies, nebulas, and star clusters millions of light-years away.',
+  description: 'Explore the distant reaches of space with detailed captures of galaxies, nebulas, star clusters, and wide-field views millions of light-years away.',
   categories: [
     {
       title: 'Galaxies',
       href: '/astrophotography/deep-sky/galaxies',
-      backgroundImage: '/images/assets/M33.jpg',
+      backgroundImage: '/images/astrophotography/featured/M33.jpg',
       description: 'Distant island universes beyond our Milky Way',
       imageFolder: 'astrophotography/deep-sky/galaxies'
     },
@@ -88,6 +88,13 @@ export const deepSkyConfig = {
       backgroundImage: '/images/astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg',
       description: 'Gravitationally bound groups of stars',
       imageFolder: 'astrophotography/deep-sky/star-clusters'
+    },
+    {
+      title: 'Wide Field',
+      href: '/astrophotography/deep-sky/wide-field',
+      backgroundImage: '/images/astrophotography/deep-sky/wide-field/Orion-wide-death-valley.jpg',
+      description: 'Expansive views of constellations and star fields',
+      imageFolder: 'astrophotography/deep-sky/wide-field'
     }
   ]
 };
@@ -108,7 +115,7 @@ export const solarSystemConfig = {
     {
       title: 'Lunar',
       href: '/astrophotography/solar-system/lunar',
-      backgroundImage: '/images/astrophotography/solar-system/lunar/Twilight Moon.jpg',
+      backgroundImage: '/images/astrophotography/solar-system/lunar/Full Moon.jpg',
       description: 'Moon phases and surface details',
       imageFolder: 'astrophotography/solar-system/lunar'
     },
@@ -168,14 +175,6 @@ export const terrestrialConfig = {
   ]
 };
 
-// Wide Field Astrophotography Configuration
-export const wideFieldConfig = {
-  title: 'WIDE FIELD ASTROPHOTOGRAPHY',
-  backgroundImage: '/images/assets/NGC7000-Pelican-1.jpg',
-  imageFolder: 'astrophotography/deep-sky/wide-field',
-  description: 'Wide-angle captures of the night sky, constellations, and Milky Way panoramas showcasing the grandeur of our cosmic neighborhood.'
-};
-
 // Equipment Page Configuration
 export const equipmentConfig = {
   title: 'MY GEAR',
@@ -184,34 +183,14 @@ export const equipmentConfig = {
   description: observatoryConfig.equipmentDescription
 };
 
-// Resources Configuration
-export const resourcesConfig = {
-  title: 'Resources',
-  backgroundImage: '/images/astrophotography/deep-sky/nebulas/North America and The Pelican.jpg',
-  description: 'Explore curated resources for astronomy, astrophotography, mindfulness, and wellbeing. Discover guides, articles, and tools to enhance your journey.',
-  categories: [
-    {
-      title: 'Astronomy & Astrophotography',
-      href: '/resources/astronomy-astrophotography',
-      backgroundImage: '/images/astrophotography/deep-sky/nebulas/North America and The Pelican.jpg',
-      description: 'Guides, communities, and tools for exploring the universe'
-    },
-    {
-      title: 'Mindfulness',
-      href: '/resources/mindfulness',
-      backgroundImage: '/images/astrophotography/deep-sky/nebulas/North America and The Pelican.jpg',
-      description: 'Resources for meditation, wellbeing, and mindful living'
-    }
-  ]
-};
-
 // Gallery Image Folders Configuration
 export const imageFoldersConfig = {
   featured: 'astrophotography/featured',
   deepSky: {
     galaxies: 'astrophotography/deep-sky/galaxies',
     nebulas: 'astrophotography/deep-sky/nebulas',
-    starClusters: 'astrophotography/deep-sky/star-clusters'
+    starClusters: 'astrophotography/deep-sky/star-clusters',
+    wideField: 'astrophotography/deep-sky/wide-field'
   },
   solarSystem: {
     solar: 'astrophotography/solar-system/solar',
@@ -222,7 +201,6 @@ export const imageFoldersConfig = {
   celestialEvents: {
     totalEclipse2017: 'astrophotography/solar-system/events/total-eclipse-2017'
   },
-  wideField: 'wide-field',
   terrestrial: {
     yellowstone: 'terrestrial/yellowstone',
     grandTetons: 'terrestrial/grand-tetons'
@@ -264,12 +242,11 @@ export const globalConfig = {
   deepSky: deepSkyConfig,
   solarSystem: solarSystemConfig,
   celestialEvents: celestialEventsConfig,
-  wideField: wideFieldConfig,
   terrestrial: terrestrialConfig,
   equipment: equipmentConfig,
-  resources: resourcesConfig,
   imageFolders: imageFoldersConfig,
-  style: styleConfig
+  style: styleConfig,
+  wideField: deepSkyConfig.categories[3] // Wide Field category
 };
 
 export default globalConfig;

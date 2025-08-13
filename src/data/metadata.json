@@ -129,6 +129,16 @@
     "youtubeLink": "https://youtu.be/4oK1Jco6JFM",
     "youtubeTitle": "Contemplative Sounds"
   },
+  "Ghost of Cassiopeia-S50.jpg": {
+    "catalogDesignation": "IC63",
+    "objectName": "Ghost of Cassiopeia",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false,
+    "youtubeLink": "",
+    "youtubeTitle": ""
+  },
   "Grand Tetons1.jpg": {
     "location": "Grand Teton National Park",
     "name": "Grand Tetons",
@@ -211,6 +221,16 @@
     "catalogDesignation": "IC434",
     "objectName": "Horsehead Nebula",
     "location": "Ravensdale, WA",
+    "equipment": "",
+    "exposure": "",
+    "protected": false,
+    "youtubeLink": "",
+    "youtubeTitle": ""
+  },
+  "IC63.jpg": {
+    "catalogDesignation": "IC63",
+    "objectName": "Ghost of Cassiopeia",
+    "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
     "protected": false,
@@ -959,6 +979,16 @@
   "Upper Basin9.jpg": {
     "location": "Yellowstone National Park",
     "name": "Upper Basin",
+    "protected": false,
+    "youtubeLink": "",
+    "youtubeTitle": ""
+  },
+  "Veil Nebula Complex.jpg": {
+    "catalogDesignation": "NGC 6960, NGC 6992, NGC 6995, IC 1340, NGC 6979",
+    "objectName": "Veil Nebula Complex",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": "",
     "protected": false,
     "youtubeLink": "",
     "youtubeTitle": ""
