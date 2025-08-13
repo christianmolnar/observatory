@@ -22,6 +22,26 @@ export const navigationConfig = {
   ]
 };
 
+// Sub-Navigation Configuration
+export const subNavigationConfig = {
+  '/astrophotography/deep-sky': [
+    { label: 'Galaxies', href: '/astrophotography/deep-sky/galaxies' },
+    { label: 'Nebulas', href: '/astrophotography/deep-sky/nebulas' },
+    { label: 'Star Clusters', href: '/astrophotography/deep-sky/star-clusters' },
+    { label: 'Wide Field', href: '/astrophotography/deep-sky/wide-field' }
+  ],
+  '/astrophotography/solar-system': [
+    { label: 'Solar', href: '/astrophotography/solar-system/solar' },
+    { label: 'Lunar', href: '/astrophotography/solar-system/lunar' },
+    { label: 'Planets', href: '/astrophotography/solar-system/planets' },
+    { label: 'Celestial Events', href: '/astrophotography/solar-system/events' }
+  ],
+  '/terrestrial': [
+    { label: 'Yellowstone', href: '/terrestrial/yellowstone' },
+    { label: 'Grand Tetons', href: '/terrestrial/grand-tetons' }
+  ]
+};
+
 // Homepage Configuration
 export const homepageConfig = {
   hero: {
@@ -217,6 +237,7 @@ export const styleConfig = {
 export const globalConfig = {
   observatory: observatoryConfig,
   navigation: navigationConfig,
+  subNavigation: subNavigationConfig,
   homepage: homepageConfig,
   deepSky: deepSkyConfig,
   solarSystem: solarSystemConfig,
