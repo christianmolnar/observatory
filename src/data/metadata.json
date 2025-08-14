@@ -228,14 +228,14 @@
     "youtubeTitle": ""
   },
   "IC63.jpg": {
-    "catalogDesignation": "IC63",
+    "catalogDesignation": "IC 63",
     "objectName": "Ghost of Cassiopeia",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
-    "protected": false,
     "youtubeLink": "",
-    "youtubeTitle": ""
+    "youtubeTitle": "",
+    "protected": false
   },
   "M1 - The Crab Nebula.jpg": {
     "catalogDesignation": "M1",
@@ -246,6 +246,20 @@
     "protected": false,
     "youtubeLink": "",
     "youtubeTitle": ""
+  },
+  "M13-1.jpg": {
+    "catalogDesignation": "M13",
+    "objectName": "Great Globular Cluster in Hercules",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
+  "M13-2.jpg": {
+    "catalogDesignation": "M13",
+    "objectName": "Great Globular Cluster in Hercules",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
   },
   "M16.jpg": {
     "catalogDesignation": "M16",
@@ -984,14 +998,14 @@
     "youtubeTitle": ""
   },
   "Veil Nebula Complex.jpg": {
-    "catalogDesignation": "NGC 6960, NGC 6992, NGC 6995, IC 1340, NGC 6979",
+    "catalogDesignation": "NGC 6960/6992",
     "objectName": "Veil Nebula Complex",
     "location": "Maple Valley, WA",
     "equipment": "",
     "exposure": "",
-    "protected": false,
     "youtubeLink": "",
-    "youtubeTitle": ""
+    "youtubeTitle": "",
+    "protected": false
   },
   "Wizard-Lr-PI.jpg": {
     "catalogDesignation": "Sh2-140",
@@ -1135,25 +1149,5 @@
     "protected": false,
     "youtubeLink": "",
     "youtubeTitle": ""
-  },
-  "IC63.jpg": {
-    "catalogDesignation": "IC 63",
-    "objectName": "Ghost of Cassiopeia",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "youtubeLink": "",
-    "youtubeTitle": "",
-    "protected": false
-  },
-  "Veil Nebula Complex.jpg": {
-    "catalogDesignation": "NGC 6960/6992",
-    "objectName": "Veil Nebula Complex",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": "",
-    "youtubeLink": "",
-    "youtubeTitle": "",
-    "protected": false
   }
 }
