@@ -14,6 +14,7 @@ const SCAN_FOLDERS = [
   'astrophotography/deep-sky/nebulas',
   'astrophotography/deep-sky/star-clusters',
   'astrophotography/deep-sky/wide-field',
+  'astrophotography/deep-sky/Hubble-Palette',
   'astrophotography/solar-system/solar',
   'astrophotography/solar-system/lunar',
   'astrophotography/solar-system/planets',

@@ -182,6 +182,7 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
     imageFolder === 'astrophotography/deep-sky/galaxies' ||    // Galaxies gallery  
     imageFolder === 'astrophotography/deep-sky/star-clusters' || // Star Clusters gallery
     imageFolder === 'astrophotography/deep-sky/wide-field' ||  // Deep Sky Wide Field gallery
+    imageFolder === 'astrophotography/deep-sky/Hubble-Palette' || // Hubble Palette gallery
     imageFolder === 'astrophotography/solar-system/solar' ||   // Solar gallery
     imageFolder === 'astrophotography/solar-system/lunar' ||   // Lunar gallery
     imageFolder === 'astrophotography/solar-system/planets' || // Planets gallery

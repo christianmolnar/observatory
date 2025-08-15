@@ -29,6 +29,7 @@ export const subNavigationConfig = {
     { label: 'Galaxies', href: '/astrophotography/deep-sky/galaxies' },
     { label: 'Nebulas', href: '/astrophotography/deep-sky/nebulas' },
     { label: 'Star Clusters', href: '/astrophotography/deep-sky/star-clusters' },
+    { label: 'Hubble Palette', href: '/astrophotography/deep-sky/hubble-palette' },
     { label: 'Wide Field', href: '/astrophotography/deep-sky/wide-field' }
   ],
   '/astrophotography/solar-system': [
@@ -93,6 +94,13 @@ export const deepSkyConfig = {
       backgroundImage: '/images/astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg',
       description: 'Gravitationally bound groups of stars',
       imageFolder: 'astrophotography/deep-sky/star-clusters'
+    },
+    {
+      title: 'Hubble Palette',
+      href: '/astrophotography/deep-sky/hubble-palette',
+      backgroundImage: '/images/astrophotography/deep-sky/Hubble-Palette/NGC7000 and IC5070-1.jpg',
+      description: 'Images captured using the Hubble Space Telescope color palette',
+      imageFolder: 'astrophotography/deep-sky/Hubble-Palette'
     },
     {
       title: 'Wide Field',
