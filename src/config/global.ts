@@ -98,8 +98,8 @@ export const deepSkyConfig = {
     {
       title: 'Hubble Palette',
       href: '/astrophotography/deep-sky/hubble-palette',
-      backgroundImage: '/images/astrophotography/deep-sky/Hubble-Palette/NGC7000 and IC5070-1.jpg',
-      description: 'Images captured using the Hubble Space Telescope color palette',
+      backgroundImage: '/images/astrophotography/deep-sky/Hubble-Palette/NGC7000 and IC5070-2.jpg',
+      description: 'Images processed using the Hubble Space Telescope color palette',
       imageFolder: 'astrophotography/deep-sky/Hubble-Palette'
     },
     {

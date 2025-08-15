@@ -656,13 +656,19 @@ function createMetadataEntry(image) {
     case 'terrestrial':
       return {
         "location": generateLocationFromFolder(image.folder), // e.g., "Yellowstone National Park"
-        "name": generateCleanName(image.filename)      // e.g., "Mammoth Springs"
+        "name": generateCleanName(image.filename),      // e.g., "Mammoth Springs"
+        "protected": false,
+        "youtubeLink": "",
+        "youtubeTitle": ""
       };
       
     case 'equipment':
       return {
         "equipmentName": generateCleanName(image.filename), // e.g., "SeeStar S50"
-        "equipmentInfo": ""  // e.g., "Smart Telescope by ZWO"
+        "equipmentInfo": "",  // e.g., "Smart Telescope by ZWO"
+        "protected": false,
+        "youtubeLink": "",
+        "youtubeTitle": ""
       };
       
     case 'celestial-events':
@@ -671,7 +677,10 @@ function createMetadataEntry(image) {
         "objectName": generateCleanName(image.filename), // e.g., "Total Eclipse" instead of "2017 Total Eclipse1"
         "location": "Maple Valley, WA",
         "equipment": "",
-        "exposure": ""
+        "exposure": "",
+        "protected": false,
+        "youtubeLink": "",
+        "youtubeTitle": ""
       };
       
     default: // astrophotography
@@ -681,7 +690,10 @@ function createMetadataEntry(image) {
         "objectName": parsed.objectName,
         "location": "Maple Valley, WA",
         "equipment": "",
-        "exposure": ""
+        "exposure": "",
+        "protected": false,
+        "youtubeLink": "",
+        "youtubeTitle": ""
       };
   }
 }
