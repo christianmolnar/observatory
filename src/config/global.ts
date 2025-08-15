@@ -283,7 +283,7 @@ export const globalConfig = {
   resources: resourcesConfig,
   imageFolders: imageFoldersConfig,
   style: styleConfig,
-  wideField: deepSkyConfig.categories[3] // Wide Field category
+  wideField: deepSkyConfig.categories[4] // Wide Field category
 };
 
 export default globalConfig;
