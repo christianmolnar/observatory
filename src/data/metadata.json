@@ -261,6 +261,13 @@
     "equipment": "",
     "exposure": ""
   },
+  "M13-3.jpg": {
+    "catalogDesignation": "M13",
+    "objectName": "Great Globular Cluster in Hercules",
+    "location": "Maple Valley, WA",
+    "equipment": "",
+    "exposure": ""
+  },
   "M13-4.jpg": {
     "catalogDesignation": "M13",
     "objectName": "Great Globular Cluster in Hercules",
@@ -684,27 +691,23 @@
     "youtubeLink": "",
     "youtubeTitle": ""
   },
-  "NGC6635-Hubble-1.jpg": {
-    "catalogDesignation": "NGC6635",
-    "objectName": "NGC6635",
+  "NGC7000 and IC5070-1.jpg": {
+    "catalogDesignation": "NGC7000",
+    "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
     "equipment": "",
-    "exposure": ""
-  },
-  "NGC6635-Hubble.jpg": {
-    "catalogDesignation": "NGC6635",
-    "objectName": "NGC6635",
-    "location": "Maple Valley, WA",
-    "equipment": "",
-    "exposure": ""
+    "exposure": "",
+    "protected": false,
+    "youtubeLink": "",
+    "youtubeTitle": ""
   },
   "NGC7000 and IC5070-2.jpg": {
     "catalogDesignation": "NGC7000 and IC5070",
     "objectName": "North America Nebula",
     "location": "Maple Valley, WA",
-    "equipment": "My first Hubble Palette processing attempt",
+    "equipment": "My first Hubble Palette processing attempt...",
     "exposure": "",
-    "protected": false,
+    "protected": true,
     "youtubeLink": "",
     "youtubeTitle": ""
   },

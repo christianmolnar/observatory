@@ -41,6 +41,20 @@
     "ctimeMs": 1754006540912.467,
     "filename": "M33-1.jpg"
   },
+  "astrophotography/deep-sky/Hubble-Palette/NGC6635-Hubble-1.jpg": {
+    "mtime": "2025-08-15T07:32:10.375Z",
+    "mtimeMs": 1755243130374.8528,
+    "ctime": "2025-08-15T07:32:10.375Z",
+    "ctimeMs": 1755243130374.8528,
+    "filename": "NGC6635-Hubble-1.jpg"
+  },
+  "astrophotography/deep-sky/Hubble-Palette/NGC7000 and IC5070-2.jpg": {
+    "mtime": "2025-08-15T06:51:17.579Z",
+    "mtimeMs": 1755240677578.828,
+    "ctime": "2025-08-15T06:51:17.579Z",
+    "ctimeMs": 1755240677578.9077,
+    "filename": "NGC7000 and IC5070-2.jpg"
+  },
   "astrophotography/deep-sky/galaxies/M31-25x300sec-Tight-1600x1131.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
     "mtimeMs": 312796800000,
@@ -131,6 +145,13 @@
     "ctime": "2025-07-31T22:11:42.317Z",
     "ctimeMs": 1753999902317.1958,
     "filename": "M1 - The Crab Nebula.jpg"
+  },
+  "astrophotography/deep-sky/nebulas/M13-4.jpg": {
+    "mtime": "2025-08-14T02:00:30.943Z",
+    "mtimeMs": 1755136830943.386,
+    "ctime": "2025-08-14T02:00:30.943Z",
+    "ctimeMs": 1755136830943.386,
+    "filename": "M13-4.jpg"
   },
   "astrophotography/deep-sky/nebulas/M16.jpg": {
     "mtime": "1979-11-30T08:00:00.000Z",
@@ -258,6 +279,13 @@
     "ctimeMs": 1754272426786.7373,
     "filename": "Wizard-Lr-PI.jpg"
   },
+  "astrophotography/deep-sky/star-clusters/M13-1.jpg": {
+    "mtime": "2025-08-14T01:41:00.520Z",
+    "mtimeMs": 1755135660520.1433,
+    "ctime": "2025-08-14T01:41:00.520Z",
+    "ctimeMs": 1755135660520.1433,
+    "filename": "M13-1.jpg"
+  },
   "astrophotography/deep-sky/star-clusters/M45 - Pleiades.jpg": {
     "mtime": "2025-07-31T21:55:25.271Z",
     "mtimeMs": 1753998925270.5557,
@@ -321,6 +349,13 @@
     "ctimeMs": 1755058386737.2622,
     "filename": "IC63.jpg"
   },
+  "astrophotography/featured/M13-2.jpg": {
+    "mtime": "2025-08-14T01:41:17.616Z",
+    "mtimeMs": 1755135677616.0505,
+    "ctime": "2025-08-14T01:41:17.616Z",
+    "ctimeMs": 1755135677616.0505,
+    "filename": "M13-2.jpg"
+  },
   "astrophotography/featured/M27-2-2.jpg": {
     "mtime": "2025-08-03T00:58:03.607Z",
     "mtimeMs": 1754182683607.1064,
@@ -334,6 +369,20 @@
     "ctime": "2025-07-31T23:13:13.451Z",
     "ctimeMs": 1754003593451.1692,
     "filename": "M33.jpg"
+  },
+  "astrophotography/featured/NGC6635-Hubble.jpg": {
+    "mtime": "2025-08-15T07:31:53.818Z",
+    "mtimeMs": 1755243113817.9717,
+    "ctime": "2025-08-15T07:31:53.818Z",
+    "ctimeMs": 1755243113817.9717,
+    "filename": "NGC6635-Hubble.jpg"
+  },
+  "astrophotography/featured/NGC7000 and IC5070-2.jpg": {
+    "mtime": "2025-08-15T06:28:21.010Z",
+    "mtimeMs": 1755239301010.0942,
+    "ctime": "2025-08-15T06:28:21.010Z",
+    "ctimeMs": 1755239301010.0942,
+    "filename": "NGC7000 and IC5070-2.jpg"
   },
   "astrophotography/featured/NGC7000-Pelican-1.jpg": {
     "mtime": "2025-07-30T21:12:44.695Z",
