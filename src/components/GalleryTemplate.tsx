@@ -281,6 +281,37 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
     setShowYouTubeOverlay(false); // Close YouTube overlay when changing images
   };
 
+  // Swipe gesture handling
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null); // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && images.length > 1) {
+      nextImage(); // Swipe left = next image
+    }
+    if (isRightSwipe && images.length > 1) {
+      prevImage(); // Swipe right = previous image
+    }
+  };
+
   // Keyboard navigation
   useEffect(() => {
     if (!modalOpen) return;
@@ -334,12 +365,12 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               {images.map((image: ImageMetadata, index: number) => (
               <div
                 key={image.filename}
-                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-                style={{ width: '280px' }}
+                className="group cursor-pointer transform transition-all duration-300 hover:scale-105 touch-manipulation"
+                style={{ width: '280px', minHeight: '44px' }}
                 onClick={() => openModal(index)}
               >
-                {/* Glass Card */}
-                <div className="relative bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                {/* Glass Card - Enhanced for touch */}
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 active:scale-95">
                   {/* Image/Video Container */}
                   <div className="aspect-[3/4] relative">
                     {isVideoFile(image.src) ? (
@@ -427,46 +458,44 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
           className="fixed inset-0 flex items-center justify-center bg-black/95 backdrop-blur-lg"
           style={{ zIndex: 99999 }}
         >
-          {/* Close button */}
+          {/* Close button - Enhanced for mobile */}
           <button
             onClick={closeModal}
-            className="absolute top-2 right-2 text-white/80 hover:text-white text-2xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+            className="absolute top-3 right-3 md:top-2 md:right-2 text-white/90 hover:text-white text-xl md:text-2xl font-light bg-black/60 hover:bg-black/80 backdrop-blur-sm transition-all duration-300 ease-out touch-manipulation"
             aria-label="Close full screen image"
             style={{ 
               zIndex: 100000,
               position: 'absolute',
-              top: '8px',
-              right: '8px',
-              width: '32px',
-              height: '32px',
-              borderRadius: '6px',
+              width: '44px',
+              height: '44px',
+              borderRadius: '8px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              fontSize: '18px',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              fontSize: '20px',
               fontWeight: 300
             }}
           >
             ✕
           </button>
 
-          {/* Previous Image Button */}
+          {/* Previous Image Button - Enhanced for mobile */}
           {images.length > 1 && (
             <button
               onClick={prevImage}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white text-4xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+              className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-white text-3xl md:text-4xl font-light bg-black/60 hover:bg-black/80 backdrop-blur-sm transition-all duration-300 ease-out touch-manipulation"
               aria-label="Previous image"
               style={{ 
                 zIndex: 100000,
-                width: '48px',
-                height: '48px',
-                borderRadius: '6px',
+                width: '56px',
+                height: '56px',
+                borderRadius: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                fontSize: '24px',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                fontSize: '28px',
                 fontWeight: 300
               }}
             >
@@ -474,22 +503,22 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
             </button>
           )}
 
-          {/* Next Image Button */}
+          {/* Next Image Button - Enhanced for mobile */}
           {images.length > 1 && (
             <button
               onClick={nextImage}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white text-4xl font-light bg-black/40 hover:bg-black/60 backdrop-blur-sm transition-all duration-300 ease-out"
+              className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 text-white/90 hover:text-white text-3xl md:text-4xl font-light bg-black/60 hover:bg-black/80 backdrop-blur-sm transition-all duration-300 ease-out touch-manipulation"
               aria-label="Next image"
               style={{ 
                 zIndex: 100000,
-                width: '48px',
-                height: '48px',
-                borderRadius: '6px',
+                width: '56px',
+                height: '56px',
+                borderRadius: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                fontSize: '24px',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                fontSize: '28px',
                 fontWeight: 300
               }}
             >
@@ -499,19 +528,20 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
 
           {/* Media Container - Maximized for fullscreen viewing */}
           <div className="flex flex-col items-center justify-center w-full h-full p-2">
-            {/* YouTube Contemplation Control - Top right, elegant styling */}
+            {/* YouTube Contemplation Control - Enhanced for mobile */}
             {shouldShowContemplationControls(images[currentImage]) && (
               <div 
-                className="fixed top-4 right-24 z-10 bg-white/5 backdrop-blur-md rounded-lg px-4 py-4 border border-white/10 cursor-pointer hover:bg-white/10 hover:border-white/20 transition-all duration-300 group shadow-2xl"
+                className="fixed top-4 right-4 md:right-24 z-10 bg-white/10 backdrop-blur-md rounded-lg px-4 py-4 border border-white/20 cursor-pointer hover:bg-white/15 hover:border-white/30 transition-all duration-300 group shadow-2xl touch-manipulation"
                 onClick={openYouTubeOverlay}
+                style={{ minHeight: '44px', minWidth: '44px' }}
               >
                 <div className="flex flex-col items-center justify-center gap-2 text-white/90 max-w-[168px]">
                   <div className="flex-shrink-0">
-                    <svg className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 md:w-5 md:h-5 text-white/90 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                   </div>
-                  <div className="text-sm leading-tight text-center">
+                  <div className="text-sm leading-tight text-center hidden md:block">
                     <div className="font-light tracking-wide group-hover:text-white transition-colors duration-300">
                       Contemplative Sounds
                     </div>
@@ -523,15 +553,16 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               </div>
             )}
 
-            {/* YouTube Video Overlay - Upper Right Corner */}
+            {/* YouTube Video Overlay - Enhanced for mobile */}
             {showYouTubeOverlay && shouldShowContemplationControls(images[currentImage]) && (
-              <div className="fixed top-4 right-20 z-[100001] bg-black/90 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden shadow-2xl">
+              <div className="fixed top-4 right-4 md:right-20 z-[100001] bg-black/90 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden shadow-2xl">
                 <div className="flex items-center justify-between bg-black/60 px-3 py-2 border-b border-white/10">
                   <span className="text-white/90 text-xs">{images[currentImage].youtubeTitle || "Contemplative Sounds"}</span>
                   <button
                     onClick={closeYouTubeOverlay}
-                    className="text-white/80 hover:text-white transition-colors duration-200"
+                    className="text-white/90 hover:text-white transition-colors duration-200 touch-manipulation p-1 ml-2"
                     aria-label="Close video"
+                    style={{ minHeight: '32px', minWidth: '32px' }}
                   >
                     ✕
                   </button>
@@ -548,7 +579,12 @@ export default function GalleryTemplate({ title, backgroundImage, imageFolder }:
               </div>
             )}
             
-            <div className="relative max-w-[98vw] max-h-[92vh] rounded-lg overflow-hidden shadow-2xl bg-black">
+            <div 
+              className="relative max-w-[98vw] max-h-[92vh] rounded-lg overflow-hidden shadow-2xl bg-black"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
               {isVideoFile(images[currentImage].src) ? (
                 <video
                   src={images[currentImage].src}

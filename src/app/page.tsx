@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Navigation />
       {/* Hero Section with Floating Text */}
-      <div className="relative pt-32">
+      <div className="relative pt-[108px]">
         {/* Hero Image - Smaller height so Latest Captures are clearly visible */}
         <div className="h-[75vh] relative overflow-hidden">
           <Image

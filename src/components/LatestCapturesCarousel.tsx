@@ -88,17 +88,17 @@ export default function LatestCapturesCarousel() {
 
   return (
     <section className="w-full flex flex-col items-center py-2">
-      {/* Gallery container to prevent overlap with heading/line/text */}
+      {/* Gallery container - Enhanced for mobile responsiveness */}
       <div
-        className="relative w-full max-w-4xl mx-auto flex items-center justify-center mt-8"
-        style={{ minHeight: 600, height: 600, maxHeight: 600 }}
+        className="relative w-full max-w-4xl mx-auto flex items-center justify-center mt-4 md:mt-8"
+        style={{ minHeight: '400px', height: '50vh', maxHeight: '600px' }}
       >
         <div
-          className="flex items-center justify-center w-full h-full gap-4"
+          className="flex items-center justify-center w-full h-full gap-2 md:gap-4"
           style={{ position: 'relative', zIndex: 2, height: '100%', alignItems: 'center', justifyContent: 'center' }}
         >
           {/* Left Image - previous */}
-          <div style={{ width: '220px', height: '320px', zIndex: 1 }}>
+          <div className="hidden md:block" style={{ width: '220px', height: '320px', zIndex: 1 }}>
             <Image
               src={images[(current - 1 + length) % length].src}
               alt={images[(current - 1 + length) % length].alt}
@@ -115,14 +115,18 @@ export default function LatestCapturesCarousel() {
               setAutoScroll(false);
               setCurrent((current - 1 + length) % length);
             }}
-            className="mx-2 text-white text-4xl font-bold bg-black/60 rounded-full px-2 py-1 hover:bg-yellow-400/80 transition-colors z-10"
+            className="mx-1 md:mx-2 text-white text-2xl md:text-4xl font-bold bg-black/60 rounded-full px-2 py-1 hover:bg-yellow-400/80 transition-colors z-10 touch-manipulation"
             aria-label="Previous image"
-            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)', height: '48px' }}
+            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)', height: '40px', minHeight: '40px' }}
           >
             {'<'}
           </button>
-          {/* Center Image - current */}
-          <div style={{ maxWidth: '600px', maxHeight: '810px', width: '100%', height: '100%', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={openModal}>
+          {/* Center Image - current - Enhanced for mobile */}
+          <div 
+            className="flex-1 max-w-[300px] md:max-w-[600px] h-full flex items-center justify-center z-2 cursor-pointer" 
+            onClick={openModal}
+            style={{ zIndex: 2 }}
+          >
             <Image
               src={images[current].src}
               alt={images[current].alt}
@@ -140,14 +144,14 @@ export default function LatestCapturesCarousel() {
               setAutoScroll(false);
               setCurrent((current + 1) % length);
             }}
-            className="mx-2 text-white text-4xl font-bold bg-black/60 rounded-full px-2 py-1 hover:bg-yellow-400/80 transition-colors z-10"
+            className="mx-1 md:mx-2 text-white text-2xl md:text-4xl font-bold bg-black/60 rounded-full px-2 py-1 hover:bg-yellow-400/80 transition-colors z-10 touch-manipulation"
             aria-label="Next image"
-            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)', height: '48px' }}
+            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)', height: '40px', minHeight: '40px' }}
           >
             {'>'}
           </button>
           {/* Right Image - next */}
-          <div style={{ width: '220px', height: '320px', zIndex: 1 }}>
+          <div className="hidden md:block" style={{ width: '220px', height: '320px', zIndex: 1 }}>
             <Image
               src={images[(current + 1) % length].src}
               alt={images[(current + 1) % length].alt}
