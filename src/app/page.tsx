@@ -31,17 +31,17 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent pb-8 pt-12">
           <div className="max-w-5xl mx-auto px-6 text-center">
             {/* Main Title - Smaller to fit one line */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-yellow-400 mb-2 uppercase">
+            <h1 className="homepage-text text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-yellow-400 mb-2 uppercase">
               {homepage.hero.title}
             </h1>
             {/* Tagline right under title - back to nav font style */}
-            <p className="text-base md:text-lg text-gray-300 mb-8 font-light tracking-wide">
+            <p className="homepage-text text-base md:text-lg text-gray-300 mb-8 font-light tracking-wide">
               {homepage.hero.tagline}
             </p>
             {/* Description Paragraph - Smaller font */}
             <div className="max-w-3xl mx-auto">
               {homepage.hero.description.map((paragraph, index) => (
-                <p key={index} className="text-sm md:text-base text-gray-400 leading-relaxed font-light mt-4 first:mt-0">
+                <p key={index} className="homepage-text text-sm md:text-base text-gray-400 leading-relaxed font-light mt-4 first:mt-0">
                   {paragraph}
                 </p>
               ))}
@@ -66,10 +66,10 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-full h-24 pointer-events-none" style={{background: 'linear-gradient(to top, #000 0%, transparent 100%)', zIndex: 2}} />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-white mb-2 uppercase">
+            <h2 className="homepage-text text-4xl md:text-5xl lg:text-6xl font-light tracking-wider text-white mb-2 uppercase">
               {homepage.latestCaptures.title}
             </h2>
-            <p className="text-lg md:text-xl text-white font-semibold mb-4 drop-shadow-lg">
+            <p className="homepage-text text-lg md:text-xl text-white font-light mb-4 drop-shadow-lg">
               {homepage.latestCaptures.subtitle}
             </p>
             <div className="flex justify-center">

@@ -237,6 +237,11 @@ export const styleConfig = {
       medium: 500,
       semibold: 600,
       bold: 700
+    },
+    navigation: {
+      fontSize: '1rem', // 16px - base size for better readability
+      fontWeight: 400,   // Normal weight instead of light
+      letterSpacing: '0.025em' // Subtle letter spacing
     }
   },
   layout: {

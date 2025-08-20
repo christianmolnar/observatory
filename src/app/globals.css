@@ -30,6 +30,19 @@
     font-weight: 200 !important;
   }
 
+  /* Navigation-specific font overrides for better readability - scoped to nav only */
+  nav .nav-link {
+    font-weight: 400 !important; /* Normal weight for navigation only */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Ensure homepage and body text stays light */
+  .homepage-text, .hero-text {
+    font-weight: 200 !important;
+  }
+
   /* Selection styling */
   ::selection {
     background-color: var(--color-accent);

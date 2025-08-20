@@ -43,7 +43,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Logo Section */}
-        <div className="flex items-center justify-between pt-4 pb-2">
+        <div className="flex items-center justify-between md:justify-center pt-4 pb-2">
           <Link href="/" className="hover:opacity-80 transition-opacity">
             {/* Observatory Logo */}
             <div
@@ -99,7 +99,7 @@ export default function Navigation() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-white hover:text-yellow-400 transition-colors duration-200 text-sm font-light tracking-wide"
+                  className="nav-link text-white hover:text-yellow-400 transition-colors duration-200 text-base font-normal tracking-normal"
                 >
                   {item.label}
                 </Link>
@@ -130,7 +130,7 @@ export default function Navigation() {
                     <Link
                       href={item.href}
                       onClick={closeMobileMenu}
-                      className="block text-white hover:text-yellow-400 transition-colors duration-200 text-lg font-light tracking-wide py-3 px-4 rounded-lg hover:bg-white/5"
+                      className="nav-link block text-white hover:text-yellow-400 transition-colors duration-200 text-lg font-normal tracking-normal py-3 px-4 rounded-lg hover:bg-white/5"
                     >
                       {item.label}
                     </Link>
